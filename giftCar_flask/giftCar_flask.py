@@ -2,7 +2,7 @@
 
 from flask import Flask, render_template
 
-#from carCtrl import CarCtrlClass
+from carCtrl import CarCtrlClass
 import carCtrl
 app = Flask(__name__)
 myCarCtrl = carCtrl.CarCtrlClass(29, 12, 15, 16, 0)
@@ -43,5 +43,5 @@ def carEvents(direction):
 
 
 if __name__ == '__main__':
-    # app.run(host="192.168.100.2", port=8989, debug=True)
-    app.run(host="192.168.100.3", port=8989, debug=True)
+    app.run(host="192.168.100.2", port=8989, debug=True)
+    # app.run(host="192.168.100.3", port=8989, debug=True)

@@ -21,8 +21,8 @@ def local_update():
 
 @task
 def remote_update():
-    with cd("~/testdemo"):
-        run("ls -l")
+    with cd("/home/pi/RaspbianPython/giftCarProject"):
+        # run("ls -l")
         run("git checkout master")
         run("git pull origin master")
 
