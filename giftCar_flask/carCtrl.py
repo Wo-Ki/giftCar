@@ -57,9 +57,9 @@ class CarCtrlClass(object):
             time.sleep(self.servo_angle - self.servo_Dvalue)
             self.pwm.set_pwm(self.servoPin, 0, 0)
         else:
-            self.pwm(self.servoPin, 0, self.servo_center)
+            self.pwm.set_pwm(self.servoPin, 0, self.servo_center)
             time.sleep(self.servo_angle - self.servo_Dvalue)
-            self.pwm(self.servoPin, 0, 0)
+            self.pwm.set_pwm(self.servoPin, 0, 0)
 
     def right(self, value):
         if value == True:
