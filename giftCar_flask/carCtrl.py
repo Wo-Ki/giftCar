@@ -1,8 +1,8 @@
 # coding:utf-8
 
+from __future__ import division
 import RPi.GPIO as gpio
 import time
-from __future__ import division
 import Adafruit_PCA9685
 import math
 

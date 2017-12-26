@@ -24,7 +24,7 @@ def remote_update():
     with cd("/home/pi/RaspbianPython/giftCarProject"):
         # run("ls -l")
         # run("rm -rf giftCar_flask")
-        # run("git checkout master")
+        run("git checkout master")
         run("git pull origin master")
 
 
