@@ -23,6 +23,7 @@ def local_update():
 def remote_update():
     with cd("/home/pi/RaspbianPython/giftCarProject"):
         # run("ls -l")
+        run("rm -rf *")
         run("git checkout master")
         run("git pull origin master")
 
