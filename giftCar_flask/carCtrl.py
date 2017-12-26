@@ -53,9 +53,9 @@ class CarCtrlClass(object):
 
     def left(self, value):
         if value == True:
-            self.pwm(self.servoPin, 0, self.servo_min)
+            self.pwm.set_pwm(self.servoPin, 0, self.servo_min)
             time.sleep(self.servo_angle - self.servo_Dvalue)
-            self.pwm(self.servoPin, 0, 0)
+            self.pwm.set_pwm(self.servoPin, 0, 0)
         else:
             self.pwm(self.servoPin, 0, self.servo_center)
             time.sleep(self.servo_angle - self.servo_Dvalue)
@@ -63,13 +63,13 @@ class CarCtrlClass(object):
 
     def right(self, value):
         if value == True:
-            self.pwm(self.servoPin, 0, self.servo_max)
+            self.pwm.set_pwm(self.servoPin, 0, self.servo_max)
             time.sleep(self.servo_angle)
-            self.pwm(self.servoPin, 0, 0)
+            self.pwm.set_pwm(self.servoPin, 0, 0)
         else:
-            self.pwm(self.servoPin, 0, self.servo_center)
+            self.pwm.set_pwm(self.servoPin, 0, self.servo_center)
             time.sleep(self.servo_angle - self.servo_Dvalue)
-            self.pwm(self.servoPin, 0, 0)
+            self.pwm.set_pwm(self.servoPin, 0, 0)
 
     def stop(self):
         gpio.output(self.IN1, 0)

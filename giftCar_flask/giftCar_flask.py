@@ -2,7 +2,7 @@
 
 from flask import Flask, render_template
 
-from carCtrl import CarCtrlClass
+# from carCtrl import CarCtrlClass
 import carCtrl
 app = Flask(__name__)
 myCarCtrl = carCtrl.CarCtrlClass(29, 12, 15, 16, 0)
