@@ -1,0 +1,16 @@
+div[class*='col-']{
+    height: 50px;
+    /*border: 1px solid #000;*/
+    /*background-color: gold;*/
+    text-align: center;
+    line-height: 50px;
+}
+
+
+div[class*='col-'] div{
+
+}
+
+body{
+    -webkit-touch-callout: none;
+}
