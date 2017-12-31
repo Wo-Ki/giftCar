@@ -67,6 +67,9 @@ class Car_pwm_ctrl(object):
             self.in1_hz.ChangeDutyCycle(0)
             self.in2_hz.ChangeDutyCycle(0)
 
+            self.in1_hz.ChangeDutyCycle(0)
+            self.in2_hz.ChangeDutyCycle(0)
+
     def right_wheel(self, value):
         """右轮的pwm控制"""
         # 后退
@@ -82,6 +85,8 @@ class Car_pwm_ctrl(object):
         else:
             self.in3_hz.ChangeDutyCycle(0)
             self.in4_hz.ChangeDutyCycle(0)
+            self.in3_hz.ChangeDutyCycle(0)
+            self.in4_hz.ChangeDutyCycle(0)
 
     def dir_ctrl(self, value):
         """方向轮的pwm控制"""
@@ -89,19 +94,21 @@ class Car_pwm_ctrl(object):
         print "value:", value
         if value < 0:
             pwm_value = self.servo_center - ((-value) / 100.0) * (self.servo_center - self.servo_min)
-            print "pwm_value left：", pwm_value
             self.dir_pwm.set_pwm(self.dir_pin, 0, int(pwm_value))
             time.sleep(self.servo_angle - self.servo_Dvalue)
             self.dir_pwm.set_pwm(self.dir_pin, 0, 0)
         # 右转
         elif value > 0:
             pwm_value = (value / 100.0) * (self.servo_max - self.servo_center) + self.servo_center
-            print "pwm_value right：", pwm_value
             self.dir_pwm.set_pwm(self.dir_pin, 0, int(pwm_value))
             time.sleep(self.servo_angle - self.servo_Dvalue)
             self.dir_pwm.set_pwm(self.dir_pin, 0, 0)
         # 归位
         else:
+            self.dir_pwm.set_pwm(self.dir_pin, 0, self.servo_center)
+            time.sleep(self.servo_angle - self.servo_Dvalue)
+            self.dir_pwm.set_pwm(self.dir_pin, 0, 0)
+
             self.dir_pwm.set_pwm(self.dir_pin, 0, self.servo_center)
             time.sleep(self.servo_angle - self.servo_Dvalue)
             self.dir_pwm.set_pwm(self.dir_pin, 0, 0)

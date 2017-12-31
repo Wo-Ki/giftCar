@@ -62,13 +62,10 @@
                                 <rect key="frame" x="93" y="539" width="292" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="leftRightChanged:" destination="BYZ-38-t0r" eventType="touchDragExit" id="0Ex-Pr-Muv"/>
-                                    <action selector="leftRightChanged:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="7Wz-DU-ngw"/>
                                     <action selector="leftRightChanged:" destination="BYZ-38-t0r" eventType="touchUpOutside" id="DUX-X0-guK"/>
                                     <action selector="leftRightChanged:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ahr-AI-jcq"/>
                                     <action selector="leftRightChanged:" destination="BYZ-38-t0r" eventType="touchCancel" id="bmD-aq-oHA"/>
                                     <action selector="leftRightChanging:" destination="BYZ-38-t0r" eventType="valueChanged" id="GOw-Fu-cmX"/>
-                                    <action selector="upDownChanged:" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="NDr-Qa-6At"/>
                                 </connections>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-100" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="5MQ-Mi-IO4">
@@ -76,9 +73,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="upDownChanged:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6Wr-F6-qql"/>
-                                    <action selector="upDownChanged:" destination="BYZ-38-t0r" eventType="touchDragExit" id="K0j-Va-Hcf"/>
                                     <action selector="upDownChanged:" destination="BYZ-38-t0r" eventType="touchCancel" id="QSq-S5-xxT"/>
-                                    <action selector="upDownChanged:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="mAe-1p-tWu"/>
                                     <action selector="upDownChanged:" destination="BYZ-38-t0r" eventType="touchUpOutside" id="nB5-nm-Fml"/>
                                     <action selector="upDownChanging:" destination="BYZ-38-t0r" eventType="valueChanged" id="QUT-RI-04G"/>
                                 </connections>

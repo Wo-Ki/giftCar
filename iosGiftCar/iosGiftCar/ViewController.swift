@@ -105,6 +105,7 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate {
         leftRight.setValue(0, animated: true)
         let str = "{\"LR\":"+String(sender.value)+"}"
         clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
+        clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
     }
     @IBAction func upDownChanging(_ sender: UISlider) {
         let str = "{\"UD\":"+String(sender.value)+"}"
@@ -113,6 +114,7 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate {
     @IBAction func upDownChanged(_ sender: UISlider) {
         upDown.setValue(0, animated: true)
         let str = "{\"UD\":"+String(sender.value)+"}"
+        clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
         clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
     }
     @IBAction func stopBtnTouched(_ sender: UIButton) {
