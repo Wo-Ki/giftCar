@@ -66,9 +66,7 @@ class Car_pwm_ctrl(object):
         else:
             self.in1_hz.ChangeDutyCycle(0)
             self.in2_hz.ChangeDutyCycle(0)
-
-            self.in1_hz.ChangeDutyCycle(0)
-            self.in2_hz.ChangeDutyCycle(0)
+            time.sleep(0.02)
 
     def right_wheel(self, value):
         """右轮的pwm控制"""
@@ -85,8 +83,7 @@ class Car_pwm_ctrl(object):
         else:
             self.in3_hz.ChangeDutyCycle(0)
             self.in4_hz.ChangeDutyCycle(0)
-            self.in3_hz.ChangeDutyCycle(0)
-            self.in4_hz.ChangeDutyCycle(0)
+            time.sleep(0.02)
 
     def dir_ctrl(self, value):
         """方向轮的pwm控制"""
@@ -108,10 +105,7 @@ class Car_pwm_ctrl(object):
             self.dir_pwm.set_pwm(self.dir_pin, 0, self.servo_center)
             time.sleep(self.servo_angle - self.servo_Dvalue)
             self.dir_pwm.set_pwm(self.dir_pin, 0, 0)
-
-            self.dir_pwm.set_pwm(self.dir_pin, 0, self.servo_center)
-            time.sleep(self.servo_angle - self.servo_Dvalue)
-            self.dir_pwm.set_pwm(self.dir_pin, 0, 0)
+            time.sleep(0.02)
 
     def stop(self):
         self.in1_hz.ChangeDutyCycle(0)
