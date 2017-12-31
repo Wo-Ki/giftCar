@@ -62,6 +62,7 @@
                                 <rect key="frame" x="93" y="539" width="292" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
+                                    <action selector="leftRightChanged:" destination="BYZ-38-t0r" eventType="touchDragExit" id="0Ex-Pr-Muv"/>
                                     <action selector="leftRightChanged:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="7Wz-DU-ngw"/>
                                     <action selector="leftRightChanged:" destination="BYZ-38-t0r" eventType="touchUpOutside" id="DUX-X0-guK"/>
                                     <action selector="leftRightChanged:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ahr-AI-jcq"/>
@@ -75,6 +76,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="upDownChanged:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6Wr-F6-qql"/>
+                                    <action selector="upDownChanged:" destination="BYZ-38-t0r" eventType="touchDragExit" id="K0j-Va-Hcf"/>
                                     <action selector="upDownChanged:" destination="BYZ-38-t0r" eventType="touchCancel" id="QSq-S5-xxT"/>
                                     <action selector="upDownChanged:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="mAe-1p-tWu"/>
                                     <action selector="upDownChanged:" destination="BYZ-38-t0r" eventType="touchUpOutside" id="nB5-nm-Fml"/>
