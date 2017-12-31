@@ -8,7 +8,7 @@ import socket
 import json
 import car_pwm_ctrl
 
-host = "192.168.100.3"
+host = "192.168.100.2"
 port = 8989
 
 
@@ -20,9 +20,9 @@ def handle_client(client_socket, client_address):
                 # print "request_data:", request_data
                 try:
                     json_data = json.loads(request_data)
-                    car_pwm_ctrl.left_wheel(int(json_data.get("LR")))
-                    car_pwm_ctrl.right_wheel(int(json_data.get("LR")))
-                    car_pwm_ctrl.dir_ctrl(int(json_data.get("UD")))
+                    car_pwm_ctrl.left_wheel(int(json_data.get("UD")))
+                    car_pwm_ctrl.right_wheel(int(json_data.get("UD")))
+                    car_pwm_ctrl.dir_ctrl(int(json_data.get("LR")))
 
                 except:
                     print "json data load error!"
