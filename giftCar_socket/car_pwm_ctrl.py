@@ -55,10 +55,12 @@ class Car_pwm_ctrl(object):
         """左轮的pwm控制"""
         # 前进
         if value > 0:
+            print "left_wheel up"
             self.in1_hz.changeDutyCycle(value)
             self.in2_hz.changeDutyCycle(0)
         # 后退
         elif value < 0:
+            print "left_wheel dwon"
             self.in1_hz.changeDutyCycle(100)
             self.in2_hz.changeDutyCycle(-value)
             # 停止

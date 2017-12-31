@@ -17,7 +17,7 @@ def handle_client(client_socket, client_address):
         try:
             request_data = client_socket.recv(1024)
             if request_data:
-                print "request_data:", request_data
+                # print "request_data:", request_data
                 try:
                     json_data = json.loads(request_data)
                     car_pwm_ctrl.left_wheel(int(json_data.get("LR")))
@@ -26,6 +26,10 @@ def handle_client(client_socket, client_address):
 
                 except:
                     print "json data load error!"
+            else:
+                print e
+                print "[%s, %s] : disconnect" % client_address
+                client_socket.close()
         except Exception, e:
             print e
             print "[%s, %s] : disconnect" % client_address

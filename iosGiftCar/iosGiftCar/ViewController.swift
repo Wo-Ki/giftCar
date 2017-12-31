@@ -41,6 +41,7 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate {
     }
  
     @IBAction func disConnDidTouched(_ sender: UIButton) {
+        clientSocket.disconnect()
     }
     @IBAction func connDidTouched(_ sender: UIButton) {
         if ipTextFiled.text == nil || portTextField.text == nil{
