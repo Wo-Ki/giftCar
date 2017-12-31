@@ -56,32 +56,32 @@ class Car_pwm_ctrl(object):
         # 前进
         if value < 0:
             print "left_wheel up"
-            self.in1_hz.changeDutyCycle(value)
-            self.in2_hz.changeDutyCycle(0)
+            self.in1_hz.ChangeDutyCycle(value)
+            self.in2_hz.ChangeDutyCycle(0)
         # 后退
         elif value > 0:
             print "left_wheel down"
-            self.in1_hz.changeDutyCycle(100)
-            self.in2_hz.changeDutyCycle(-value)
+            self.in1_hz.ChangeDutyCycle(100)
+            self.in2_hz.ChangeDutyCycle(-value)
             # 停止
         else:
-            self.in1_hz.changeDutyCycle(0)
-            self.in2_hz.changeDutyCycle(0)
+            self.in1_hz.ChangeDutyCycle(0)
+            self.in2_hz.ChangeDutyCycle(0)
 
     def right_wheel(self, value):
         """右轮的pwm控制"""
         # 前进
         if value > 0:
-            self.in3_hz.changeDutyCycle(value)
-            self.in4_hz.changeDutyCycle(0)
+            self.in3_hz.ChangeDutyCycle(value)
+            self.in4_hz.ChangeDutyCycle(0)
         # 后退
         elif value < 0:
-            self.in3_hz.changeDutyCycle(100)
-            self.in4_hz.changeDutyCycle(-value)
+            self.in3_hz.ChangeDutyCycle(100)
+            self.in4_hz.ChangeDutyCycle(-value)
             # 停止
         else:
-            self.in3_hz.changeDutyCycle(0)
-            self.in4_hz.changeDutyCycle(0)
+            self.in3_hz.ChangeDutyCycle(0)
+            self.in4_hz.ChangeDutyCycle(0)
 
     def dir_ctrl(self, value):
         """方向轮的pwm控制"""
@@ -104,10 +104,10 @@ class Car_pwm_ctrl(object):
             self.dir_pwm.set_pwm(self.dir_pin, 0, 0)
 
     def stop(self):
-        self.in1_hz.changeDutyCycle(0)
-        self.in2_hz.changeDutyCycle(0)
-        self.in3_hz.changeDutyCycle(0)
-        self.in4_hz.changeDutyCycle(0)
+        self.in1_hz.ChangeDutyCycle(0)
+        self.in2_hz.ChangeDutyCycle(0)
+        self.in3_hz.ChangeDutyCycle(0)
+        self.in4_hz.ChangeDutyCycle(0)
 
     def all_die(self):
         self.in1_hz.stop()
