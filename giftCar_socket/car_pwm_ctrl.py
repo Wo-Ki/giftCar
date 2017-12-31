@@ -56,7 +56,7 @@ class Car_pwm_ctrl(object):
         # 后退
         if value > 0:
             self.in1_hz.ChangeDutyCycle(100)
-            self.in2_hz.ChangeDutyCycle(value)
+            self.in2_hz.ChangeDutyCycle(100-value)
 
         # 前进
         elif value < 0:
@@ -72,7 +72,7 @@ class Car_pwm_ctrl(object):
         # 后退
         if value > 0:
             self.in3_hz.ChangeDutyCycle(100)
-            self.in4_hz.ChangeDutyCycle(value)
+            self.in4_hz.ChangeDutyCycle(100-value)
         # 前进
         elif value < 0:
 
@@ -119,9 +119,16 @@ class Car_pwm_ctrl(object):
 
 if __name__ == "__main__":
     car_pwm_ctrl = Car_pwm_ctrl(29, 12, 15, 16, 0)
-    car_pwm_ctrl.left_wheel(50)
-    time.sleep(4)
-    car_pwm_ctrl.left_wheel(100)
-    time.sleep(4)
-    car_pwm_ctrl.left_wheel(0)
+    # car_pwm_ctrl.left_wheel(50)
+    # time.sleep(4)
+    # car_pwm_ctrl.left_wheel(100)
+    # time.sleep(4)
+    # car_pwm_ctrl.left_wheel(0)
+    car_pwm_ctrl.dir_ctrl(50)
+    time.sleep(3)
+    car_pwm_ctrl.dir_ctrl(0)
+    time.sleep(3)
+    car_pwm_ctrl.dir_ctrl(-50)
+    time.sleep(3)
+    car_pwm_ctrl.dir_ctrl(0)
     # car_pwm_ctrl.all_die()
