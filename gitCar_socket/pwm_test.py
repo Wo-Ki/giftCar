@@ -7,8 +7,8 @@
 import RPi.GPIO as gpio
 import time, sys
 
-# 我用的第12个引脚
-pin = 12
+# 我用的第29个引脚
+pin = 29
 gpio.setmode(gpio.BOARD)
 gpio.setup(pin, gpio.OUT)
 # 频率设置为400Hz
@@ -20,6 +20,6 @@ for i in range(40):
     dc += 2
     print 'dc:', dc
     p.ChangeDutyCycle(dc)
-    time.sleep(0.3);
+    time.sleep(0.3)
 p.stop()
 gpio.cleanup()
