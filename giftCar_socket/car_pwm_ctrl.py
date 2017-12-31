@@ -55,7 +55,7 @@ class Car_pwm_ctrl(object):
         """左轮的pwm控制"""
         # 后退
         if value > 0:
-            self.in1_hz.ChangeDutyCycle(100-value)
+            self.in1_hz.ChangeDutyCycle(100 - value)
             self.in2_hz.ChangeDutyCycle(100)
 
         # 前进
@@ -71,7 +71,7 @@ class Car_pwm_ctrl(object):
         """右轮的pwm控制"""
         # 后退
         if value > 0:
-            self.in3_hz.ChangeDutyCycle(100-value)
+            self.in3_hz.ChangeDutyCycle(100 - value)
             self.in4_hz.ChangeDutyCycle(100)
         # 前进
         elif value < 0:
@@ -88,12 +88,14 @@ class Car_pwm_ctrl(object):
         # 左转
         if value < 0:
             pwm_value = (-value / 100.0) * (self.servo_center - self.servo_min) + self.servo_min
+            print "pwm_value left：", pwm_value
             self.dir_pwm.set_pwm(self.dir_pin, 0, int(pwm_value))
             time.sleep(self.servo_angle - self.servo_Dvalue)
             self.dir_pwm.set_pwm(self.dir_pin, 0, 0)
         # 右转
         elif value > 0:
             pwm_value = (value / 100.0) * (self.servo_max - self.servo_center) + self.servo_center
+            print "pwm_value right：", pwm_value
             self.dir_pwm.set_pwm(self.dir_pin, 0, int(pwm_value))
             time.sleep(self.servo_angle - self.servo_Dvalue)
             self.dir_pwm.set_pwm(self.dir_pin, 0, 0)
