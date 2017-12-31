@@ -88,7 +88,7 @@ class Car_pwm_ctrl(object):
         # 左转
         print "value:", value
         if value < 0:
-            pwm_value = (100-value / 100.0) * (self.servo_center - self.servo_min) + self.servo_min
+            pwm_value = self.servo_center - (100-value / 100.0) * (self.servo_center - self.servo_min)
             print "pwm_value left：", pwm_value
             self.dir_pwm.set_pwm(self.dir_pin, 0, int(pwm_value))
             time.sleep(self.servo_angle - self.servo_Dvalue)
@@ -98,7 +98,7 @@ class Car_pwm_ctrl(object):
             pwm_value = (value / 100.0) * (self.servo_max - self.servo_center) + self.servo_center
             print "pwm_value right：", pwm_value
             self.dir_pwm.set_pwm(self.dir_pin, 0, int(pwm_value))
-            time.sleep(self.servo_angle)
+            time.sleep(self.servo_angle - self.servo_Dvalue)
             self.dir_pwm.set_pwm(self.dir_pin, 0, 0)
         # 归位
         else:
