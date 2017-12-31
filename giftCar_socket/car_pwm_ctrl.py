@@ -61,8 +61,8 @@ class Car_pwm_ctrl(object):
         # 后退
         elif value > 0:
             print "left_wheel down"
-        self.in1_hz.ChangeDutyCycle(100-value)
-        self.in2_hz.ChangeDutyCycle(100)
+            self.in1_hz.ChangeDutyCycle(100-value)
+            self.in2_hz.ChangeDutyCycle(100)
             # 停止
         else:
             self.in1_hz.ChangeDutyCycle(0)
