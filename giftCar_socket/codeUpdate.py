@@ -29,6 +29,6 @@ def remote_update():
 
 
 @task
-def deploy():
+def go():
     local_update()
     remote_update()

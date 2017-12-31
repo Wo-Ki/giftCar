@@ -101,15 +101,19 @@ class Car_pwm_ctrl(object):
             time.sleep(self.servo_angle - self.servo_Dvalue)
             self.dir_pwm.set_pwm(self.dir_pin, 0, 0)
 
-        def stop(self):
-            self.in1_hz.changeDutyCycle(0)
-            self.in2_hz.changeDutyCycle(0)
-            self.in3_hz.changeDutyCycle(0)
-            self.in4_hz.changeDutyCycle(0)
+    def stop(self):
+        self.in1_hz.changeDutyCycle(0)
+        self.in2_hz.changeDutyCycle(0)
+        self.in3_hz.changeDutyCycle(0)
+        self.in4_hz.changeDutyCycle(0)
 
-        def all_die(self):
-            self.in1_hz.stop()
-            self.in2_hz.stop()
-            self.in3_hz.stop()
-            self.in4_hz.stop()
-            gpio.cleanup()
+    def all_die(self):
+        self.in1_hz.stop()
+        self.in2_hz.stop()
+        self.in3_hz.stop()
+        self.in4_hz.stop()
+        gpio.cleanup()
+
+if __name__ == "__main__":
+    car_pwm_ctrl = Car_pwm_ctrl(29, 12, 15, 16, 0)
+    car_pwm_ctrl.all_die()

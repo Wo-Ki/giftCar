@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="ipad9_7" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="iosGiftCar" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-100" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="KB7-sk-KUi">
+                                <rect key="frame" x="90" y="585" width="292" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="leftRightChanged:" destination="BYZ-38-t0r" eventType="touchUpOutside" id="DUX-X0-guK"/>
+                                    <action selector="leftRightChanged:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ahr-AI-jcq"/>
+                                    <action selector="leftRightChanged:" destination="BYZ-38-t0r" eventType="touchCancel" id="bmD-aq-oHA"/>
+                                    <action selector="leftRightChanging:" destination="BYZ-38-t0r" eventType="valueChanged" id="GOw-Fu-cmX"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-100" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="5MQ-Mi-IO4">
+                                <rect key="frame" x="712" y="585" width="257" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="upDownChanged:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6Wr-F6-qql"/>
+                                    <action selector="upDownChanged:" destination="BYZ-38-t0r" eventType="touchCancel" id="QSq-S5-xxT"/>
+                                    <action selector="upDownChanged:" destination="BYZ-38-t0r" eventType="touchUpOutside" id="nB5-nm-Fml"/>
+                                    <action selector="upDownChanging:" destination="BYZ-38-t0r" eventType="valueChanged" id="QUT-RI-04G"/>
+                                </connections>
+                            </slider>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Co-d5-oMW">
+                                <rect key="frame" x="506" y="585.43600547924598" width="31.000000000000057" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="stop"/>
+                                <connections>
+                                    <action selector="stopBtnTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ukD-bv-gY2"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="192.168.100.2" borderStyle="roundedRect" placeholder="car's IP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qff-TN-2iA">
+                                <rect key="frame" x="20" y="20" width="110.00000000000006" height="30.000000000000028"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="8989" borderStyle="roundedRect" placeholder="car's port" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0DO-DS-2Ji">
+                                <rect key="frame" x="153" y="20" width="65.999999999999972" height="30.000000000000028"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=":" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b7h-BX-rpg">
+                                <rect key="frame" x="140" y="23" width="4.9999999999999982" height="20.999999999999972"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="12K-MO-npl">
+                                <rect key="frame" x="227" y="20" width="31" height="30.000000000000028"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="连接"/>
+                                <connections>
+                                    <action selector="connDidTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bir-Ho-u3R"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TWn-yS-JzG">
+                                <rect key="frame" x="283" y="20" width="31" height="30.000000000000028"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="断开"/>
+                                <connections>
+                                    <action selector="disConnDidTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="H12-su-ZZb"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="connBtn" destination="12K-MO-npl" id="GyK-9o-WHO"/>
+                        <outlet property="disConnBtn" destination="TWn-yS-JzG" id="6Uz-BA-I0w"/>
+                        <outlet property="ipTextFiled" destination="Qff-TN-2iA" id="y3A-F7-8St"/>
+                        <outlet property="leftRight" destination="KB7-sk-KUi" id="p7c-jV-ulw"/>
+                        <outlet property="portTextField" destination="0DO-DS-2Ji" id="NpP-2J-qcA"/>
+                        <outlet property="stopBtn" destination="3Co-d5-oMW" id="WBt-d8-Mfy"/>
+                        <outlet property="upDown" destination="5MQ-Mi-IO4" id="p7d-nS-m9K"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="225.58593749999997" y="112.5"/>
+        </scene>
+    </scenes>
+</document>
