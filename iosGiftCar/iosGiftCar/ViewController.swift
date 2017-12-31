@@ -98,7 +98,7 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate {
         clientSocket.readData(withTimeout: -1, tag: 0)
     }
     @IBAction func leftRightChanging(_ sender: UISlider) {
-        let str = "{\"LR\":"+String(sender.value)+"}"
+        let str = "{\"LR\":"+String(Int(sender.value))+"}"
         clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
     }
     @IBAction func leftRightChanged(_ sender: UISlider) {
