@@ -20,11 +20,11 @@ def handle_client(client_socket, client_address):
                 print "request_data:", request_data
                 try:
                     json_data = json.loads(request_data)
-                    car_pwm_ctrl.left_wheel(int(json_data.get("UD")))
-                    car_pwm_ctrl.right_wheel(int(json_data.get("UD")))
-                    car_pwm_ctrl.dir_ctrl(int(json_data.get("LR")))
-                    print "int(json_data.get(LR)):", int(json_data.get("LR"))
-
+                    if json_data.get("UD") is not None:
+                        car_pwm_ctrl.left_wheel(int(json_data.get("UD")))
+                        car_pwm_ctrl.right_wheel(int(json_data.get("UD")))
+                    if json_data.get("LR") is not None:
+                        car_pwm_ctrl.dir_ctrl(int(json_data.get("LR")))
                 except:
                     pass
             else:
