@@ -22,7 +22,7 @@ def handle_client(client_socket, client_address):
                     json_data = json.loads(request_data)
                     car_pwm_ctrl.left_wheel(int(json_data.get("UD")))
                     car_pwm_ctrl.right_wheel(int(json_data.get("UD")))
-                    car_pwm_ctrl.dir_ctrl(float(json_data.get("LR")))
+                    car_pwm_ctrl.dir_ctrl(int(json_data.get("LR")))
 
                 except:
                     pass
