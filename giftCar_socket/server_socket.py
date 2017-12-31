@@ -6,17 +6,18 @@
 
 import socket
 import json
+
 host = "192.168.100.3"
 port = 8989
 
 
 def handle_client(client_socket):
-    request_data = client_socket.recv(1024)
-    if request_data:
-        print "request_data:", request_data
-        try:
-            json_data = json.loads(request_data)
-
+    while True:
+        request_data = client_socket.recv(1024)
+        if request_data:
+            print "request_data:", request_data
+            try:
+                json_data = json.loads(request_data)
 
 
 if __name__ == "__main__":

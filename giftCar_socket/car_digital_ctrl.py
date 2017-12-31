@@ -7,7 +7,7 @@ import Adafruit_PCA9685
 import math
 
 
-class CarCtrlClass(object):
+class Car_digital_ctrl(object):
     # 设置舵机活动范围
     servo_min = 200  # Min pulse length out of 4096
     servo_center = 300
