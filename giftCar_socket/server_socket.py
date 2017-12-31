@@ -52,4 +52,5 @@ if __name__ == "__main__":
             handle_client(client_socket, client_address)
     except KeyboardInterrupt:
         print "******Server Offline*****"
+        client_socket.close()
         server_socket.close()
