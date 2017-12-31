@@ -23,11 +23,11 @@ def handle_client(client_socket, client_address):
                     car_pwm_ctrl.left_wheel(int(json_data.get("UD")))
                     car_pwm_ctrl.right_wheel(int(json_data.get("UD")))
                     car_pwm_ctrl.dir_ctrl(int(json_data.get("LR")))
+                    print "int(json_data.get(LR)):", int(json_data.get("LR"))
 
                 except:
                     pass
             else:
-                print e
                 print "[%s, %s] : disconnect" % client_address
                 client_socket.close()
                 return
