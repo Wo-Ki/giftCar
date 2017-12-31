@@ -53,29 +53,31 @@ class Car_pwm_ctrl(object):
 
     def left_wheel(self, value):
         """左轮的pwm控制"""
-        # 前进
-        if value > 0:
-            self.in1_hz.ChangeDutyCycle(value)
-            self.in2_hz.ChangeDutyCycle(0)
         # 后退
-        elif value < 0:
+        if value > 0:
             self.in1_hz.ChangeDutyCycle(100)
-            self.in2_hz.ChangeDutyCycle(-value)
-            # 停止
+            self.in2_hz.ChangeDutyCycle(value)
+
+        # 前进
+        elif value < 0:
+            self.in1_hz.ChangeDutyCycle(-value)
+            self.in2_hz.ChangeDutyCycle(0)
+        # 停止
         else:
             self.in1_hz.ChangeDutyCycle(0)
             self.in2_hz.ChangeDutyCycle(0)
 
     def right_wheel(self, value):
         """右轮的pwm控制"""
-        # 前进
-        if value > 0:
-            self.in3_hz.ChangeDutyCycle(value)
-            self.in4_hz.ChangeDutyCycle(0)
         # 后退
-        elif value < 0:
+        if value > 0:
             self.in3_hz.ChangeDutyCycle(100)
-            self.in4_hz.ChangeDutyCycle(-value)
+            self.in4_hz.ChangeDutyCycle(value)
+        # 前进
+        elif value < 0:
+
+            self.in3_hz.ChangeDutyCycle(-value)
+            self.in4_hz.ChangeDutyCycle(0)
             # 停止
         else:
             self.in3_hz.ChangeDutyCycle(0)
