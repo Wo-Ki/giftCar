@@ -17,35 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-100" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="KB7-sk-KUi">
-                                <rect key="frame" x="90" y="585" width="292" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="leftRightChanged:" destination="BYZ-38-t0r" eventType="touchUpOutside" id="DUX-X0-guK"/>
-                                    <action selector="leftRightChanged:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ahr-AI-jcq"/>
-                                    <action selector="leftRightChanged:" destination="BYZ-38-t0r" eventType="touchCancel" id="bmD-aq-oHA"/>
-                                    <action selector="leftRightChanging:" destination="BYZ-38-t0r" eventType="valueChanged" id="GOw-Fu-cmX"/>
-                                    <action selector="upDownChanged:" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="NDr-Qa-6At"/>
-                                </connections>
-                            </slider>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-100" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="5MQ-Mi-IO4">
-                                <rect key="frame" x="712" y="585" width="257" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="upDownChanged:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6Wr-F6-qql"/>
-                                    <action selector="upDownChanged:" destination="BYZ-38-t0r" eventType="touchCancel" id="QSq-S5-xxT"/>
-                                    <action selector="upDownChanged:" destination="BYZ-38-t0r" eventType="touchUpOutside" id="nB5-nm-Fml"/>
-                                    <action selector="upDownChanging:" destination="BYZ-38-t0r" eventType="valueChanged" id="QUT-RI-04G"/>
-                                </connections>
-                            </slider>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Co-d5-oMW">
-                                <rect key="frame" x="506" y="585.43600547924598" width="31.000000000000057" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="stop"/>
-                                <connections>
-                                    <action selector="stopBtnTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ukD-bv-gY2"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="192.168.100.2" borderStyle="roundedRect" placeholder="car's IP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qff-TN-2iA">
                                 <rect key="frame" x="20" y="21" width="110.00000000000004" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -67,10 +38,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ceP-km-eSj">
-                                <rect key="frame" x="226" y="25" width="19.999999999999929" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="12K-MO-npl">
                                 <rect key="frame" x="253" y="21" width="31" height="30.000000000000028"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -85,6 +52,41 @@
                                 <state key="normal" title="断开"/>
                                 <connections>
                                     <action selector="disConnDidTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="H12-su-ZZb"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ceP-km-eSj">
+                                <rect key="frame" x="226" y="25" width="19.999999999999929" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-100" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="KB7-sk-KUi">
+                                <rect key="frame" x="93" y="539" width="292" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="leftRightChanged:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="7Wz-DU-ngw"/>
+                                    <action selector="leftRightChanged:" destination="BYZ-38-t0r" eventType="touchUpOutside" id="DUX-X0-guK"/>
+                                    <action selector="leftRightChanged:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ahr-AI-jcq"/>
+                                    <action selector="leftRightChanged:" destination="BYZ-38-t0r" eventType="touchCancel" id="bmD-aq-oHA"/>
+                                    <action selector="leftRightChanging:" destination="BYZ-38-t0r" eventType="valueChanged" id="GOw-Fu-cmX"/>
+                                    <action selector="upDownChanged:" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="NDr-Qa-6At"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-100" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="5MQ-Mi-IO4">
+                                <rect key="frame" x="715" y="539" width="257" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="upDownChanged:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6Wr-F6-qql"/>
+                                    <action selector="upDownChanged:" destination="BYZ-38-t0r" eventType="touchCancel" id="QSq-S5-xxT"/>
+                                    <action selector="upDownChanged:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="mAe-1p-tWu"/>
+                                    <action selector="upDownChanged:" destination="BYZ-38-t0r" eventType="touchUpOutside" id="nB5-nm-Fml"/>
+                                    <action selector="upDownChanging:" destination="BYZ-38-t0r" eventType="valueChanged" id="QUT-RI-04G"/>
+                                </connections>
+                            </slider>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Co-d5-oMW">
+                                <rect key="frame" x="509" y="539" width="31.000000000000057" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="stop"/>
+                                <connections>
+                                    <action selector="stopBtnTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ukD-bv-gY2"/>
                                 </connections>
                             </button>
                         </subviews>
