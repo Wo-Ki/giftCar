@@ -43,7 +43,7 @@ if __name__ == "__main__":
     server_socket.listen(3)
 
     car_pwm_ctrl = car_pwm_ctrl.Car_pwm_ctrl(29, 12, 15, 16, 0)
-
+    print "******Server Online*****"
     try:
         while True:
             client_socket, client_address = server_socket.accept()
@@ -51,5 +51,5 @@ if __name__ == "__main__":
             print "[%s, %s] : connected" % client_address
             handle_client(client_socket, client_address)
     except KeyboardInterrupt:
-        print "******Smart Farm Server Offline*****"
+        print "******Server Offline*****"
         server_socket.close()
