@@ -17,6 +17,7 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate {
     @IBOutlet weak var connBtn: UIButton!
     @IBOutlet weak var stopBtn: UIButton!
     @IBOutlet weak var disConnBtn: UIButton!
+    @IBOutlet weak var connActivity: UIActivityIndicatorView!
     
 
     var clientSocket:GCDAsyncSocket!
@@ -32,6 +33,7 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate {
         leftRight.isEnabled = false
         stopBtn.isEnabled = false
         disConnBtn.isEnabled = false
+        connActivity.isHidden = true
         
     }
 
@@ -52,6 +54,8 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate {
             clientSocket = GCDAsyncSocket()
             clientSocket.delegate = self
             clientSocket.delegateQueue = DispatchQueue.global()
+            connActivity.isHidden = false
+            connActivity.startAnimating()
             do{
                 try clientSocket.connect(toHost: ip, onPort: UInt16(port)!)
             }catch{
@@ -67,6 +71,8 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate {
         leftRight.isEnabled = false
         connBtn.isEnabled = true
         disConnBtn.isEnabled = false
+        connActivity.stopAnimating()
+        connActivity.isHidden = true
         alertFunc(title: "提示", message: "已经断开连接")
     }
     func socket(_ sock: GCDAsyncSocket!, didRead data: Data!, withTag tag: Int) {
@@ -82,6 +88,8 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate {
     }
     func socket(_ sock: GCDAsyncSocket!, didConnectToHost host: String!, port: UInt16) {
         print("Connect successfully")
+        connActivity.stopAnimating()
+        connActivity.isHidden = true
         upDown.isEnabled = true
         leftRight.isEnabled = true
         stopBtn.isEnabled = true
