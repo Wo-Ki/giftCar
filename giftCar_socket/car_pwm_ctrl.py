@@ -171,7 +171,7 @@ class Car_pwm_ctrl(object):
 
 
 if __name__ == "__main__":
-    car_pwm_ctrl = Car_pwm_ctrl(29, 12, 15, 16, 0, 1, 2)
+    car_pwm_ctrl = Car_pwm_ctrl(13, 12, 15, 16, 0, 1, 2)
     # car_pwm_ctrl.left_wheel(50)
     # time.sleep(4)
     # car_pwm_ctrl.left_wheel(100)

@@ -43,7 +43,7 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate, UIWebViewDelegate
         motionSliderH.isEnabled = false
         motionSliderV.isEnabled = false
         motionResetBtn.isEnabled = false
-        motionStopLoadBtn.isEnabled = false
+
         
         
     }
@@ -98,7 +98,6 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate, UIWebViewDelegate
         motionSliderH.isEnabled = false
         motionSliderV.isEnabled = false
         motionResetBtn.isEnabled = false
-        motionStopLoadBtn.isEnabled = false
         alertFunc(title: "提示", message: "已经断开连接")
     }
     func socket(_ sock: GCDAsyncSocket!, didRead data: Data!, withTag tag: Int) {
@@ -124,7 +123,6 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate, UIWebViewDelegate
         motionSliderH.isEnabled = true
         motionSliderV.isEnabled = true
         motionResetBtn.isEnabled = true
-        motionStopLoadBtn.isEnabled = true
         clientSocket.readData(withTimeout: -1, tag: 0)
     }
     var lastLeftRight = 0

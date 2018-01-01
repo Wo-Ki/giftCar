@@ -89,5 +89,5 @@ class Car_digital_ctrl(object):
 
 
 if __name__ == "__main__":
-    myCar = Car_digital_ctrl(29, 12, 15, 16, 0)
+    myCar = Car_digital_ctrl(13, 12, 15, 16, 0)
     myCar.stop()

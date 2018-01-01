@@ -13,6 +13,8 @@ port = 8989
 
 
 def handle_client(client_socket, client_address):
+    """处理客户端"""
+    client_socket.send("OK\r\n")
     while True:
         try:
             request_data = client_socket.recv(1024)
@@ -50,7 +52,7 @@ if __name__ == "__main__":
     server_socket.bind((host, port))
     server_socket.listen(3)
 
-    car_pwm_ctrl = car_pwm_ctrl.Car_pwm_ctrl(29, 12, 15, 16, 0, 1, 2)
+    car_pwm_ctrl = car_pwm_ctrl.Car_pwm_ctrl(13, 12, 15, 16, 0, 1, 2)
     print "******Server Online*****"
     try:
         while True:
