@@ -98,29 +98,29 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate {
         clientSocket.readData(withTimeout: -1, tag: 0)
     }
     @IBAction func leftRightChanging(_ sender: UISlider) {
-        let str = "{\"LR\":"+String(Int(sender.value))+"}"
+        let str = "{\"LR\":"+String(Int(sender.value))+"},"
         clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
     }
     @IBAction func leftRightChanged(_ sender: UISlider) {
         leftRight.setValue(0, animated: true)
-        let str = "{\"LR\":"+String(sender.value)+"}"
+        let str = "{\"LR\":0},"
         clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
-        clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
+        
     }
     @IBAction func upDownChanging(_ sender: UISlider) {
-        let str = "{\"UD\":"+String(sender.value)+"}"
+        let str = "{\"UD\":"+String(Int(sender.value))+"},"
         clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
     }
     @IBAction func upDownChanged(_ sender: UISlider) {
         upDown.setValue(0, animated: true)
-        let str = "{\"UD\":"+String(sender.value)+"}"
+        let str = "{\"UD\":0},"
         clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
-        clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
+        
     }
     @IBAction func stopBtnTouched(_ sender: UIButton) {
-        var str = "{\"LR\":0}"
+        var str = "{\"LR\":0},"
         clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
-        str = "{\"UD\":0}"
+        str = "{\"UD\":0},"
         clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
     }
     
