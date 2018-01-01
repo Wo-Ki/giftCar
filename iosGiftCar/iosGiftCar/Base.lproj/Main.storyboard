@@ -86,6 +86,67 @@
                                     <action selector="stopBtnTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ukD-bv-gY2"/>
                                 </connections>
                             </button>
+                            <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="22F-BF-ffd">
+                                <rect key="frame" x="253" y="75" width="430" height="276"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="云台水平:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1CE-51-v9R">
+                                <rect key="frame" x="20" y="364" width="74" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="云台纵向：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qAg-hN-tpL">
+                                <rect key="frame" x="20" y="406" width="87" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-100" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="pg0-oR-Ud5">
+                                <rect key="frame" x="108" y="359" width="140" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="motionSliderHChanging:" destination="BYZ-38-t0r" eventType="valueChanged" id="saU-Ut-ylU"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-100" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="af5-im-GzX">
+                                <rect key="frame" x="106" y="406" width="142" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="motionSliderVCHanging:" destination="BYZ-38-t0r" eventType="valueChanged" id="jGN-2c-uBM"/>
+                                </connections>
+                            </slider>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YCi-CX-5fC">
+                                <rect key="frame" x="20" y="435" width="31" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="归位"/>
+                                <connections>
+                                    <action selector="motionResetBtnTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TTU-KY-trU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="neR-iP-FVm">
+                                <rect key="frame" x="655" y="358" width="31" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="停止"/>
+                                <connections>
+                                    <action selector="motionStopLoadBtnTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EQ3-kW-mkN"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rjm-b7-QS7">
+                                <rect key="frame" x="608" y="358" width="31" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="刷新"/>
+                                <connections>
+                                    <action selector="motionFlashBtnDidTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fiH-RO-e75"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -96,6 +157,11 @@
                         <outlet property="disConnBtn" destination="TWn-yS-JzG" id="6Uz-BA-I0w"/>
                         <outlet property="ipTextFiled" destination="Qff-TN-2iA" id="y3A-F7-8St"/>
                         <outlet property="leftRight" destination="KB7-sk-KUi" id="p7c-jV-ulw"/>
+                        <outlet property="motionResetBtn" destination="YCi-CX-5fC" id="9YJ-a3-bOP"/>
+                        <outlet property="motionSliderH" destination="pg0-oR-Ud5" id="EVq-vg-x3b"/>
+                        <outlet property="motionSliderV" destination="af5-im-GzX" id="jTJ-gb-vgf"/>
+                        <outlet property="motionStopLoadBtn" destination="neR-iP-FVm" id="Xmg-VS-5FZ"/>
+                        <outlet property="motionWebView" destination="22F-BF-ffd" id="bia-Nl-w2W"/>
                         <outlet property="portTextField" destination="0DO-DS-2Ji" id="NpP-2J-qcA"/>
                         <outlet property="stopBtn" destination="3Co-d5-oMW" id="WBt-d8-Mfy"/>
                         <outlet property="upDown" destination="5MQ-Mi-IO4" id="p7d-nS-m9K"/>

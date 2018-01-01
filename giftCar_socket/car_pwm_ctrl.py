@@ -20,12 +20,14 @@ class Car_pwm_ctrl(object):
     servo_angle = 0.03  # sleep时间，值越大，一次的转动幅度越大
     servo_Dvalue = 0.01  # 控制左右旋转产生的误差
 
-    def __init__(self, IN1, IN2, IN3, IN4, dir_pin):
+    def __init__(self, IN1, IN2, IN3, IN4, dir_pin, yh_pin, yv_pin):
         self.IN1 = IN1
         self.IN2 = IN2
         self.IN3 = IN3
         self.IN4 = IN4
         self.dir_pin = dir_pin
+        self.yh_pin = yh_pin
+        self.yv_pin = yv_pin
 
         gpio.setmode(gpio.BOARD)
 
@@ -44,12 +46,12 @@ class Car_pwm_ctrl(object):
         self.in3_hz.start(0)
         self.in4_hz.start(0)
 
-        self.dir_pwm = Adafruit_PCA9685.PCA9685()
-        self.dir_pwm.set_pwm_freq(60)
+        self.pca_pwm = Adafruit_PCA9685.PCA9685()
+        self.pca_pwm.set_pwm_freq(60)
         # 初始归位方向轮
-        self.dir_pwm.set_pwm(self.dir_pin, 0, self.servo_center)
+        self.pca_pwm.set_pwm(self.dir_pin, 0, self.servo_center)
         time.sleep(self.servo_angle - self.servo_Dvalue)
-        self.dir_pwm.set_pwm(self.dir_pin, 0, 0)
+        self.pca_pwm.set_pwm(self.dir_pin, 0, 0)
 
     def left_wheel(self, value):
         """左轮的pwm控制"""
@@ -91,20 +93,68 @@ class Car_pwm_ctrl(object):
         print "value:", value
         if value < 0:
             pwm_value = self.servo_center - ((-value) / 100.0) * (self.servo_center - self.servo_min)
-            self.dir_pwm.set_pwm(self.dir_pin, 0, int(pwm_value))
+            self.pca_pwm.set_pwm(self.dir_pin, 0, int(pwm_value))
             time.sleep(self.servo_angle - self.servo_Dvalue)
-            self.dir_pwm.set_pwm(self.dir_pin, 0, 0)
+            self.pca_pwm.set_pwm(self.dir_pin, 0, 0)
         # 右转
         elif value > 0:
             pwm_value = (value / 100.0) * (self.servo_max - self.servo_center) + self.servo_center
-            self.dir_pwm.set_pwm(self.dir_pin, 0, int(pwm_value))
+            self.pca_pwm.set_pwm(self.dir_pin, 0, int(pwm_value))
             time.sleep(self.servo_angle - self.servo_Dvalue)
-            self.dir_pwm.set_pwm(self.dir_pin, 0, 0)
+            self.pca_pwm.set_pwm(self.dir_pin, 0, 0)
         # 归位
         else:
-            self.dir_pwm.set_pwm(self.dir_pin, 0, self.servo_center)
+            self.pca_pwm.set_pwm(self.dir_pin, 0, self.servo_center)
             time.sleep(self.servo_angle - self.servo_Dvalue)
-            self.dir_pwm.set_pwm(self.dir_pin, 0, 0)
+            self.pca_pwm.set_pwm(self.dir_pin, 0, 0)
+
+    def yh_ctrl(self, value):
+        """云台水平方向控制"""
+        yh_center = 375
+        yh_max = 600
+        yh_min = 150
+        # 左转
+        print "motion yh value:", value
+        if value < 0:
+            pwm_value = yh_center - ((-value) / 100.0) * (yh_center - yh_min)
+            self.pca_pwm.set_pwm(self.yh_pin, 0, int(pwm_value))
+            time.sleep(self.servo_angle - self.servo_Dvalue)
+            self.pca_pwm.set_pwm(self.yh_pin, 0, 0)
+        # 右转
+        elif value > 0:
+            pwm_value = (value / 100.0) * (yh_max - yh_center) + yh_center
+            self.pca_pwm.set_pwm(self.yh_pin, 0, int(pwm_value))
+            time.sleep(self.servo_angle - self.servo_Dvalue)
+            self.pca_pwm.set_pwm(self.yh_pin, 0, 0)
+        # 归位
+        else:
+            self.pca_pwm.set_pwm(self.yh_pin, 0, yh_center)
+            time.sleep(self.servo_angle - self.servo_Dvalue)
+            self.pca_pwm.set_pwm(self.yh_pin, 0, 0)
+
+    def yv_ctrl(self, value):
+        """云台垂直方向控制"""
+        yv_center = 375
+        yv_max = 600
+        yv_min = 150
+        # 左转
+        print "motion yv value:", value
+        if value < 0:
+            pwm_value = yv_center - ((-value) / 100.0) * (yv_center - yv_min)
+            self.pca_pwm.set_pwm(self.yv_pin, 0, int(pwm_value))
+            time.sleep(self.servo_angle - self.servo_Dvalue)
+            self.pca_pwm.set_pwm(self.yv_pin, 0, 0)
+        # 右转
+        elif value > 0:
+            pwm_value = (value / 100.0) * (yv_max - yv_center) + yv_center
+            self.pca_pwm.set_pwm(self.yv_pin, 0, int(pwm_value))
+            time.sleep(self.servo_angle - self.servo_Dvalue)
+            self.pca_pwm.set_pwm(self.yv_pin, 0, 0)
+        # 归位
+        else:
+            self.pca_pwm.set_pwm(self.yv_pin, 0, yv_center)
+            time.sleep(self.servo_angle - self.servo_Dvalue)
+            self.pca_pwm.set_pwm(self.yv_pin, 0, 0)
 
     def stop(self):
         self.in1_hz.ChangeDutyCycle(0)
@@ -121,7 +171,7 @@ class Car_pwm_ctrl(object):
 
 
 if __name__ == "__main__":
-    car_pwm_ctrl = Car_pwm_ctrl(29, 12, 15, 16, 0)
+    car_pwm_ctrl = Car_pwm_ctrl(29, 12, 15, 16, 0, 1, 2)
     # car_pwm_ctrl.left_wheel(50)
     # time.sleep(4)
     # car_pwm_ctrl.left_wheel(100)

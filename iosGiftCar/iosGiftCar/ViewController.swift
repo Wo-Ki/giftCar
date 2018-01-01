@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import WebKit
 
-class ViewController: UIViewController,GCDAsyncSocketDelegate {
+class ViewController: UIViewController,GCDAsyncSocketDelegate, UIWebViewDelegate {
     @IBOutlet weak var ipTextFiled: UITextField!
     
     @IBOutlet weak var portTextField: UITextField!
@@ -18,11 +19,16 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate {
     @IBOutlet weak var stopBtn: UIButton!
     @IBOutlet weak var disConnBtn: UIButton!
     @IBOutlet weak var connActivity: UIActivityIndicatorView!
+    @IBOutlet weak var motionWebView: WKWebView!
+    @IBOutlet weak var motionSliderH: UISlider!
+    @IBOutlet weak var motionSliderV: UISlider!
+    @IBOutlet weak var motionResetBtn: UIButton!
+    @IBOutlet weak var motionStopLoadBtn: UIButton!
     
-
     var clientSocket:GCDAsyncSocket!
     
     override func viewDidLoad() {
+       
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         upDown.transform = CGAffineTransform(rotationAngle: 1.571)
@@ -34,6 +40,11 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate {
         stopBtn.isEnabled = false
         disConnBtn.isEnabled = false
         connActivity.isHidden = true
+        motionSliderH.isEnabled = false
+        motionSliderV.isEnabled = false
+        motionResetBtn.isEnabled = false
+        motionStopLoadBtn.isEnabled = false
+        
         
     }
 
@@ -41,7 +52,18 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
- 
+    // 摄像头网页
+    @IBAction func motionFlashBtnDidTouched(_ sender: UIButton) {
+        let motionUrl = URL(string: "http://192.168.100.2:9090")
+        let motionRequest = URLRequest(url: motionUrl!)
+        motionWebView.load(motionRequest)
+        
+    }
+    @IBAction func motionStopLoadBtnTouched(_ sender: UIButton) {
+        motionWebView.stopLoading()
+    }
+
+    
     @IBAction func disConnDidTouched(_ sender: UIButton) {
         clientSocket.disconnect()
     }
@@ -73,6 +95,10 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate {
         disConnBtn.isEnabled = false
         connActivity.stopAnimating()
         connActivity.isHidden = true
+        motionSliderH.isEnabled = false
+        motionSliderV.isEnabled = false
+        motionResetBtn.isEnabled = false
+        motionStopLoadBtn.isEnabled = false
         alertFunc(title: "提示", message: "已经断开连接")
     }
     func socket(_ sock: GCDAsyncSocket!, didRead data: Data!, withTag tag: Int) {
@@ -95,6 +121,10 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate {
         stopBtn.isEnabled = true
         disConnBtn.isEnabled = true
         connBtn.isEnabled = false
+        motionSliderH.isEnabled = true
+        motionSliderV.isEnabled = true
+        motionResetBtn.isEnabled = true
+        motionStopLoadBtn.isEnabled = true
         clientSocket.readData(withTimeout: -1, tag: 0)
     }
     var lastLeftRight = 0
@@ -117,6 +147,7 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate {
     @IBAction func upDownChanging(_ sender: UISlider) {
         let value = Int(sender.value)
         if abs(lastUpDown - value) >= 5 || lastUpDown == 0{
+            lastUpDown = value
             let str = "{\"UD\":"+String(value)+"},"
             clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
         }
@@ -133,6 +164,35 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate {
         clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
         str = "{\"UD\":0},"
         clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
+    }
+    // 摄像头云台控制
+    var lastMotionH = 0
+    @IBAction func motionSliderHChanging(_ sender: UISlider) {
+        let value = Int(sender.value)
+        if abs(lastMotionH - value) >= 5 || lastMotionH == 0{
+            lastMotionH = value
+            let str = "{\"YH\":"+String(value)+"},"
+            clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
+        }
+        
+    }
+    var lastMotionV = 0
+    @IBAction func motionSliderVCHanging(_ sender: UISlider) {
+        let value = Int(sender.value)
+        if abs(lastMotionV - value) >= 5 || lastMotionV == 0{
+            lastMotionV = value
+            let str = "{\"YV\":"+String(value)+"},"
+            clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
+        }
+    }
+    
+    @IBAction func motionResetBtnTouched(_ sender: UIButton) {
+        motionSliderV.setValue(0, animated: true)
+        motionSliderH.setValue(0, animated: true)
+        let str = "{\"YH\":0},{\"YV\":0}"
+        clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
+        lastMotionH = 0
+        lastMotionV = 0
     }
     
     

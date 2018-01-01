@@ -27,6 +27,10 @@ def handle_client(client_socket, client_address):
                             car_pwm_ctrl.right_wheel(int(json_data.get("UD")))
                         if json_data.get("LR") is not None:
                             car_pwm_ctrl.dir_ctrl(int(json_data.get("LR")))
+                        if json_data.get("YH") is not None:
+                            pass
+                        if json_data.get("YV") is not None:
+                            pass
                 except:
                     pass
             else:
@@ -46,7 +50,7 @@ if __name__ == "__main__":
     server_socket.bind((host, port))
     server_socket.listen(3)
 
-    car_pwm_ctrl = car_pwm_ctrl.Car_pwm_ctrl(29, 12, 15, 16, 0)
+    car_pwm_ctrl = car_pwm_ctrl.Car_pwm_ctrl(29, 12, 15, 16, 0, 1, 2)
     print "******Server Online*****"
     try:
         while True:
