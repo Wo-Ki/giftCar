@@ -24,10 +24,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="server_socket.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="server_socket.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server_socket.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
+            <state relative-caret-position="306">
               <caret line="23" column="57" selection-start-line="23" selection-start-column="57" selection-end-line="23" selection-end-column="57" />
               <folding>
                 <element signature="e#90#103#0" expanded="true" />
@@ -48,11 +48,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="car_pwm_ctrl.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="car_pwm_ctrl.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/car_pwm_ctrl.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1615">
-              <caret line="99" column="22" selection-start-line="99" selection-start-column="22" selection-end-line="99" selection-end-column="22" />
+            <state relative-caret-position="187">
+              <caret line="91" column="20" selection-start-line="91" selection-start-column="20" selection-end-line="91" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -97,8 +97,8 @@
         <option value="$PROJECT_DIR$/../gitCar_socket/pwm_test.py" />
         <option value="$PROJECT_DIR$/codeUpdate.py" />
         <option value="$PROJECT_DIR$/car_digital_ctrl.py" />
-        <option value="$PROJECT_DIR$/car_pwm_ctrl.py" />
         <option value="$PROJECT_DIR$/server_socket.py" />
+        <option value="$PROJECT_DIR$/car_pwm_ctrl.py" />
       </list>
     </option>
   </component>
@@ -514,7 +514,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server_socket.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
+        <state relative-caret-position="306">
           <caret line="23" column="57" selection-start-line="23" selection-start-column="57" selection-end-line="23" selection-end-column="57" />
           <folding>
             <element signature="e#90#103#0" expanded="true" />
@@ -529,14 +529,6 @@
           <folding>
             <element signature="e#16#47#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/car_pwm_ctrl.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1615">
-          <caret line="99" column="22" selection-start-line="99" selection-start-column="22" selection-end-line="99" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -555,6 +547,14 @@
           <folding>
             <element signature="e#90#113#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/car_pwm_ctrl.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="91" column="20" selection-start-line="91" selection-start-column="20" selection-end-line="91" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>

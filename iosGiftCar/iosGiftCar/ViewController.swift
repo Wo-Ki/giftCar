@@ -97,9 +97,15 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate {
         connBtn.isEnabled = false
         clientSocket.readData(withTimeout: -1, tag: 0)
     }
+    var lastLeftRight = 0
     @IBAction func leftRightChanging(_ sender: UISlider) {
-        let str = "{\"LR\":"+String(Int(sender.value))+"},"
-        clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
+        let value = Int(sender.value)
+        if abs(value - lastLeftRight) >= 5 || lastLeftRight == 0{
+            lastLeftRight = value
+            let str = "{\"LR\":"+String(value)+"},"
+            clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
+        }
+        
     }
     @IBAction func leftRightChanged(_ sender: UISlider) {
         leftRight.setValue(0, animated: true)
@@ -107,9 +113,14 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate {
         clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
         
     }
+    var lastUpDown = 0
     @IBAction func upDownChanging(_ sender: UISlider) {
-        let str = "{\"UD\":"+String(Int(sender.value))+"},"
-        clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
+        let value = Int(sender.value)
+        if abs(lastUpDown - value) >= 5 || lastUpDown == 0{
+            let str = "{\"UD\":"+String(value)+"},"
+            clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
+        }
+        
     }
     @IBAction func upDownChanged(_ sender: UISlider) {
         upDown.setValue(0, animated: true)
