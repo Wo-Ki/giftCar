@@ -28,9 +28,9 @@ def handle_client(client_socket, client_address):
                         if json_data.get("LR") is not None:
                             car_pwm_ctrl.dir_ctrl(int(json_data.get("LR")))
                         if json_data.get("YH") is not None:
-                            pass
+                            car_pwm_ctrl.yh_ctrl(int(json_data.get("YH")))
                         if json_data.get("YV") is not None:
-                            pass
+                            car_pwm_ctrl.yv_ctrl(int(json_data.get("YV")))
                 except:
                     pass
             else:
