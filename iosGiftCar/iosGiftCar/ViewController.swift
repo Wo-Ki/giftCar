@@ -218,7 +218,7 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate, UIWebViewDelegate
     var lastArmUp = 0
     @IBAction func robotArmUpSliderChanging(_ sender: UISlider) {
         let value = Int(sender.value)
-        if abs(lastArmUp - value) >= 5 || lastArmUp == 0{
+        if abs(lastArmUp - value) >= 2 || lastArmUp == 0{
             lastArmUp = value
             let str = "{\"AU\":"+String(value)+"},"
             clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
@@ -227,7 +227,7 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate, UIWebViewDelegate
     var lastArmDown = 0
     @IBAction func robotArmDownSliderChanging(_ sender: UISlider) {
         let value = Int(sender.value)
-        if abs(lastArmDown - value) >= 5 || lastArmDown == 0{
+        if abs(lastArmDown - value) >= 2 || lastArmDown == 0{
             lastArmDown = value
             let str = "{\"AD\":"+String(value)+"},"
             clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
@@ -236,7 +236,7 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate, UIWebViewDelegate
     var lastArmLeft = 0
     @IBAction func robotArmLeftSliderChanging(_ sender: UISlider) {
         let value = Int(sender.value)
-        if abs(lastArmLeft - value) >= 5 || lastArmLeft == 0{
+        if abs(lastArmLeft - value) >= 2 || lastArmLeft == 0{
             lastArmLeft = value
             let str = "{\"AL\":"+String(value)+"},"
             clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
@@ -245,7 +245,7 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate, UIWebViewDelegate
     var lastArmRight = 0
     @IBAction func robotArmRightSliderChanging(_ sender: UISlider) {
         let value = Int(sender.value)
-        if abs(lastArmRight - value) >= 5 || lastArmRight == 0{
+        if abs(lastArmRight - value) >= 2 || lastArmRight == 0{
             lastArmRight = value
             let str = "{\"AR\":"+String(value)+"},"
             clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
