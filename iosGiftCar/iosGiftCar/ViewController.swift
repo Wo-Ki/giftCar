@@ -215,26 +215,42 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate, UIWebViewDelegate
     }
     
     // 机械臂控制函数
-    
+    var lastArmUp = 0
     @IBAction func robotArmUpSliderChanging(_ sender: UISlider) {
         let value = Int(sender.value)
-        let str = "{\"AU\":"+String(value)+"},"
-        clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
+        if abs(lastArmUp - value) >= 5 || lastArmUp == 0{
+            lastArmUp = value
+            let str = "{\"AU\":"+String(value)+"},"
+            clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
+        }
     }
+    var lastArmDown = 0
     @IBAction func robotArmDownSliderChanging(_ sender: UISlider) {
         let value = Int(sender.value)
-        let str = "{\"AD\":"+String(value)+"},"
-        clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
+        if abs(lastArmDown - value) >= 5 || lastArmDown == 0{
+            lastArmDown = value
+            let str = "{\"AD\":"+String(value)+"},"
+            clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
+        }
     }
+    var lastArmLeft = 0
     @IBAction func robotArmLeftSliderChanging(_ sender: UISlider) {
         let value = Int(sender.value)
-        let str = "{\"AL\":"+String(value)+"},"
-        clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
+        if abs(lastArmLeft - value) >= 5 || lastArmLeft == 0{
+            lastArmLeft = value
+            let str = "{\"AL\":"+String(value)+"},"
+            clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
+        }
     }
+    var lastArmRight = 0
     @IBAction func robotArmRightSliderChanging(_ sender: UISlider) {
         let value = Int(sender.value)
-        let str = "{\"AR\":"+String(value)+"},"
-        clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
+        if abs(lastArmRight - value) >= 5 || lastArmRight == 0{
+            lastArmRight = value
+            let str = "{\"AR\":"+String(value)+"},"
+            clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
+        }
+      
     }
     
     func alertFunc(title:String, message:String) {

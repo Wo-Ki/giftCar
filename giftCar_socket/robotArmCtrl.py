@@ -24,7 +24,7 @@ class RobotArmCtrl(object):
        self.pca_pwm.set_pwm_freq(60)
        self.downPin = downPin
        self.leftPin = leftPin
-       self.rigihtPin = rightPin
+       self.rightPin = rightPin
        self.upPin = upPin
        
     def downCtrl(self, value):
