@@ -147,6 +147,73 @@
                                     <action selector="motionFlashBtnDidTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fiH-RO-e75"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="机械臂控制：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gpW-ef-QNR">
+                                <rect key="frame" x="691" y="75" width="104" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="上：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qAl-5C-ozm">
+                                <rect key="frame" x="717" y="104" width="35" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="下：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gH2-W4-qu3">
+                                <rect key="frame" x="717" y="153" width="35" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="左：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tUL-NL-zmU">
+                                <rect key="frame" x="717" y="203" width="35" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="右：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tbx-10-M2K">
+                                <rect key="frame" x="717" y="253" width="35" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-100" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="GyD-Lk-hWv">
+                                <rect key="frame" x="749" y="100" width="257" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="motionSliderHChanging:" destination="BYZ-38-t0r" eventType="valueChanged" id="hsu-cI-ILE"/>
+                                    <action selector="robotArmUpSliderChanging:" destination="BYZ-38-t0r" eventType="valueChanged" id="r9X-Dw-FD4"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-100" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="JQ5-Q5-pZJ">
+                                <rect key="frame" x="749" y="149" width="257" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="motionSliderHChanging:" destination="BYZ-38-t0r" eventType="valueChanged" id="aO5-r3-5SY"/>
+                                    <action selector="robotArmDownSliderChanging:" destination="BYZ-38-t0r" eventType="valueChanged" id="4ws-pN-kSF"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-100" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="XUc-co-lj8">
+                                <rect key="frame" x="749" y="199" width="257" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="motionSliderHChanging:" destination="BYZ-38-t0r" eventType="valueChanged" id="35W-x8-FNK"/>
+                                    <action selector="robotArmLeftSliderChanging:" destination="BYZ-38-t0r" eventType="valueChanged" id="QHd-Eg-rC7"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-100" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="WlX-fk-sw6">
+                                <rect key="frame" x="749" y="249" width="257" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="motionSliderHChanging:" destination="BYZ-38-t0r" eventType="valueChanged" id="XLp-R6-unX"/>
+                                    <action selector="robotArmRightSliderChanging:" destination="BYZ-38-t0r" eventType="valueChanged" id="AcI-zU-Ohe"/>
+                                </connections>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -163,6 +230,10 @@
                         <outlet property="motionStopLoadBtn" destination="neR-iP-FVm" id="Xmg-VS-5FZ"/>
                         <outlet property="motionWebView" destination="22F-BF-ffd" id="bia-Nl-w2W"/>
                         <outlet property="portTextField" destination="0DO-DS-2Ji" id="NpP-2J-qcA"/>
+                        <outlet property="robotArmDownSlider" destination="JQ5-Q5-pZJ" id="Kt3-Xw-eIO"/>
+                        <outlet property="robotArmLeftSlider" destination="XUc-co-lj8" id="MZQ-K9-2eS"/>
+                        <outlet property="robotArmRightSlider" destination="WlX-fk-sw6" id="5u7-uE-npL"/>
+                        <outlet property="robotArmUpSlider" destination="GyD-Lk-hWv" id="d4S-9G-jtt"/>
                         <outlet property="stopBtn" destination="3Co-d5-oMW" id="WBt-d8-Mfy"/>
                         <outlet property="upDown" destination="5MQ-Mi-IO4" id="p7d-nS-m9K"/>
                     </connections>

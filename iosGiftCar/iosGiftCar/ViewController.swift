@@ -25,6 +25,12 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate, UIWebViewDelegate
     @IBOutlet weak var motionResetBtn: UIButton!
     @IBOutlet weak var motionStopLoadBtn: UIButton!
     
+    @IBOutlet weak var robotArmUpSlider: UISlider!
+    @IBOutlet weak var robotArmDownSlider: UISlider!
+    @IBOutlet weak var robotArmLeftSlider: UISlider!
+    @IBOutlet weak var robotArmRightSlider: UISlider!
+    
+    
     var clientSocket:GCDAsyncSocket!
     
     override func viewDidLoad() {
@@ -43,6 +49,11 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate, UIWebViewDelegate
         motionSliderH.isEnabled = false
         motionSliderV.isEnabled = false
         motionResetBtn.isEnabled = false
+        
+        robotArmUpSlider.isEnabled = false
+        robotArmDownSlider.isEnabled = false
+        robotArmLeftSlider.isEnabled = false
+        robotArmRightSlider.isEnabled = false
 
         
         
@@ -98,6 +109,12 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate, UIWebViewDelegate
         motionSliderH.isEnabled = false
         motionSliderV.isEnabled = false
         motionResetBtn.isEnabled = false
+        
+        robotArmUpSlider.isEnabled = false
+        robotArmDownSlider.isEnabled = false
+        robotArmLeftSlider.isEnabled = false
+        robotArmRightSlider.isEnabled = false
+        
         alertFunc(title: "提示", message: "已经断开连接")
     }
     func socket(_ sock: GCDAsyncSocket!, didRead data: Data!, withTag tag: Int) {
@@ -123,6 +140,10 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate, UIWebViewDelegate
         motionSliderH.isEnabled = true
         motionSliderV.isEnabled = true
         motionResetBtn.isEnabled = true
+        robotArmUpSlider.isEnabled = true
+        robotArmDownSlider.isEnabled = true
+        robotArmLeftSlider.isEnabled = true
+        robotArmRightSlider.isEnabled = true
         clientSocket.readData(withTimeout: -1, tag: 0)
     }
     var lastLeftRight = 0
@@ -193,6 +214,28 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate, UIWebViewDelegate
         lastMotionV = 0
     }
     
+    // 机械臂控制函数
+    
+    @IBAction func robotArmUpSliderChanging(_ sender: UISlider) {
+        let value = Int(sender.value)
+        let str = "{\"AU\":"+String(value)+"},"
+        clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
+    }
+    @IBAction func robotArmDownSliderChanging(_ sender: UISlider) {
+        let value = Int(sender.value)
+        let str = "{\"AD\":"+String(value)+"},"
+        clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
+    }
+    @IBAction func robotArmLeftSliderChanging(_ sender: UISlider) {
+        let value = Int(sender.value)
+        let str = "{\"AL\":"+String(value)+"},"
+        clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
+    }
+    @IBAction func robotArmRightSliderChanging(_ sender: UISlider) {
+        let value = Int(sender.value)
+        let str = "{\"AR\":"+String(value)+"},"
+        clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
+    }
     
     func alertFunc(title:String, message:String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)

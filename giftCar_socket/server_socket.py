@@ -7,6 +7,8 @@
 import socket
 import json
 import car_pwm_ctrl
+import robotArmCtrl
+
 
 host = "192.168.100.2"
 port = 8989
@@ -33,6 +35,14 @@ def handle_client(client_socket, client_address):
                             car_pwm_ctrl.yh_ctrl(int(json_data.get("YH")))
                         if json_data.get("YV") is not None:
                             car_pwm_ctrl.yv_ctrl(int(json_data.get("YV")))
+                        if json_data.get("AU") is not None:
+                            robotArmCtrl.upCtrl(int(json_data.get("AU")))
+                        if json_data.get("AD") is not None:
+                            robotArmCtrl.downCtrl(int(json_data.get("AD")))
+                        if json_data.get("AL") is not None:
+                            robotArmCtrl.leftCtrl(int(json_data.get("AL")))
+                        if json_data.get("AR") is not None:
+                            robotArmCtrl.rightCtrl(int(json_data.get("AR")))
                 except:
                     pass
             else:
@@ -53,6 +63,7 @@ if __name__ == "__main__":
     server_socket.listen(3)
 
     car_pwm_ctrl = car_pwm_ctrl.Car_pwm_ctrl(13, 12, 15, 16, 0, 1, 2)
+    robotArmCtrl = robotArmCtrl.RobotArmCtrl(3, 4, 5, 6)
     print "******Server Online*****"
     try:
         while True:

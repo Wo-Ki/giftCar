@@ -19,7 +19,7 @@ class RobotArmCtrl(object):
     servo_max = 400  # Max pulse length out of 4096
     servo_angle = 0.03  # sleep时间，值越大，一次的转动幅度越大
     servo_Dvalue = 0.01  # 控制左右旋转产生的误差
-   def __init__(self, downPin, leftPin, rightPin, upPin):
+    def __init__(self, downPin, leftPin, rightPin, upPin):
        self.pca_pwm = Adafruit_PCA9685.PCA9685()
        self.pca_pwm.set_pwm_freq(60)
        self.downPin = downPin
