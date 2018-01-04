@@ -31,7 +31,7 @@ class Car_digital_ctrl(object):
         self.stop()
 
         self.pwm = Adafruit_PCA9685.PCA9685()
-        self.pwm.set_pwm_freq(60)
+        self.pwm.set_pwm_freq(65)
 
     def go(self, value):
         if value == True:
