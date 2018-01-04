@@ -210,6 +210,14 @@
                                     <action selector="robotArmRightSliderChanging:" destination="BYZ-38-t0r" eventType="valueChanged" id="AcI-zU-Ohe"/>
                                 </connections>
                             </slider>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kWb-N9-KNJ">
+                                <rect key="frame" x="751" y="286" width="37" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="clean"/>
+                                <connections>
+                                    <action selector="robotArmCleanBtnTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wuk-7u-Jv9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -226,6 +234,7 @@
                         <outlet property="motionStopLoadBtn" destination="neR-iP-FVm" id="Xmg-VS-5FZ"/>
                         <outlet property="motionWebView" destination="22F-BF-ffd" id="bia-Nl-w2W"/>
                         <outlet property="portTextField" destination="0DO-DS-2Ji" id="NpP-2J-qcA"/>
+                        <outlet property="robotArmCleanBtn" destination="kWb-N9-KNJ" id="RLi-R2-beX"/>
                         <outlet property="robotArmDownSlider" destination="JQ5-Q5-pZJ" id="Kt3-Xw-eIO"/>
                         <outlet property="robotArmLeftSlider" destination="XUc-co-lj8" id="MZQ-K9-2eS"/>
                         <outlet property="robotArmRightSlider" destination="WlX-fk-sw6" id="5u7-uE-npL"/>

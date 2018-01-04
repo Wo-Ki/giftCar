@@ -43,6 +43,8 @@ def handle_client(client_socket, client_address):
                             robotArmCtrl.leftCtrl(int(json_data.get("AL")))
                         if json_data.get("AR") is not None:
                             robotArmCtrl.rightCtrl(int(json_data.get("AR")))
+                        if json_data.get("AC") is not None:
+                            robotArmCtrl.clean()
                 except:
                     pass
             else:

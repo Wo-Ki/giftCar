@@ -29,6 +29,7 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate, UIWebViewDelegate
     @IBOutlet weak var robotArmDownSlider: UISlider!
     @IBOutlet weak var robotArmLeftSlider: UISlider!
     @IBOutlet weak var robotArmRightSlider: UISlider!
+    @IBOutlet weak var robotArmCleanBtn: UIButton!
     
     
     var clientSocket:GCDAsyncSocket!
@@ -46,6 +47,7 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate, UIWebViewDelegate
         stopBtn.isEnabled = false
         disConnBtn.isEnabled = false
         connActivity.isHidden = true
+        
         motionSliderH.isEnabled = false
         motionSliderV.isEnabled = false
         motionResetBtn.isEnabled = false
@@ -54,6 +56,7 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate, UIWebViewDelegate
         robotArmDownSlider.isEnabled = false
         robotArmLeftSlider.isEnabled = false
         robotArmRightSlider.isEnabled = false
+        robotArmCleanBtn.isEnabled = false
 
         
         
@@ -114,7 +117,7 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate, UIWebViewDelegate
         robotArmDownSlider.isEnabled = false
         robotArmLeftSlider.isEnabled = false
         robotArmRightSlider.isEnabled = false
-        
+        robotArmCleanBtn.isEnabled = false
         alertFunc(title: "提示", message: "已经断开连接")
     }
     func socket(_ sock: GCDAsyncSocket!, didRead data: Data!, withTag tag: Int) {
@@ -137,13 +140,16 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate, UIWebViewDelegate
         stopBtn.isEnabled = true
         disConnBtn.isEnabled = true
         connBtn.isEnabled = false
+        
         motionSliderH.isEnabled = true
         motionSliderV.isEnabled = true
         motionResetBtn.isEnabled = true
+        
         robotArmUpSlider.isEnabled = true
         robotArmDownSlider.isEnabled = true
         robotArmLeftSlider.isEnabled = true
         robotArmRightSlider.isEnabled = true
+        robotArmCleanBtn.isEnabled = true
         clientSocket.readData(withTimeout: -1, tag: 0)
     }
     var lastLeftRight = 0
@@ -251,6 +257,10 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate, UIWebViewDelegate
             clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
         }
       
+    }
+    @IBAction func robotArmCleanBtnTouched(_ sender: UIButton) {
+        let str = "{\"AC\":1},"
+        clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
     }
     
     func alertFunc(title:String, message:String) {

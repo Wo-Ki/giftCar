@@ -129,5 +129,7 @@ class RobotArmCtrl(object):
         self.pca_pwm.set_pwm(self.downPin, 0, 0)
         self.pca_pwm.set_pwm(self.leftPin, 0, 0)
         self.pca_pwm.set_pwm(self.rightPin, 0, 0)
+
+
 if __name__ == "__main__":
     robotArmCtrl = RobotArmCtrl(3, 4, 4, 6)
