@@ -65,6 +65,7 @@ if __name__ == "__main__":
     car_pwm_ctrl = car_pwm_ctrl.Car_pwm_ctrl(13, 12, 15, 16, 0, 1, 2)
     robotArmCtrl = robotArmCtrl.RobotArmCtrl(3, 4, 5, 6)
     print "******Server Online*****"
+    print "***", host, port, "***"
     try:
         while True:
             client_socket, client_address = server_socket.accept()

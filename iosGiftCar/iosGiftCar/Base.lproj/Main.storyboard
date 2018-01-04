@@ -186,7 +186,6 @@
                                 <rect key="frame" x="749" y="100" width="257" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="motionSliderHChanging:" destination="BYZ-38-t0r" eventType="valueChanged" id="hsu-cI-ILE"/>
                                     <action selector="robotArmUpSliderChanging:" destination="BYZ-38-t0r" eventType="valueChanged" id="r9X-Dw-FD4"/>
                                 </connections>
                             </slider>
@@ -194,7 +193,6 @@
                                 <rect key="frame" x="749" y="149" width="257" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="motionSliderHChanging:" destination="BYZ-38-t0r" eventType="valueChanged" id="aO5-r3-5SY"/>
                                     <action selector="robotArmDownSliderChanging:" destination="BYZ-38-t0r" eventType="valueChanged" id="4ws-pN-kSF"/>
                                 </connections>
                             </slider>
@@ -202,7 +200,6 @@
                                 <rect key="frame" x="749" y="199" width="257" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="motionSliderHChanging:" destination="BYZ-38-t0r" eventType="valueChanged" id="35W-x8-FNK"/>
                                     <action selector="robotArmLeftSliderChanging:" destination="BYZ-38-t0r" eventType="valueChanged" id="QHd-Eg-rC7"/>
                                 </connections>
                             </slider>
@@ -210,7 +207,6 @@
                                 <rect key="frame" x="749" y="249" width="257" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="motionSliderHChanging:" destination="BYZ-38-t0r" eventType="valueChanged" id="XLp-R6-unX"/>
                                     <action selector="robotArmRightSliderChanging:" destination="BYZ-38-t0r" eventType="valueChanged" id="AcI-zU-Ohe"/>
                                 </connections>
                             </slider>
