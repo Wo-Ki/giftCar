@@ -34,9 +34,10 @@ def handle_client(client_socket, client_address):
                 print "request_data:", request_data
                 if request_data.find("GET /video"):
                     # 浏览器视频
-                    responseHeader = "HTTP/1.1 200 OK\r\nServer: My RaspberryZero server\r\n"
+                    responseStartLine = "HTTP/1.1 200 OK\r\n"
+                    responseHeader = "Server: My RaspberryZero server\r\n"
                     responseBody = gen(Camera())
-                    response = responseHeader + "\r\n" + responseBody
+                    response = responseStartLine + responseHeader + "\r\n" + "Hello"
                     client_socket.send(bytes(response))
                 else:
                     try:
