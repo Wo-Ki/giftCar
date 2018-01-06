@@ -9,19 +9,9 @@ import json
 import car_pwm_ctrl
 import robotArmCtrl
 from multiprocessing import Process
-import requests
-from camera_pi import Camera
 
 host = "192.168.100.2"
 port = 8989
-
-
-def gen(camera):
-    """Video streaming genreator function."""
-    while True:
-        frame = camera.get_frame()
-        yield (b'--frame\r\b'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 
 def handle_client(client_socket, client_address):
@@ -63,10 +53,11 @@ def handle_client(client_socket, client_address):
                 return
 
         except Exception, e:
-        print e
+            print e
         print "[%s, %s] : disconnect" % client_address
         client_socket.close()
         return
+
 
 if __name__ == "__main__":
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
