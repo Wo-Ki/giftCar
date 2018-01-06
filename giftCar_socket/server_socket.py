@@ -36,7 +36,7 @@ def handle_client(client_socket, client_address):
                     # 浏览器视频
                     print "Brower Linked"
                     responseStartLine = "HTTP/1.1 200 OK\r\n"
-                    responseHeader = "Server: my erver\r\n"
+                    responseHeader = "Server: my server\r\n"
                     responseBody = gen(Camera())
                     response = responseStartLine + responseHeader + "\r\n" + "Hello"
                     client_socket.send(bytes(response))
