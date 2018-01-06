@@ -36,9 +36,10 @@ def handle_client(client_socket, client_address):
                     # 浏览器视频
                     responseStartLine = "HTTP/1.1 200 OK\r\n"
                     responseHeader = "Server: My RaspberryZero server\r\n"
-                    responseBody = gen(Camera())
-                    response = responseStartLine + responseHeader + "\r\n" + responseBody
-                    client_socket.send(bytes(response))
+                    while True:
+                        responseBody = gen(Camera())
+                        response = responseStartLine + responseHeader + "\r\n" + responseBody
+                        client_socket.send(bytes(response))
                 else:
                     try:
                         json_datas = request_data.split(",")
