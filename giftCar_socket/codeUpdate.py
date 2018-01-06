@@ -12,7 +12,7 @@ env.hosts = "pi@192.168.100.2"
 @runs_once
 @task
 def local_update():
-    with lcd("~/Desktop/giftCar"):
+    with lcd("~/Documents/giftCar"):
         local("git add -A")
         local("git commit -m 'update 4'")
         local("git pull origin master")
