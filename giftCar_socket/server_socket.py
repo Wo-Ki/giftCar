@@ -9,9 +9,19 @@ import json
 import car_pwm_ctrl
 import robotArmCtrl
 from multiprocessing import Process
+import requests
+from camera_opencv import Camera
 
 host = "192.168.100.2"
 port = 8989
+
+
+def gen(camera):
+    """Video streaming genreator function."""
+    while True:
+        frame = camera.get_frame()
+        yield (b'--frame\r\b'
+               b'Content-Type: image/jpegr\r\n\r\n' + frame + b'\r\n')
 
 
 def handle_client(client_socket, client_address):
@@ -23,9 +33,11 @@ def handle_client(client_socket, client_address):
             if request_data:
                 print "request_data:", request_data
                 if request_data.find("GET /video"):
-                    print "video *xxxxxx"
                     # 浏览器视频
-
+                    responseHeader = "HTTP/1.1 200 OK\r\nServer: My RaspberryZero server\r\n"
+                    responseBody = gen(Camera())
+                    response = responseHeader + "\r\n" + responseBody
+                    client_socket.send(bytes(response))
                 else:
                     try:
                         json_datas = request_data.split(",")
