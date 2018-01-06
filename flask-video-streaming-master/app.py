@@ -4,11 +4,11 @@ import os
 from flask import Flask, render_template, Response
 
 # import camera driver
-if os.environ.get('CAMERA'):
-    Camera = import_module('camera_' + os.environ['CAMERA']).Camera
-else:
-    from camera import Camera
-
+# if os.environ.get('CAMERA'):
+#     Camera = import_module('camera_' + os.environ['CAMERA']).Camera
+# else:
+from camera_pi import Camera
+#from camera_opencv import Camera
 # Raspberry Pi camera module (requires picamera package)
 # from camera_pi import Camera
 
@@ -37,4 +37,4 @@ def video_feed():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', threaded=True)
+    app.run(host='192.168.100.2',port=8989, threaded=True)
