@@ -46,16 +46,16 @@ def handle_client(client_socket, client_address):
                             robotArmCtrl.clean()
                 except:
                     pass
-            # else:
-            #     print "[%s, %s] : disconnect" % client_address
-            #     client_socket.close()
-            #     return
+            else:
+                print "[%s, %s] : disconnect" % client_address
+                client_socket.close()
+                return
 
         except Exception, e:
             print e
-        print "[%s, %s] : disconnect" % client_address
-        client_socket.close()
-        return
+            print "[%s, %s] : disconnect" % client_address
+            client_socket.close()
+            return
 
 
 if __name__ == "__main__":
