@@ -68,7 +68,7 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate, UIWebViewDelegate
     }
     // 摄像头网页
     @IBAction func motionFlashBtnDidTouched(_ sender: UIButton) {
-        let motionUrl = URL(string: "http://192.168.100.2:9090")
+        let motionUrl = URL(string: "http://192.168.100.2:9090/video/")
         let motionRequest = URLRequest(url: motionUrl!)
         motionWebView.load(motionRequest)
         

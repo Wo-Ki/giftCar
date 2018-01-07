@@ -77,7 +77,6 @@ if __name__ == "__main__":
             handle_client_process = Process(target=handle_client, args=(client_socket, client_address))
             # handle_client(client_socket, client_address)
             handle_client_process.start()
-            client_socket.close()
 
     except KeyboardInterrupt:
         print "******Server Offline*****"
