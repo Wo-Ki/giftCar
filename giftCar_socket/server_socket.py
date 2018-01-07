@@ -8,7 +8,6 @@ import socket
 import json
 import car_pwm_ctrl
 import robotArmCtrl
-from multiprocessing import Process
 
 host = "192.168.100.2"
 port = 8989
@@ -74,9 +73,7 @@ if __name__ == "__main__":
             client_socket, client_address = server_socket.accept()
             print "*" * 30
             print "[%s, %s] : connected" % client_address
-            handle_client_process = Process(target=handle_client, args=(client_socket, client_address))
-            # handle_client(client_socket, client_address)
-            handle_client_process.start()
+            handle_client(client_socket, client_address)
 
     except KeyboardInterrupt:
         print "******Server Offline*****"
