@@ -4,10 +4,10 @@
 # creator = wangkai
 # creation time = 2017/12/31 15:05
 
-import socket
 import json
-import car_pwm_ctrl
-import robotArmCtrl
+import socket
+
+from carCtrl import robotArmCtrl, car_pwm_ctrl
 
 host = "192.168.100.2"
 port = 8989
