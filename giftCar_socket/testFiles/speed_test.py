@@ -29,18 +29,9 @@ def countFunc(channel):
     print "count:", wheelRCount
 
 
-def dirFunc(channel):
-    global wheelRADir
-    if GPIO.event_detected(wheelRAPin):
-        if GPIO.input(wheelRBPin) == GPIO.HIGH:
-            wheelRADir = True
-        else:
-            wheelRADir = False
-
 
 GPIO.add_event_detect(wheelRBPin, GPIO.BOTH, callback=countFunc)  # 在引脚上添加上升临界值检测再回调
 GPIO.add_event_detect(wheelRAPin, GPIO.BOTH, callback=countFunc)
-GPIO.add_event_detect(wheelRAPin, GPIO.RISING, callback=dirFunc)
 print "****test begin****"
 
 lastTime = 0.0
@@ -51,6 +42,6 @@ while True:
         radiusSpeed = (wheelRCount / 520 * 2 * math.pi) * 2
         if not wheelRADir and radiusSpeed != 0:
             radiusSpeed = -1 * radiusSpeed
-        # print "speed radius A: %.2f rad/s" % radiusSpeed
-        # print "speed A: %.2f m/s" % (radiusSpeed * 0.03)
+        print "speed radius A: %.2f rad/s" % radiusSpeed
+        print "speed A: %.2f m/s" % (radiusSpeed * 0.03)
         wheelRACount = 0
