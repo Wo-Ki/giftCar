@@ -42,8 +42,8 @@ def wheelRBFunc(channel):  # 这里的channel和channel1无须赋确定值，但
     # print "counter RB:", wheelRBCount
 
 
-GPIO.add_event_detect(wheelRBPin, GPIO.RISING, callback=wheelRBFunc)  # 在引脚上添加上升临界值检测再回调
-# GPIO.add_event_detect(wheelRAPin, GPIO.RISING, callback=wheelRAFunc)
+# GPIO.add_event_detect(wheelRBPin, GPIO.RISING, callback=wheelRBFunc)  # 在引脚上添加上升临界值检测再回调
+GPIO.add_event_detect(wheelRAPin, GPIO.RISING, callback=wheelRAFunc)
 
 print "****test begin****"
 
