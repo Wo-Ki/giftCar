@@ -18,15 +18,18 @@ GPIO.setup(wheelRAPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 wheelRACount = 0
 wheelRBCount = 0
 
+wheelRADir = True
+wheelRBDir = True
+
 
 def wheelRAFunc(channel):  # 边缘检测回调函数，详情在参见链接中
-    global wheelRACount  # 设置为全局变量
+    global wheelRACount, wheelRADir  # 设置为全局变量
     if GPIO.event_detected(wheelRAPin):  # 检测到一个脉冲则脉冲数加1
         wheelRACount = wheelRACount + 1
     if GPIO.input(wheelRBPin) == GPIO.HIGH:
-        print "up"
+        wheelRADir = True
     else:
-        print "down"
+        wheelRADir = False
     # print "counter RA:", wheelRACount
 
 
@@ -49,6 +52,8 @@ while True:
     if lastTime == 0 or time.time() - lastTime >= 0.5:
         lastTime = time.time()
         radiusSpeed = (wheelRACount / 150 * 2 * math.pi) * 2
+        if not wheelRADir:
+            radiusSpeed = -1 * radiusSpeed
         print "speed radius A: %.2f rad/s" % radiusSpeed
         print "speed A: %.2f m/s" % (radiusSpeed * 0.03)
         wheelRACount = 0
