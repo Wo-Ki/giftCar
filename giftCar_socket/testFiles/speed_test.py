@@ -23,6 +23,10 @@ def wheelRAFunc(channel):  # 边缘检测回调函数，详情在参见链接中
     global wheelRACount  # 设置为全局变量
     if GPIO.event_detected(wheelRAPin):  # 检测到一个脉冲则脉冲数加1
         wheelRACount = wheelRACount + 1
+    if GPIO.input(wheelRBPin) == GPIO.HIGH:
+        print "up"
+    else:
+        print "down"
     # print "counter RA:", wheelRACount
 
 
@@ -30,10 +34,7 @@ def wheelRBFunc(channel):  # 这里的channel和channel1无须赋确定值，但
     global wheelRBCount
     if GPIO.event_detected(wheelRBPin):
         wheelRBCount = wheelRBCount + 1
-        if GPIO.input(wheelRBPin) == GPIO.HIGH:
-            print "up"
-        else:
-            print "down"
+
     # print "counter RB:", wheelRBCount
 
 
