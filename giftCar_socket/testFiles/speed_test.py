@@ -13,8 +13,9 @@ wheelRAPin = 35
 wheelRBPin = 18
 
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(wheelRBPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(wheelRAPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+# GPIO.setup(wheelRBPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(wheelRBPin, GPIO.IN)
 
 wheelRACount = 0
 wheelRBCount = 0
