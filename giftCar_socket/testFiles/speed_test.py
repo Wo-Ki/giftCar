@@ -30,6 +30,10 @@ def wheelRBFunc(channel):  # 这里的channel和channel1无须赋确定值，但
     global wheelRBCount
     if GPIO.event_detected(wheelRBPin):
         wheelRBCount = wheelRBCount + 1
+        if GPIO.input(wheelRBPin) == GPIO.HIGH:
+            print "up"
+        else:
+            print "down"
     # print "counter RB:", wheelRBCount
 
 
@@ -47,3 +51,4 @@ while True:
         print "speed radius A: %.2f rad/s" % radiusSpeed
         print "speed A: %.2f m/s" % (radiusSpeed * 0.03)
         wheelRACount = 0
+
