@@ -64,7 +64,7 @@ while True:
         radiusSpeed = (wheelRACount / 150 * 2 * math.pi) * 2
         if not wheelRADir and radiusSpeed != 0:
             radiusSpeed = -1 * radiusSpeed
-        print "speed radius A: %.2f rad/s" % radiusSpeed
-        print "speed A: %.2f m/s" % (radiusSpeed * 0.03)
+        # print "speed radius A: %.2f rad/s" % radiusSpeed
+        # print "speed A: %.2f m/s" % (radiusSpeed * 0.03)
         wheelRACount = 0
 
