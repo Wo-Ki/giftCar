@@ -26,10 +26,10 @@ def wheelRAFunc(channel):  # 边缘检测回调函数，详情在参见链接中
     global wheelRACount, wheelRADir  # 设置为全局变量
     if GPIO.event_detected(wheelRAPin):  # 检测到一个脉冲则脉冲数加1
         wheelRACount = wheelRACount + 1
-    if GPIO.input(wheelRBPin) == GPIO.HIGH:
-        wheelRADir = True
-    else:
-        wheelRADir = False
+        if GPIO.input(wheelRBPin) == GPIO.HIGH:
+            wheelRADir = True
+        else:
+            wheelRADir = False
     # print "counter RA:", wheelRACount
 
 
@@ -52,7 +52,7 @@ while True:
     if lastTime == 0 or time.time() - lastTime >= 0.5:
         lastTime = time.time()
         radiusSpeed = (wheelRACount / 150 * 2 * math.pi) * 2
-        if not wheelRADir:
+        if not wheelRADir and radiusSpeed != 0:
             radiusSpeed = -1 * radiusSpeed
         print "speed radius A: %.2f rad/s" % radiusSpeed
         print "speed A: %.2f m/s" % (radiusSpeed * 0.03)
