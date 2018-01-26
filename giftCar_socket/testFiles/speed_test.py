@@ -14,11 +14,12 @@ wheelRBPin = 18
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(wheelRAPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-# GPIO.setup(wheelRBPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(wheelRBPin, GPIO.IN)
+GPIO.setup(wheelRBPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 wheelRACount = 0
 wheelRBCount = 0
+wheelRCount = 0
+
 
 wheelRADir = True
 wheelRBDir = True
@@ -42,10 +43,17 @@ def wheelRBFunc(channel):  # 这里的channel和channel1无须赋确定值，但
 
     # print "counter RB:", wheelRBCount
 
+def countFunc(channel):
+    global wheelRCount
+    if GPIO.event_detected(wheelRAPin) or GPIO.event_detected(wheelRBPin):
+        wheelRCount += 1
+    print "count:", wheelRCount
+
 
 # GPIO.add_event_detect(wheelRBPin, GPIO.RISING, callback=wheelRBFunc)  # 在引脚上添加上升临界值检测再回调
-GPIO.add_event_detect(wheelRAPin, GPIO.RISING, callback=wheelRAFunc)
-
+# GPIO.add_event_detect(wheelRAPin, GPIO.RISING, callback=wheelRAFunc)
+GPIO.add_event_detect(wheelRBPin, GPIO.BOTH, callback=countFunc)  # 在引脚上添加上升临界值检测再回调
+GPIO.add_event_detect(wheelRAPin, GPIO.BOTH, callback=countFunc)
 print "****test begin****"
 
 lastTime = 0.0
