@@ -26,7 +26,7 @@ def countFunc(channel):
     global wheelRCount
     if GPIO.event_detected(wheelRAPin) or GPIO.event_detected(wheelRBPin):
         wheelRCount += 1
-    print "count:", wheelRCount
+    # print "count:", wheelRCount
 
 
 
