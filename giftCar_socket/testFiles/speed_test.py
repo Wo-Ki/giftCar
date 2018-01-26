@@ -15,6 +15,7 @@ wheelRBPin = 18
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(wheelRBPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(wheelRAPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
 wheelRACount = 0
 wheelRBCount = 0
 
@@ -42,7 +43,7 @@ def wheelRBFunc(channel):  # 这里的channel和channel1无须赋确定值，但
 
 
 GPIO.add_event_detect(wheelRBPin, GPIO.RISING, callback=wheelRBFunc)  # 在引脚上添加上升临界值检测再回调
-GPIO.add_event_detect(wheelRAPin, GPIO.RISING, callback=wheelRAFunc)
+# GPIO.add_event_detect(wheelRAPin, GPIO.RISING, callback=wheelRAFunc)
 
 print "****test begin****"
 
