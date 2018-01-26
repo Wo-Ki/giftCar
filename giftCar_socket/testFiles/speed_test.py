@@ -43,4 +43,4 @@ while True:
             radiusSpeed = -1 * radiusSpeed
         # print "speed radius A: %.2f rad/s" % radiusSpeed
         # print "speed A: %.2f m/s" % (radiusSpeed * 0.03)
-        wheelRCount = 0
+        # wheelRCount = 0
