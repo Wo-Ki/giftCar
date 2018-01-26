@@ -43,6 +43,7 @@ lastTime = 0.0
 while True:
     if lastTime == 0 or time.time() - lastTime >= 0.5:
         lastTime = time.time()
-        print "speed radius A: %.2f rad/s" % ((wheelRACount / 150 * 2 * math.pi) * 2)
-        print "speed A: %.2f m/s" % ((wheelRACount / 130 * 2 * math.pi * 0.03) * 2)
+        radiusSpeed = (wheelRACount / 150 * 2 * math.pi) * 2
+        print "speed radius A: %.2f rad/s" % radiusSpeed
+        print "speed A: %.2f m/s" % (radiusSpeed * 0.03)
         wheelRACount = 0
