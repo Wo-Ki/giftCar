@@ -46,6 +46,8 @@ def speed():
 
 
 timer = threading.Timer(0.5, speed)
+timer.start()
+
 
 lastTime = 0.0
 
