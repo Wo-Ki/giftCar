@@ -1,7 +1,11 @@
 # coding:utf-8
 
 
-
+from __future__ import division
+import RPi.GPIO as gpio
+import time
+import Adafruit_PCA9685
+import math
 
 class Car_digital_ctrl(object):
     # 设置舵机活动范围

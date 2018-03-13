@@ -4,11 +4,11 @@
 # creator = wangkai
 # creation time = 2017/12/31 15:35
 
-# from __future__ import division
-# import RPi.GPIO as gpio
-# import time
-# import Adafruit_PCA9685
-# import math
+from __future__ import division
+import RPi.GPIO as gpio
+import time
+import Adafruit_PCA9685
+import math
 
 
 class Car_pwm_ctrl(object):
