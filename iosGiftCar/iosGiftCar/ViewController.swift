@@ -38,10 +38,10 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate, UIWebViewDelegate
        
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        upDown.transform = CGAffineTransform(rotationAngle: 1.571)
-    
+        
         leftRight.sizeToFit()
-       
+        upDown.transform = CGAffineTransform(rotationAngle: 1.571)
+        
         upDown.isEnabled = false
         leftRight.isEnabled = false
         stopBtn.isEnabled = false
@@ -57,7 +57,8 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate, UIWebViewDelegate
         robotArmLeftSlider.isEnabled = false
         robotArmRightSlider.isEnabled = false
         robotArmCleanBtn.isEnabled = false
-
+        
+        
         
         
     }
