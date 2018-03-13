@@ -36,13 +36,15 @@ print "****test begin****"
 
 
 def speed():
-    global wheelRCount
+    global wheelRCount, timer
     radiusSpeed = (wheelRCount / 520.0 * (2 * math.pi)) * 2
     if not wheelRADir and radiusSpeed != 0:
         radiusSpeed = -1 * radiusSpeed
     print "speed radius A: %.2f rad/s" % radiusSpeed
     print "speed A: %.2f m/s" % (radiusSpeed * 0.03)
     wheelRCount = 0
+    timer = threading.Timer(0.5, speed)
+    timer.start()
 
 
 timer = threading.Timer(0.5, speed)
