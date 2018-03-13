@@ -56,4 +56,4 @@ lastTime = 0.0
 while True:
     if lastTime == 0 or time.time() - lastTime >= 0.5:
         lastTime = time.time()
-        print "out"
+        # print "out"
