@@ -49,6 +49,9 @@ def handle_client(client_socket, client_address):
             else:
                 print "[%s, %s] : disconnect" % client_address
                 client_socket.close()
+                car_pwm_ctrl.left_wheel(0)
+                car_pwm_ctrl.right_wheel(0)
+                car_pwm_ctrl.dir_ctrl(0)
                 return
 
         except Exception, e:
