@@ -22,12 +22,16 @@ wheelRCount = 0
 wheelRADir = True
 wheelRBDir = True
 
+lock = threading.Lock()
+
 
 def countFunc(channel):
     global wheelRCount
     if GPIO.event_detected(wheelRAPin) or GPIO.event_detected(wheelRBPin):
-        wheelRCount += 1
-        # print "count:", wheelRCount
+        while lock.require():
+            wheelRCount += 1
+            # print "count:", wheelRCount
+            lock.release()
 
 
 GPIO.add_event_detect(wheelRBPin, GPIO.BOTH, callback=countFunc)  # 在引脚上添加上升临界值检测再回调
@@ -49,7 +53,6 @@ def speed():
 
 timer = threading.Timer(0.5, speed)
 timer.start()
-
 
 lastTime = 0.0
 
