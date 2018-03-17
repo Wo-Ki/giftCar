@@ -23,6 +23,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8336DD11205CAF240004E0B7 /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
 		83FD72B6205BA019004DA868 /* gitfCarSocket_C */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = gitfCarSocket_C; sourceTree = BUILT_PRODUCTS_DIR; };
 		83FD72B9205BA019004DA868 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				83FD72B9205BA019004DA868 /* main.cpp */,
+				8336DD11205CAF240004E0B7 /* main.h */,
 			);
 			path = gitfCarSocket_C;
 			sourceTree = "<group>";

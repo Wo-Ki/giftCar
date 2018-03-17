@@ -34,14 +34,14 @@ def countFunc(channel):
         lock.release()
 
 
-GPIO.add_event_detect(wheelRBPin, GPIO.BOTH, callback=countFunc)  # 在引脚上添加上升临界值检测再回调
-GPIO.add_event_detect(wheelRAPin, GPIO.BOTH, callback=countFunc)
+GPIO.add_event_detect(wheelRBPin, GPIO.RISING, callback=countFunc)  # 在引脚上添加上升临界值检测再回调
+# GPIO.add_event_detect(wheelRAPin, GPIO.BOTH, callback=countFunc)
 print("****test begin****")
 
 
 def speed():
     global wheelRCount, timer
-    radiusSpeed = (wheelRCount / 520.0 * (2 * math.pi)) * 2
+    radiusSpeed = (wheelRCount / 130.0 * (2 * math.pi)) * 2
     if not wheelRADir and radiusSpeed != 0:
         radiusSpeed = -1 * radiusSpeed
     print("speed radius A: %.2f rad/s" % radiusSpeed)

@@ -6,15 +6,8 @@
 //  Copyright © 2018年  WangKai. All rights reserved.
 //
 
-#include <iostream>
-#include <stdio.h>
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <arpa/inet.h>
-#include <unistd.h>
-#include <string.h>
-#include <netdb.h>
 
+#include "main.h"
 
 #define HOST "192.168.100.3"
 #define PORT 8989
