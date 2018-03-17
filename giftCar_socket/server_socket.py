@@ -9,8 +9,7 @@ import socket
 
 from carCtrl import robotArmCtrl, car_pwm_ctrl
 
-hostname = socket.gethostname()
-host = socket.gethostbyname(hostname)
+host = "0.0.0.0"
 port = 8989
 
 
