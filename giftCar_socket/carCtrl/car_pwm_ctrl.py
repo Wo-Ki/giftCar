@@ -36,7 +36,7 @@ class Car_pwm_ctrl(object):
         gpio.setup(self.IN3, gpio.OUT)
         gpio.setup(self.IN4, gpio.OUT)
 
-        hz = 400
+        hz = 100
         self.in1_hz = gpio.PWM(self.IN1, hz)
         self.in2_hz = gpio.PWM(self.IN2, hz)
         self.in3_hz = gpio.PWM(self.IN3, hz)
