@@ -28,7 +28,7 @@ lock = threading.Lock()
 def countFunc(channel):
     global wheelRCount
     if GPIO.event_detected(wheelRAPin) or GPIO.event_detected(wheelRBPin):
-        while lock.require():
+        while lock.acquire():
             wheelRCount += 1
             # print "count:", wheelRCount
             lock.release()
