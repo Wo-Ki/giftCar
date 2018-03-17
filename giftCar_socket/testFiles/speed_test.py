@@ -46,7 +46,9 @@ def speed():
         radiusSpeed = -1 * radiusSpeed
     print("speed radius A: %.2f rad/s" % radiusSpeed)
     print("speed A: %.2f m/s" % (radiusSpeed * 0.03))
-    wheelRCount = 0
+    while lock.acquire():
+        wheelRCount = 0
+        lock.release()
     timer = threading.Timer(0.5, speed)
     timer.start()
 
