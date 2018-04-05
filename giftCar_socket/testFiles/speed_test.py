@@ -83,7 +83,7 @@ def control():
     timer = threading.Timer(0.5, control)
     timer.start()
 
-timer = threading.Timer(0.5, speed)
+timer = threading.Timer(0.5, control)
 timer.start()
 
 lastTime = 0.0
