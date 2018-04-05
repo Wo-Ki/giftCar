@@ -4,7 +4,12 @@
 # creator = wangkai
 # creation time = 2018/3/25 19:16
 
-from . import *
+from __future__ import division
+import RPi.GPIO as gpio
+import time
+import Adafruit_PCA9685
+import math
+import threading
 
 
 class ServoCtrl(object):
