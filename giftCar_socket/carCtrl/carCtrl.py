@@ -15,7 +15,7 @@ class CarCtrl(BaseCarCtrl):
     origin_wheel_value = 0
 
     def __init__(self, IN1, IN2, IN3, IN4, dir_pin):
-        super(BaseCarCtrl, self).__init__(IN1, IN2, IN3, IN4, dir_pin)
+        super(CarCtrl, self).__init__(IN1, IN2, IN3, IN4, dir_pin)
 
     # 定时测速
     def get_wheel_speed(self, value):
