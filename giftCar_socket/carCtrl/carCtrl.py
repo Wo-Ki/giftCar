@@ -22,7 +22,7 @@ class CarCtrl(BaseCarCtrl):
         pass
 
     # 从云端下发的原始数据
-    def set_speed_value(self, value):
+    def set_speed(self, value):
         self.origin_wheel_value = value
         self.left_wheel(value)
         self.right_wheel(value)

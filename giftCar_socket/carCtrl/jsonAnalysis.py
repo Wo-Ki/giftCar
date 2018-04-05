@@ -21,9 +21,9 @@ class JsonAnalysis(object):
         if json_data.get("LR") is not None:
             self.carCtrl.dir_ctrl(int(json_data.get("LR")))
         if json_data.get("YH") is not None:
-            self.carCtrl.yh_ctrl(int(json_data.get("YH")))
+            self.servoCtrl.yh_ctrl(int(json_data.get("YH")))
         if json_data.get("YV") is not None:
-            self.carCtrl.yv_ctrl(int(json_data.get("YV")))
+            self.servoCtrl.yv_ctrl(int(json_data.get("YV")))
         if json_data.get("AU") is not None:
             self.robotArmCtrl.upCtrl(int(json_data.get("AU")))
         if json_data.get("AD") is not None:
