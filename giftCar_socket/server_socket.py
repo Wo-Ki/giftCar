@@ -31,9 +31,7 @@ def handle_client(client_socket, client_address):
             else:
                 print "[%s, %s] : disconnect" % client_address
                 client_socket.close()
-                carCtrl.left_wheel(0)
-                carCtrl.right_wheel(0)
-                carCtrl.dir_ctrl(0)
+                carCtrl.stop()
                 return
 
         except Exception, e:

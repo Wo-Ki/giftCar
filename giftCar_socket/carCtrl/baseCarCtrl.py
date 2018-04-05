@@ -101,3 +101,14 @@ class BaseCarCtrl(object):
             self.pca_pwm.set_pwm(self.dir_pin, 0, self.servo_center)
             time.sleep(self.servo_angle - self.servo_Dvalue)
             self.pca_pwm.set_pwm(self.dir_pin, 0, 0)
+
+    def stop(self):
+        self.pca_pwm.set_pwm(self.dir_pin, 0, self.servo_center)
+        time.sleep(self.servo_angle - self.servo_Dvalue)
+        self.pca_pwm.set_pwm(self.dir_pin, 0, 0)
+        self.in3_hz.ChangeDutyCycle(0)
+        self.in4_hz.ChangeDutyCycle(0)
+        self.in1_hz.ChangeDutyCycle(0)
+        time.sleep(0.01)
+        self.in2_hz.ChangeDutyCycle(0)
+        time.sleep(0.01)
