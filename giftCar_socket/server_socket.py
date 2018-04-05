@@ -7,7 +7,7 @@
 import json
 import socket
 
-from carCtrl import robotArmCtrl, car_pwm_ctrl
+from carCtrl import robotArmCtrl, jsonAnalysis, carCtrl, servoCtrl
 
 host = "0.0.0.0"
 port = 8989
@@ -25,33 +25,15 @@ def handle_client(client_socket, client_address):
                     json_datas = request_data.split(",")
                     for json_data in json_datas:
                         json_data = json.loads(json_data)
-                        if json_data.get("UD") is not None:
-                            car_pwm_ctrl.left_wheel(int(json_data.get("UD")))
-                            car_pwm_ctrl.right_wheel(int(json_data.get("UD")))
-                        if json_data.get("LR") is not None:
-                            car_pwm_ctrl.dir_ctrl(int(json_data.get("LR")))
-                        if json_data.get("YH") is not None:
-                            car_pwm_ctrl.yh_ctrl(int(json_data.get("YH")))
-                        if json_data.get("YV") is not None:
-                            car_pwm_ctrl.yv_ctrl(int(json_data.get("YV")))
-                        if json_data.get("AU") is not None:
-                            robotArmCtrl.upCtrl(int(json_data.get("AU")))
-                        if json_data.get("AD") is not None:
-                            robotArmCtrl.downCtrl(int(json_data.get("AD")))
-                        if json_data.get("AL") is not None:
-                            robotArmCtrl.leftCtrl(int(json_data.get("AL")))
-                        if json_data.get("AR") is not None:
-                            robotArmCtrl.rightCtrl(int(json_data.get("AR")))
-                        if json_data.get("AC") is not None:
-                            robotArmCtrl.clean()
+                        jsonCtrl.analysis(json_data)
                 except:
                     pass
             else:
                 print "[%s, %s] : disconnect" % client_address
                 client_socket.close()
-                car_pwm_ctrl.left_wheel(0)
-                car_pwm_ctrl.right_wheel(0)
-                car_pwm_ctrl.dir_ctrl(0)
+                carCtrl.left_wheel(0)
+                carCtrl.right_wheel(0)
+                carCtrl.dir_ctrl(0)
                 return
 
         except Exception, e:
@@ -67,8 +49,11 @@ if __name__ == "__main__":
     server_socket.bind((host, port))
     server_socket.listen(3)
 
-    car_pwm_ctrl = car_pwm_ctrl.Car_pwm_ctrl(13, 12, 15, 16, 0, 1, 2)
+    carCtrl = carCtrl.CarCtrl(13, 12, 15, 16, 0)
+    servoCtrl = servoCtrl.ServoCtrl(1, 2)
     robotArmCtrl = robotArmCtrl.RobotArmCtrl(3, 4, 5, 6)
+    jsonCtrl = jsonAnalysis.JsonAnalysis(servoCtrl, carCtrl, robotArmCtrl)
+
     print "******Server Online*****"
     print "***", host, port, "***"
     try:
@@ -81,5 +66,5 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print "******Server Offline*****"
         robotArmCtrl.clean()
-        client_socket.close()
+        # client_socket.close()
         server_socket.close()
