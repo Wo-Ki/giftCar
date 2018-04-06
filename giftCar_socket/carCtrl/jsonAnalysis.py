@@ -16,8 +16,9 @@ class JsonAnalysis(object):
     def analysis(self, json_data):
         """处理json数据"""
         if json_data.get("UD") is not None:
-            self.carCtrl.left_wheel(int(json_data.get("UD")))
-            self.carCtrl.right_wheel(int(json_data.get("UD")))
+            # self.carCtrl.left_wheel(int(json_data.get("UD")))
+            # self.carCtrl.right_wheel(int(json_data.get("UD")))
+            self.carCtrl.set_speed(int(json_data.get("UD")))
         if json_data.get("LR") is not None:
             self.carCtrl.dir_ctrl(int(json_data.get("LR")))
         if json_data.get("YH") is not None:
