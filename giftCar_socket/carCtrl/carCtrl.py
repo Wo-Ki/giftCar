@@ -42,17 +42,17 @@ class CarCtrl(BaseCarCtrl):
     def avoid_up_left_changed(self, channel):
         if gpio.event_detected(self.avoid_up_left_pin):
             if gpio.input(self.avoid_up_left_pin) == gpio.LOW:
-                self.avoid_up_left = False
+                self.avoid_up_left = True
                 print "self.avoid_up_left:", self.avoid_up_left
             else:
-                self.avoid_up_left = True
+                self.avoid_up_left = False
                 print "self.avoid_up_left:", self.avoid_up_left
 
     def avoid_down_left_changed(self, channel):
         if gpio.event_detected(self.avoid_down_left_pin):
             if gpio.input(self.avoid_down_left_pin) == gpio.LOW:
-                self.avoid_down_left_pin = False
+                self.avoid_down_left_pin = True
                 print "self.avoid_down_left_pin:", self.avoid_down_left_pin
             else:
-                self.avoid_down_left_pin = True
+                self.avoid_down_left_pin = False
                 print "self.avoid_down_left_pin:", self.avoid_down_left_pin
