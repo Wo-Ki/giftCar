@@ -7,8 +7,8 @@ void countFunc();
 
 int count=0;
 
-long encoder_r = 24;
-long direction_r = 5;
+int encoder_r = 24;
+int direction_r = 5;
 long velocity_r = 0;
 
 //void countFunc(){
@@ -24,9 +24,9 @@ void countFunc(){
               }
          else{
             if(digitalRead(direction_r) == LOW)
-                velocity_r -= 1
+                velocity_r -= 1;
             else
-                velocity_r += 1
+                velocity_r += 1;
              }
 }
 
