@@ -35,7 +35,7 @@ class CarCtrl(BaseCarCtrl):
     # 从云端下发的原始数据
     def set_speed(self, value):
         self.origin_wheel_value = value
-        if (value > 0 and self.avoid_up_left is False) or (value < 0 and self.avoid_down_left is False) or value == 0:
+        if (value > 0 and self.avoid_down_left is False) or (value < 0 and self.avoid_up_left is False) or value == 0:
             self.left_wheel(value)
             self.right_wheel(value)
 
