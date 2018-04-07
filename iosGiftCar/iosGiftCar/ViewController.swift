@@ -153,6 +153,7 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate  {
     }
     func socket(_ sock: GCDAsyncSocket!, didConnectToHost host: String!, port: UInt16) {
         print("Connect successfully")
+        
         connActivity.stopAnimating()
         connActivity.isHidden = true
         upDown.isEnabled = true

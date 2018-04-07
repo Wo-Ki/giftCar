@@ -38,7 +38,6 @@ def handle_client(client_socket, client_address):
             timer = threading.Timer(3, send_test, args=[client_socket])
             timer.start()
 
-
         except Exception, e:
             print e
             print "[%s, %s] : disconnect" % client_address
@@ -46,9 +45,11 @@ def handle_client(client_socket, client_address):
             client_socket.close()
             return
 
+count =0
 
 def send_test(client_socket):
-    client_socket.send("Test 3s")
+    global count
+    client_socket.send("count:",str(count+=1))
     timer = threading.Timer(3, send_test, args=[client_socket])
     timer.start()
 
