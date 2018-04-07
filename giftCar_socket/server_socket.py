@@ -6,7 +6,8 @@
 
 import json
 import socket
-
+import select
+import threading
 from carCtrl import robotArmCtrl, jsonAnalysis, carCtrl, servoCtrl
 
 host = "0.0.0.0"
@@ -16,6 +17,7 @@ port = 8989
 def handle_client(client_socket, client_address):
     """处理客户端"""
     client_socket.send("OK\r\n")
+    client_socket.setblocking(0)
     while True:
         try:
             request_data = client_socket.recv(1024)
@@ -29,16 +31,25 @@ def handle_client(client_socket, client_address):
                 except:
                     pass
             else:
-                print "[%s, %s] : disconnect" % client_address
-                client_socket.close()
-                carCtrl.stop()
-                return
+                timer = threading.Timer(3, send_test, args=[client_socket])
+                timer.start()
+                # print "[%s, %s] : disconnect" % client_address
+                # client_socket.close()
+                # carCtrl.stop()
+                # return
 
         except Exception, e:
             print e
             print "[%s, %s] : disconnect" % client_address
+            carCtrl.stop()
             client_socket.close()
             return
+
+
+def send_test(client_socket):
+    client_socket.send("Test 3s")
+    timer = threading.Timer(3, send_test, args=[client_socket])
+    timer.start()
 
 
 if __name__ == "__main__":
