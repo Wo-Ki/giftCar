@@ -205,10 +205,10 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate  {
         
     }
     @IBAction func stopBtnTouched(_ sender: UIButton) {
-        var str = "{\"LR\":0},"
+        let str = "{\"M\":\"stop\"},"
         clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
-        str = "{\"UD\":0},"
-        clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
+//        str = "{\"UD\":0},"
+//        clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
     }
     // 摄像头云台控制
     var lastMotionH = 0

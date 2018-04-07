@@ -110,4 +110,4 @@ class BaseCarCtrl(object):
         self.in4_hz.ChangeDutyCycle(100)
         self.in1_hz.ChangeDutyCycle(100)
         self.in2_hz.ChangeDutyCycle(100)
-        time.sleep(0.1)
+        time.sleep(1)
