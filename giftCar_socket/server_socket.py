@@ -17,7 +17,7 @@ port = 8989
 def handle_client(client_socket, client_address):
     """处理客户端"""
     client_socket.send("OK\r\n")
-    client_socket.setblocking(0)
+    client_socket.settimeout(100)
     while True:
         try:
             request_data = client_socket.recv(1024)
@@ -30,13 +30,14 @@ def handle_client(client_socket, client_address):
                         jsonCtrl.analysis(json_data)
                 except:
                     pass
-            else:
-                timer = threading.Timer(3, send_test, args=[client_socket])
-                timer.start()
-                # print "[%s, %s] : disconnect" % client_address
-                # client_socket.close()
-                # carCtrl.stop()
-                # return
+            # else:
+            # print "[%s, %s] : disconnect" % client_address
+            # client_socket.close()
+            # carCtrl.stop()
+            # return
+            timer = threading.Timer(3, send_test, args=[client_socket])
+            timer.start()
+
 
         except Exception, e:
             print e
