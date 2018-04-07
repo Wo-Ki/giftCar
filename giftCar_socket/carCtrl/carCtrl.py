@@ -37,8 +37,8 @@ class CarCtrl(BaseCarCtrl):
 
         gpio.setup(speed_left_pin, gpio.IN, pull_up_down=gpio.PUD_UP)
         gpio.setup(speed_right_pin, gpio.IN, pull_up_down=gpio.PUD_UP)
-        gpio.add_event_detect(speed_left_pin, gpio.RISING, callback=CarCtrl.speed_left_func)
-        gpio.add_event_detect(speed_right_pin, gpio.RISING, callback=CarCtrl.speed_right_func)
+        gpio.add_event_detect(speed_left_pin, gpio.RISING, callback=self.speed_left_func)
+        gpio.add_event_detect(speed_right_pin, gpio.RISING, callback=self.speed_right_func)
 
         timer = threading.Timer(0.5, self.get_both_speed)
         timer.start()
