@@ -45,11 +45,15 @@ def handle_client(client_socket, client_address):
             client_socket.close()
             return
 
-count =0
+
+count = 0
+
 
 def send_test(client_socket):
     global count
-    client_socket.send("count:",str(count+=1))
+    s = "count:" + str(count)
+    client_socket.send(s)
+    count += 1
     timer = threading.Timer(3, send_test, args=[client_socket])
     timer.start()
 
