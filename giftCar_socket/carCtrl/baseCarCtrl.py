@@ -84,7 +84,6 @@ class BaseCarCtrl(object):
     def dir_ctrl(self, value):
         """方向轮的pwm控制"""
         # 左转
-        print "value:", value
         if value < 0:
             pwm_value = self.servo_center - ((-value) / 100.0) * (self.servo_center - self.servo_min)
             self.pca_pwm.set_pwm(self.dir_pin, 0, int(pwm_value))

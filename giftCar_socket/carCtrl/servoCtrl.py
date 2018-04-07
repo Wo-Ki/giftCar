@@ -29,18 +29,19 @@ class ServoCtrl(object):
         # 左转
         print "motion yh value:", value
         if value < 0:
-            pwm_value = yh_center - ((-value) / 100.0) * (yh_center - yh_min)
+            pwm_value = (-value / 100.0) * (yh_max - yh_center) + yh_center
             self.pwm.set_pwm(self.yh_pin, 0, int(pwm_value))
             time.sleep(self.servo_angle - self.servo_Dvalue)
             if lock is False:
                 self.pwm.set_pwm(self.yh_pin, 0, 0)
         # 右转
         elif value > 0:
-            pwm_value = (value / 100.0) * (yh_max - yh_center) + yh_center
+            pwm_value = yh_center - (value / 100.0) * (yh_center - yh_min)
             self.pwm.set_pwm(self.yh_pin, 0, int(pwm_value))
             time.sleep(self.servo_angle - self.servo_Dvalue)
             if lock is False:
                 self.pwm.set_pwm(self.yh_pin, 0, 0)
+
         # 归位
         else:
             self.pwm.set_pwm(self.yh_pin, 0, yh_center)

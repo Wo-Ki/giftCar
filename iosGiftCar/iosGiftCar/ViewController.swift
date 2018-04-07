@@ -42,7 +42,7 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate  {
         
         leftRight.sizeToFit()
         upDown.transform = CGAffineTransform(rotationAngle: 1.571)
-        
+        motionSliderV.transform = CGAffineTransform(rotationAngle: 1.571)
         upDown.isEnabled = false
         leftRight.isEnabled = false
         stopBtn.isEnabled = false
