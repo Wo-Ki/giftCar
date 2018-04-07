@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class ViewController: UIViewController,GCDAsyncSocketDelegate, UIWebViewDelegate {
+class ViewController: UIViewController,GCDAsyncSocketDelegate  {
     @IBOutlet weak var ipTextFiled: UITextField!
     
     @IBOutlet weak var portTextField: UITextField!
@@ -30,6 +30,7 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate, UIWebViewDelegate
     @IBOutlet weak var robotArmLeftSlider: UISlider!
     @IBOutlet weak var robotArmRightSlider: UISlider!
     @IBOutlet weak var robotArmCleanBtn: UIButton!
+    @IBOutlet weak var speedSelectSegment: UISegmentedControl!
     
     
     var clientSocket:GCDAsyncSocket!
@@ -58,7 +59,8 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate, UIWebViewDelegate
         robotArmRightSlider.isEnabled = false
         robotArmCleanBtn.isEnabled = false
         
-        
+        speedSelectSegment.selectedSegmentIndex = 0
+        speedSelectSegment.addTarget(self, action: #selector(ViewController.speedSelectFunc(_:)), for: .valueChanged)
         
         
     }
@@ -66,6 +68,23 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate, UIWebViewDelegate
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    @objc func speedSelectFunc(_ segmented:UISegmentedControl){
+        if(segmented.selectedSegmentIndex == 0){
+            print("选择低速")
+            upDown.maximumValue = 30
+            upDown.minimumValue = -30
+        }
+        else if(segmented.selectedSegmentIndex == 1){
+            print("选择中速")
+            upDown.maximumValue = 60
+            upDown.minimumValue = -60
+        }
+        else if(segmented.selectedSegmentIndex == 2){
+            print("选择高速")
+            upDown.maximumValue = 100
+            upDown.minimumValue = -100
+        }
     }
     // 摄像头网页
     @IBAction func motionFlashBtnDidTouched(_ sender: UIButton) {

@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="22F-BF-ffd">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                <rect key="frame" x="59" y="0.0" width="1024" height="768"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
@@ -88,7 +88,7 @@
                                 </connections>
                             </slider>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Co-d5-oMW">
-                                <rect key="frame" x="509" y="539" width="31.000000000000057" height="30"/>
+                                <rect key="frame" x="509" y="576" width="31.000000000000057" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="stop"/>
                                 <connections>
@@ -218,6 +218,15 @@
                                     <action selector="robotArmCleanBtnTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wuk-7u-Jv9"/>
                                 </connections>
                             </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="M4C-MW-DHz">
+                                <rect key="frame" x="449" y="539" width="151" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="低速"/>
+                                    <segment title="中速"/>
+                                    <segment title="高速"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -239,13 +248,14 @@
                         <outlet property="robotArmLeftSlider" destination="XUc-co-lj8" id="MZQ-K9-2eS"/>
                         <outlet property="robotArmRightSlider" destination="WlX-fk-sw6" id="5u7-uE-npL"/>
                         <outlet property="robotArmUpSlider" destination="GyD-Lk-hWv" id="d4S-9G-jtt"/>
+                        <outlet property="speedSelectSegment" destination="M4C-MW-DHz" id="lAH-AF-tGl"/>
                         <outlet property="stopBtn" destination="3Co-d5-oMW" id="WBt-d8-Mfy"/>
                         <outlet property="upDown" destination="5MQ-Mi-IO4" id="p7d-nS-m9K"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="162" y="74"/>
+            <point key="canvasLocation" x="161.71875" y="73.4375"/>
         </scene>
     </scenes>
 </document>
