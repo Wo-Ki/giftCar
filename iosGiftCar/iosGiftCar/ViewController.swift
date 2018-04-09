@@ -9,9 +9,8 @@
 import UIKit
 import WebKit
 
-class ViewController: UIViewController,GCDAsyncSocketDelegate  {
+class ViewController: UIViewController,GCDAsyncSocketDelegate,UIScrollViewDelegate  {
     @IBOutlet weak var ipTextFiled: UITextField!
-    
     @IBOutlet weak var portTextField: UITextField!
     @IBOutlet weak var upDown: UISlider!
     @IBOutlet weak var leftRight: UISlider!
@@ -31,9 +30,12 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate  {
     @IBOutlet weak var robotArmRightSlider: UISlider!
     @IBOutlet weak var robotArmCleanBtn: UIButton!
     @IBOutlet weak var speedSelectSegment: UISegmentedControl!
+    @IBOutlet weak var viewModeSelectSegment: UISegmentedControl!
+    @IBOutlet weak var scrollMode: UIScrollView!
     
     
     var clientSocket:GCDAsyncSocket!
+    var beatTimer:Timer!
     
     override func viewDidLoad() {
        
@@ -43,6 +45,14 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate  {
         leftRight.sizeToFit()
         upDown.transform = CGAffineTransform(rotationAngle: 1.571)
         motionSliderV.transform = CGAffineTransform(rotationAngle: 1.571)
+        self.scrollMode.frame = CGRect(x: 0, y: 50, width: self.view.frame.size.width, height: self.view.frame.size.height/2)
+        self.scrollMode.contentSize = CGSize(width: 3*self.view.frame.size.width, height: self.view.frame.size.height/2)
+        self.scrollMode.isPagingEnabled=true
+        self.scrollMode.showsVerticalScrollIndicator=false
+        self.scrollMode.showsHorizontalScrollIndicator=false
+        self.scrollMode.delegate = self
+        
+        self.motionWebView
         upDown.isEnabled = false
         leftRight.isEnabled = false
         stopBtn.isEnabled = false
@@ -63,12 +73,44 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate  {
         speedSelectSegment.addTarget(self, action: #selector(ViewController.speedSelectFunc(_:)), for: .valueChanged)
         
         
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    // scorll
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let pageWidth=self.scrollMode.frame.size.width
+        if scrollView.contentOffset.x < pageWidth/6{
+            viewModeSelectSegment.selectedSegmentIndex=0
+        }
+        if scrollView.contentOffset.x > pageWidth*3/6{
+            viewModeSelectSegment.selectedSegmentIndex=1
+        }
+        if scrollView.contentOffset.x > pageWidth*5/6{
+            viewModeSelectSegment.selectedSegmentIndex=2
+        }
+    }
+    @IBAction func viewModeSelectChanged(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0{
+            UIView.animate(withDuration: 0.5, animations: {
+                self.scrollMode.contentOffset=CGPoint(x: 0, y: 0)
+            })
+        }else if sender.selectedSegmentIndex == 1{
+            UIView.animate(withDuration: 0.5, animations: {
+                self.scrollMode.contentOffset=CGPoint(x: self.view.frame.size.width, y: 0)
+                
+            })
+        }else if sender.selectedSegmentIndex == 2{
+            UIView.animate(withDuration: 0.5, animations: {
+                self.scrollMode.contentOffset=CGPoint(x: self.view.frame.size.width*2, y: 0)
+                
+            })
+        }
+    }
+    
     @objc func speedSelectFunc(_ segmented:UISegmentedControl){
         if(segmented.selectedSegmentIndex == 0){
             print("选择低速")
@@ -122,23 +164,27 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate  {
     }
     func socketDidDisconnect(_ sock: GCDAsyncSocket!, withError err: Error!) {
         print("Disconnected!!!")
-        stopBtn.isEnabled = false
-        upDown.isEnabled = false
-        leftRight.isEnabled = false
-        connBtn.isEnabled = true
-        disConnBtn.isEnabled = false
-        connActivity.stopAnimating()
-        connActivity.isHidden = true
-        motionSliderH.isEnabled = false
-        motionSliderV.isEnabled = false
-        motionResetBtn.isEnabled = false
+        DispatchQueue.main.async {
+            self.stopBtn.isEnabled = false
+            self.upDown.isEnabled = false
+            self.leftRight.isEnabled = false
+            self.connBtn.isEnabled = true
+            self.disConnBtn.isEnabled = false
+            self.connActivity.stopAnimating()
+            self.connActivity.isHidden = true
+            self.motionSliderH.isEnabled = false
+            self.motionSliderV.isEnabled = false
+            self.motionResetBtn.isEnabled = false
+            
+            self.robotArmUpSlider.isEnabled = false
+            self.robotArmDownSlider.isEnabled = false
+            self.robotArmLeftSlider.isEnabled = false
+            self.robotArmRightSlider.isEnabled = false
+            self.robotArmCleanBtn.isEnabled = false
+            self.beatTimer.invalidate()
+            self.alertFunc(title: "提示", message: "已经断开连接")
+        }
         
-        robotArmUpSlider.isEnabled = false
-        robotArmDownSlider.isEnabled = false
-        robotArmLeftSlider.isEnabled = false
-        robotArmRightSlider.isEnabled = false
-        robotArmCleanBtn.isEnabled = false
-        alertFunc(title: "提示", message: "已经断开连接")
     }
     func socket(_ sock: GCDAsyncSocket!, didRead data: Data!, withTag tag: Int) {
         let readData = String.init(data: data, encoding: String.Encoding.utf8)
@@ -152,27 +198,37 @@ class ViewController: UIViewController,GCDAsyncSocketDelegate  {
         clientSocket.readData(withTimeout: -1, tag: 0)
     }
     func socket(_ sock: GCDAsyncSocket!, didConnectToHost host: String!, port: UInt16) {
-        print("Connect successfully")
-        connActivity.stopAnimating()
-        connActivity.perform(#selector(connActivity.stopAnimating), on: .main, with: nil, waitUntilDone: true)
+        DispatchQueue.main.async {
+            print("Connect successfully")
+            self.connActivity.stopAnimating()
+            self.connActivity.isHidden = true
+            self.upDown.isEnabled = true
+            self.leftRight.isEnabled = true
+            self.stopBtn.isEnabled = true
+            self.disConnBtn.isEnabled = true
+            self.connBtn.isEnabled = false
+            
+            self.motionSliderH.isEnabled = true
+            self.motionSliderV.isEnabled = true
+            self.motionResetBtn.isEnabled = true
+            
+            self.robotArmUpSlider.isEnabled = true
+            self.robotArmDownSlider.isEnabled = true
+            self.robotArmLeftSlider.isEnabled = true
+            self.robotArmRightSlider.isEnabled = true
+            self.robotArmCleanBtn.isEnabled = true
+            
+             self.beatTimer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(ViewController.beatFunc), userInfo: nil, repeats: true)
+            
+            self.clientSocket.readData(withTimeout: -1, tag: 0)
+        }
         
-        connActivity.isHidden = true
-        upDown.isEnabled = true
-        leftRight.isEnabled = true
-        stopBtn.isEnabled = true
-        disConnBtn.isEnabled = true
-        connBtn.isEnabled = false
-        
-        motionSliderH.isEnabled = true
-        motionSliderV.isEnabled = true
-        motionResetBtn.isEnabled = true
-        
-        robotArmUpSlider.isEnabled = true
-        robotArmDownSlider.isEnabled = true
-        robotArmLeftSlider.isEnabled = true
-        robotArmRightSlider.isEnabled = true
-        robotArmCleanBtn.isEnabled = true
-        clientSocket.readData(withTimeout: -1, tag: 0)
+    }
+    @objc func beatFunc(){
+        if(clientSocket.isConnected){
+            let str = "{\"M\":\"b\"},"
+            clientSocket.write(str.data(using: String.Encoding.utf8), withTimeout: -1, tag: 0)
+        }
     }
     var lastLeftRight = 0
     @IBAction func leftRightChanging(_ sender: UISlider) {

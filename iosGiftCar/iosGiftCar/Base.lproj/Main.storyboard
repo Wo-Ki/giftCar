@@ -117,22 +117,6 @@
                                     <action selector="motionResetBtnTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TTU-KY-trU"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="neR-iP-FVm">
-                                <rect key="frame" x="402" y="21" width="31" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="停止"/>
-                                <connections>
-                                    <action selector="motionStopLoadBtnTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EQ3-kW-mkN"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rjm-b7-QS7">
-                                <rect key="frame" x="355" y="21" width="31" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="刷新"/>
-                                <connections>
-                                    <action selector="motionFlashBtnDidTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fiH-RO-e75"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="机械臂控制：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gpW-ef-QNR">
                                 <rect key="frame" x="691" y="75" width="104" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -227,6 +211,38 @@
                                     <action selector="motionSliderHChanging:" destination="BYZ-38-t0r" eventType="valueChanged" id="saU-Ut-ylU"/>
                                 </connections>
                             </slider>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8V4-Em-dDY">
+                                <rect key="frame" x="5" y="59" width="1019" height="375"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </scrollView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="g5W-rq-CmG">
+                                <rect key="frame" x="452" y="22" width="121" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="基本"/>
+                                    <segment title="监视"/>
+                                    <segment title="地图"/>
+                                </segments>
+                                <connections>
+                                    <action selector="viewModeSelectChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="kLm-Kf-hlV"/>
+                                </connections>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="neR-iP-FVm">
+                                <rect key="frame" x="710" y="21" width="31" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="停止"/>
+                                <connections>
+                                    <action selector="motionStopLoadBtnTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EQ3-kW-mkN"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rjm-b7-QS7">
+                                <rect key="frame" x="663" y="21" width="31" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="刷新"/>
+                                <connections>
+                                    <action selector="motionFlashBtnDidTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fiH-RO-e75"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -248,14 +264,16 @@
                         <outlet property="robotArmLeftSlider" destination="XUc-co-lj8" id="MZQ-K9-2eS"/>
                         <outlet property="robotArmRightSlider" destination="WlX-fk-sw6" id="5u7-uE-npL"/>
                         <outlet property="robotArmUpSlider" destination="GyD-Lk-hWv" id="d4S-9G-jtt"/>
+                        <outlet property="scrollMode" destination="8V4-Em-dDY" id="9j7-d7-X4F"/>
                         <outlet property="speedSelectSegment" destination="M4C-MW-DHz" id="lAH-AF-tGl"/>
                         <outlet property="stopBtn" destination="3Co-d5-oMW" id="WBt-d8-Mfy"/>
                         <outlet property="upDown" destination="5MQ-Mi-IO4" id="p7d-nS-m9K"/>
+                        <outlet property="viewModeSelectSegment" destination="g5W-rq-CmG" id="XNf-sR-8Wd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="161.71875" y="73.4375"/>
+            <point key="canvasLocation" x="-158" y="-339"/>
         </scene>
     </scenes>
 </document>

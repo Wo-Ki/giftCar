@@ -19,7 +19,7 @@ import Adafruit_DHT
 #     print('example: sudo ./Adafruit_DHT.py 2302 4 - Read from an AM2302 connected to GPIO #4')
 #     sys.exit(1)
 
-sensor = Adafruit_DHT.DHT22
+sensor = Adafruit_DHT.DHT11
 pin = 20  # BCM
 
 # Try to grab a sensor reading.  Use the read_retry method which will retry up

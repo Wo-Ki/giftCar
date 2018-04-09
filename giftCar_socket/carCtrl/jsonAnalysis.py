@@ -21,9 +21,6 @@ class JsonAnalysis(object):
             self.carCtrl.set_speed(int(json_data.get("UD")))
         if json_data.get("LR") is not None:
             self.carCtrl.dir_ctrl(int(json_data.get("LR")))
-        if json_data.get("M") is not None:
-            if json_data.get('stop'):
-                self.carCtrl.stop()
         if json_data.get("YH") is not None:
             self.servoCtrl.yh_ctrl(int(json_data.get("YH")))
         if json_data.get("YV") is not None:
@@ -38,3 +35,12 @@ class JsonAnalysis(object):
             self.robotArmCtrl.rightCtrl(int(json_data.get("AR")))
         if json_data.get("AC") is not None:
             self.robotArmCtrl.clean()
+        if json_data.get("M") is not None:
+            if json_data["M"] == 'stop':
+                self.carCtrl.stop()
+            if json_data["M"] == 'avoid':
+                if json_data["V"] == 'on':
+                    self.carCtrl.avoid_mode = True
+                elif json_data["V"] == 'off':
+                    self.carCtrl.avoid_mode = False
+

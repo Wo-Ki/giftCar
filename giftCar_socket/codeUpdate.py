@@ -32,3 +32,5 @@ def remote_update():
 def go():
     local_update()
     remote_update()
+
+# scp -r ../giftCar_socket pi@192.168.100.2:/home/pi/RaspbianPython/giftCarProject

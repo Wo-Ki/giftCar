@@ -41,7 +41,7 @@ class BaseCarCtrl(object):
         self.in4_hz.start(0)
 
         self.pca_pwm = Adafruit_PCA9685.PCA9685()
-        self.pca_pwm.set_pwm_freq(60)
+        self.pca_pwm.set_pwm_freq(65)
         # 初始归位方向轮
         self.pca_pwm.set_pwm(self.dir_pin, 0, self.servo_center)
         time.sleep(self.servo_angle - self.servo_Dvalue)
@@ -110,3 +110,7 @@ class BaseCarCtrl(object):
         self.in1_hz.ChangeDutyCycle(100)
         self.in2_hz.ChangeDutyCycle(100)
         time.sleep(1)
+        self.in3_hz.ChangeDutyCycle(0)
+        self.in4_hz.ChangeDutyCycle(0)
+        self.in1_hz.ChangeDutyCycle(0)
+        self.in2_hz.ChangeDutyCycle(0)

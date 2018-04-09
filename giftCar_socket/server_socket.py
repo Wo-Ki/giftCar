@@ -8,7 +8,7 @@ import json
 import socket
 import select
 import threading
-from carCtrl import robotArmCtrl, jsonAnalysis, carCtrl, servoCtrl
+from carCtrl import robotArmCtrl, jsonAnalysis, carCtrl, servoCtrl, updateCtrl
 
 host = "0.0.0.0"
 port = 8989
@@ -17,7 +17,10 @@ port = 8989
 def handle_client(client_socket, client_address):
     """处理客户端"""
     client_socket.send("OK\r\n")
-    client_socket.settimeout(100)
+    client_socket.settimeout(5)
+    update_ctrl = updateCtrl.UpdateCtrl(client_socket, carCtrl, dht11_pin)
+    timer = threading.Timer(0.3, send_data, args=[update_ctrl])
+    timer.start()
     while True:
         try:
             request_data = client_socket.recv(1024)
@@ -30,13 +33,11 @@ def handle_client(client_socket, client_address):
                         jsonCtrl.analysis(json_data)
                 except:
                     pass
-            # else:
-            # print "[%s, %s] : disconnect" % client_address
-            # client_socket.close()
-            # carCtrl.stop()
-            # return
-            timer = threading.Timer(3, send_test, args=[client_socket])
-            timer.start()
+            else:
+                print "[%s, %s] : disconnect" % client_address
+                client_socket.close()
+                carCtrl.stop()
+                return
 
         except Exception, e:
             print e
@@ -46,15 +47,9 @@ def handle_client(client_socket, client_address):
             return
 
 
-count = 0
-
-
-def send_test(client_socket):
-    global count
-    s = "count:" + str(count)
-    client_socket.send(s)
-    count += 1
-    timer = threading.Timer(3, send_test, args=[client_socket])
+def send_data(update_ctrl):
+    update_ctrl.update()
+    timer = threading.Timer(0.3, send_data, args=[update_ctrl])
     timer.start()
 
 
@@ -68,7 +63,7 @@ if __name__ == "__main__":
     servoCtrl = servoCtrl.ServoCtrl(1, 2)
     robotArmCtrl = robotArmCtrl.RobotArmCtrl(3, 4, 5, 6)
     jsonCtrl = jsonAnalysis.JsonAnalysis(servoCtrl, carCtrl, robotArmCtrl)
-
+    dht11_pin = 20
     print "******Server Online*****"
     print "***", host, port, "***"
     try:
