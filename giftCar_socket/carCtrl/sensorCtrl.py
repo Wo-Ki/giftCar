@@ -25,7 +25,10 @@ class SensorCtrl(object):
     # 以下为dth11
     def get_dht11_data(self):
         """获取dht11数据"""
-        humidity, temperature = Adafruit_DHT.read_retry(self.dht11, self.dht11_pin)
+        try:
+            humidity, temperature = Adafruit_DHT.read_retry(self.dht11, self.dht11_pin)
+        except RuntimeError:
+            return -1, -1
         return humidity, temperature
 
     # 以下为mpu9250

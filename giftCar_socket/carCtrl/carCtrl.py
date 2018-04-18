@@ -14,8 +14,8 @@ class CarCtrl(BaseCarCtrl):
     speed_r_count = 0
     speed_l_pre = 0.0
     speed_r_pre = 0.0
-    speed_l_real = 0.0
-    speed_r_real = 0.0
+    speed_l_real = 0.0  # 线速度 m/s
+    speed_r_real = 0.0  # 线速度 m/s
     origin_wheel_value = 0
 
     avoid_up_left = False
@@ -24,6 +24,8 @@ class CarCtrl(BaseCarCtrl):
     avoid_down_right = False
 
     avoid_mode = True
+
+    client_socket = None
 
     def __init__(self, IN1, IN2, IN3, IN4, dir_pin, avoid_down_left_pin, avoid_down_right_pin, speed_left_pin,
                  speed_right_pin):
@@ -45,12 +47,13 @@ class CarCtrl(BaseCarCtrl):
         timer = threading.Timer(0.5, self.get_both_speed)
         timer.start()
 
-    # 定时测速
-    def get_wheel_speed(self, value):
-        pass
+    @staticmethod
+    def set_client_socket(client_socket):
+        """当连接上客户端，设置socket，以便速度和避障上传"""
+        CarCtrl.client_socket = client_socket
 
-    # 从云端下发的原始数据
     def set_speed(self, value):
+        """从云端下发的原始数据"""
         self.origin_wheel_value = value
         # if value > 0 and self.avoid_down_left is False and self.avoid_down_right is False:
         self.left_wheel(value)
@@ -94,11 +97,23 @@ class CarCtrl(BaseCarCtrl):
             self.speed_r_count += 1
 
     def get_both_speed(self):
+        """定时测速"""
         self.speed_l_pre = self.speed_l_count
         self.speed_r_pre = self.speed_r_count
-        print "speed_l_pre:", self.speed_l_pre
-        print "speed_r_pre:", self.speed_r_pre
+        # print "speed_l_pre:", self.speed_l_pre
+        # print "speed_r_pre:", self.speed_r_pre
         self.speed_l_count = 0
         self.speed_r_count = 0
+        self.real_speed()
         timer = threading.Timer(0.5, self.get_both_speed)
         timer.start()
+
+    def real_speed(self):
+        """向上位机上传真是速度"""
+        self.speed_l_real = (self.speed_l_pre / 130.0 * (2 * math.pi)) * 2 * 0.03
+        self.speed_r_real = (self.speed_r_pre / 130.0 * (2 * math.pi)) * 2 * 0.03
+        if self.client_socket:
+            average_speed = (self.speed_l_real + self.speed_r_real) / 2.0
+            s = {"M": "update", "K": "speed", "V": average_speed}
+            self.client_socket.send(bytes(json.dumps(s)))
+            time.sleep(0.05)

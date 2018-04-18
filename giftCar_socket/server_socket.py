@@ -13,13 +13,17 @@ from carCtrl import robotArmCtrl, jsonAnalysis, carCtrl, servoCtrl, updateCtrl
 host = "0.0.0.0"
 port = 8989
 
+connected = False
 
 def handle_client(client_socket, client_address):
     """处理客户端"""
+    global connected
+    connected = True
     client_socket.send("OK\r\n")
-    client_socket.settimeout(5)
-    update_ctrl = updateCtrl.UpdateCtrl(client_socket, carCtrl, dht11_pin)
-    timer = threading.Timer(0.3, send_data, args=[update_ctrl])
+    client_socket.settimeout(8)
+    carCtrl.set_client_socket(client_socket)  # 当连接上客户端，设置socket，以便速度和避障上传
+    update_ctrl = updateCtrl.UpdateCtrl(client_socket, dht11_pin)
+    timer = threading.Timer(0.2, send_data, args=["all", update_ctrl])
     timer.start()
     while True:
         try:
@@ -35,6 +39,8 @@ def handle_client(client_socket, client_address):
                     pass
             else:
                 print "[%s, %s] : disconnect" % client_address
+                connected = False
+                carCtrl.set_client_socket(None)
                 client_socket.close()
                 carCtrl.stop()
                 return
@@ -42,16 +48,33 @@ def handle_client(client_socket, client_address):
         except Exception, e:
             print e
             print "[%s, %s] : disconnect" % client_address
+            carCtrl.set_client_socket(None)
+            connected = False
             carCtrl.stop()
             client_socket.close()
             return
 
 
-def send_data(update_ctrl):
-    update_ctrl.update()
-    timer = threading.Timer(0.3, send_data, args=[update_ctrl])
-    timer.start()
-
+def send_data(key, update_ctrl):
+    """ 上传数据"""
+    if connected is True:
+        if key == "dht":
+            update_ctrl.updateDHT11()
+            timer = threading.Timer(2, send_data, args=["dht", update_ctrl])
+            timer.start()
+        elif key == "mpu":
+            update_ctrl.updateMpu9250()
+            timer = threading.Timer(0.1, send_data, args=["mpu", update_ctrl])
+            timer.start()
+        elif key == "all":
+            update_ctrl.updateDHT11()
+            timer = threading.Timer(2, send_data, args=["dht", update_ctrl])
+            timer.start()
+            update_ctrl.updateMpu9250()
+            timer = threading.Timer(0.1, send_data, args=["mpu", update_ctrl])
+            timer.start()
+    else:
+        return
 
 if __name__ == "__main__":
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -72,6 +95,7 @@ if __name__ == "__main__":
             print "*" * 30
             print "[%s, %s] : connected" % client_address
             handle_client(client_socket, client_address)
+
 
     except KeyboardInterrupt:
         print "******Server Offline*****"
