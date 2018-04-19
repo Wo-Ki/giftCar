@@ -27,7 +27,7 @@ def read_word(adr):
 
 def read_word_2c(adr):
     val = read_word(adr)
-    if (val >= 0x8000):
+    if val >= 0x8000:
         return -((65535 - val) + 1)
     else:
         return val

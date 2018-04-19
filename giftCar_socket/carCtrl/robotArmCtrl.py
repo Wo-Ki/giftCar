@@ -34,7 +34,7 @@ class RobotArmCtrl(object):
         downMax = 600
         downMin = 150
         # 左转
-        print "robotArm down value:", value
+        print("robotArm down value:", value)
         if value < 0:
             pwm_value = downCenter - ((-value) / 100.0) * (downCenter - downMin)
             self.pca_pwm.set_pwm(self.downPin, 0, int(pwm_value))
@@ -58,7 +58,7 @@ class RobotArmCtrl(object):
         upMax = 600
         upMin = 50
         # 左转
-        print "robotArm up value:", value
+        print("robotArm up value:", value)
         if value < -10:
             pwm_value = upCenter - ((-value) / 100.0) * (upCenter - upMin)
             self.pca_pwm.set_pwm(self.upPin, 0, int(pwm_value))
@@ -82,7 +82,7 @@ class RobotArmCtrl(object):
         leftMax = 600
         leftMin = 150
         # 左转
-        print "robotArm left value:", value
+        print("robotArm left value:", value)
         if value < 0:
             pwm_value = leftCenter - ((-value) / 100.0) * (leftCenter - leftMin)
             self.pca_pwm.set_pwm(self.leftPin, 0, int(pwm_value))
@@ -106,7 +106,7 @@ class RobotArmCtrl(object):
         rightMax = 600
         rightMin = 150
         # 左转
-        print "robotArm right value:", value
+        print("robotArm right value:", value)
         if value < 0:
             pwm_value = rightCenter - ((-value) / 100.0) * (rightCenter - rightMin)
             self.pca_pwm.set_pwm(self.rightPin, 0, int(pwm_value))

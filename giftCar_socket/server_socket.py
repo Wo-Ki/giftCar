@@ -15,11 +15,12 @@ port = 8989
 
 connected = False
 
+
 def handle_client(client_socket, client_address):
     """处理客户端"""
     global connected
     connected = True
-    client_socket.send("OK\r\n")
+    client_socket.send("OK\r\n".encode("utf-8"))
     client_socket.settimeout(8)
     carCtrl.set_client_socket(client_socket)  # 当连接上客户端，设置socket，以便速度和避障上传
     update_ctrl = updateCtrl.UpdateCtrl(client_socket, dht11_pin)
@@ -29,7 +30,7 @@ def handle_client(client_socket, client_address):
         try:
             request_data = client_socket.recv(1024)
             if request_data:
-                print "request_data:", request_data
+                print("request_data:", request_data)
                 try:
                     json_datas = request_data.split(",")
                     for json_data in json_datas:
@@ -38,16 +39,16 @@ def handle_client(client_socket, client_address):
                 except:
                     pass
             else:
-                print "[%s, %s] : disconnect" % client_address
+                print("[%s, %s] : disconnect" % client_address)
                 connected = False
                 carCtrl.set_client_socket(None)
                 client_socket.close()
                 carCtrl.stop()
                 return
 
-        except Exception, e:
-            print e
-            print "[%s, %s] : disconnect" % client_address
+        except Exception as e:
+            print(e)
+            print("[%s, %s] : disconnect" % client_address)
             carCtrl.set_client_socket(None)
             connected = False
             carCtrl.stop()
@@ -58,6 +59,7 @@ def handle_client(client_socket, client_address):
 def send_data(key, update_ctrl):
     """ 上传数据"""
     if connected is True:
+
         if key == "dht":
             update_ctrl.updateDHT11()
             timer = threading.Timer(2, send_data, args=["dht", update_ctrl])
@@ -76,6 +78,7 @@ def send_data(key, update_ctrl):
     else:
         return
 
+
 if __name__ == "__main__":
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
@@ -87,18 +90,17 @@ if __name__ == "__main__":
     robotArmCtrl = robotArmCtrl.RobotArmCtrl(3, 4, 5, 6)
     jsonCtrl = jsonAnalysis.JsonAnalysis(servoCtrl, carCtrl, robotArmCtrl)
     dht11_pin = 20
-    print "******Server Online*****"
-    print "***", host, port, "***"
+    print("******Server Online*****")
+    print("***", host, port, "***")
     try:
         while True:
             client_socket, client_address = server_socket.accept()
-            print "*" * 30
-            print "[%s, %s] : connected" % client_address
+            print("*" * 30)
+            print("[%s, %s] : connected" % client_address)
             handle_client(client_socket, client_address)
 
-
     except KeyboardInterrupt:
-        print "******Server Offline*****"
+        print("******Server Offline*****")
         robotArmCtrl.clean()
         # client_socket.close()
         server_socket.close()

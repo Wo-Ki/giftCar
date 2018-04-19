@@ -76,8 +76,10 @@ class CarCtrl(BaseCarCtrl):
                 self.avoid_down_left = True
                 if self.origin_wheel_value > 0:
                     self.set_speed(0)
+                self.send_avoid_status("dl", 1)
             else:
                 self.avoid_down_left = False
+                self.send_avoid_status("dl", 0)
 
     def avoid_down_right_changed(self, channel):
         if gpio.event_detected(self.avoid_down_right_pin):
@@ -85,8 +87,17 @@ class CarCtrl(BaseCarCtrl):
                 self.avoid_down_right = True
                 if self.origin_wheel_value > 0:
                     self.set_speed(0)
+                self.send_avoid_status("dr", 1)
             else:
                 self.avoid_down_right = False
+                self.send_avoid_status("dr", 0)
+
+    def send_avoid_status(self, which, value):
+        """向云端发送障碍物状态"""
+        if self.client_socket:
+            s = {"M": "update", "K": "avoid", "V": {"W": which, "V": value}}
+            self.client_socket.send(json.dumps(s).encode("utf-8"))
+            time.sleep(0.05)
 
     def speed_left_func(self, channel):
         if gpio.event_detected(self.speed_left_pin):
@@ -115,5 +126,5 @@ class CarCtrl(BaseCarCtrl):
         if self.client_socket:
             average_speed = (self.speed_l_real + self.speed_r_real) / 2.0
             s = {"M": "update", "K": "speed", "V": average_speed}
-            self.client_socket.send(bytes(json.dumps(s)))
+            self.client_socket.send(json.dumps(s).encode("utf-8"))
             time.sleep(0.05)

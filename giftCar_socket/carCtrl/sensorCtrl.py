@@ -26,9 +26,14 @@ class SensorCtrl(object):
     def get_dht11_data(self):
         """获取dht11数据"""
         try:
-            humidity, temperature = Adafruit_DHT.read_retry(self.dht11, self.dht11_pin)
-        except RuntimeError:
-            return -1, -1
+            (humidity, temperature) = Adafruit_DHT.read_retry(self.dht11, self.dht11_pin)
+            if humidity is None:
+                humidity = -1
+            if temperature is None:
+                temperature = -1
+        except RuntimeError as e:
+            print("get_dht11_data error:", e)
+            (humidity, temperature) = (-1, -1)
         return humidity, temperature
 
     # 以下为mpu9250
@@ -62,13 +67,16 @@ class SensorCtrl(object):
         return math.degrees(radians)
 
     def get_gyro_data(self):
-        gyro_xout = self.read_word_2c(0x43) / 131.0
+        gyro_xout = self.read_word_2c(0x43) / 131.0  # ±250
         gyro_yout = self.read_word_2c(0x45) / 131.0
         gyro_zout = self.read_word_2c(0x47) / 131.0
         return gyro_xout, gyro_yout, gyro_zout
 
     def get_accelerometer_data(self):
-        accel_xout = self.read_word_2c(0x3b) / 16384.0
-        accel_yout = self.read_word_2c(0x3d) / 16384.0
-        accel_zout = self.read_word_2c(0x3f) / 16384.0
+        # accel_xout = self.read_word_2c(0x3b) / 16384.0
+        # accel_yout = self.read_word_2c(0x3d) / 16384.0
+        # accel_zout = self.read_word_2c(0x3f) / 16384.0
+        accel_xout = self.read_word_2c(0x3b)
+        accel_yout = self.read_word_2c(0x3d)
+        accel_zout = self.read_word_2c(0x3f)
         return accel_xout, accel_yout, accel_zout

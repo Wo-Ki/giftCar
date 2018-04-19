@@ -27,7 +27,7 @@ class ServoCtrl(object):
         yh_max = 600
         yh_min = 150
         # 左转
-        print "motion yh value:", value
+        print("motion yh value:", value)
         if value < 0:
             pwm_value = (-value / 100.0) * (yh_max - yh_center) + yh_center
             self.pwm.set_pwm(self.yh_pin, 0, int(pwm_value))
@@ -55,7 +55,7 @@ class ServoCtrl(object):
         yv_max = 600
         yv_min = 150
         # 左转
-        print "motion yv value:", value
+        print("motion yv value:", value)
         if value < 0:
             pwm_value = yv_center - ((-value) / 100.0) * (yv_center - yv_min)
             self.pwm.set_pwm(self.yv_pin, 0, int(pwm_value))

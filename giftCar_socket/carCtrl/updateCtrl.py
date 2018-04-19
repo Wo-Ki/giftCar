@@ -17,18 +17,20 @@ class UpdateCtrl(SensorCtrl):
         self.client_socket = client_socket
 
     def updateDHT11(self):
+        time1 = time.time()
         hum, tem = self.get_dht11_data()
+        print("hum:", hum, "tem:", tem)
         s = {"M": "update", "K": "dht11", "V": {"hum": hum, 'tem': tem}}
-        self.client_socket.send(bytes(json.dumps(s)))
+        print("dht11 time:", time.time() - time1)
+        self.client_socket.send(json.dumps(s).encode("utf-8"))
         time.sleep(0.1)
 
     def updateMpu9250(self):
         gyro_xout, gyro_yout, gyro_zout = self.get_gyro_data()
-        s = {"M": "update", "K": "gyro", "V": {"x": gyro_xout, 'y': gyro_yout, "z": gyro_zout}}
-        self.client_socket.send(bytes(json.dumps(s)))
-        time.sleep(0.05)
-
         accel_xout, accel_yout, accel_zout = self.get_accelerometer_data()
-        s = {"M": "update", "K": "accel", "V": {"x": accel_xout, 'y': accel_yout, "z": accel_zout}}
-        self.client_socket.send(bytes(json.dumps(s)))
+        s = {"M": "update", "K": "mpu9250",
+             "V": {"gx": gyro_xout, 'gy': gyro_yout, "gz": gyro_zout, "ax": accel_xout, 'ay': accel_yout,
+                   "az": accel_zout}}
+
+        self.client_socket.send(json.dumps(s).encode("utf-8"))
         time.sleep(0.05)
