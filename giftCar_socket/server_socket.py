@@ -89,7 +89,7 @@ if __name__ == "__main__":
     servoCtrl = servoCtrl.ServoCtrl(1, 2)
     robotArmCtrl = robotArmCtrl.RobotArmCtrl(3, 4, 5, 6)
     jsonCtrl = jsonAnalysis.JsonAnalysis(servoCtrl, carCtrl, robotArmCtrl)
-    dht11_pin = 20
+    dht11_pin = 20  # 20为BCM, Physical:38
     print("******Server Online*****")
     print("***", host, port, "***")
     try:

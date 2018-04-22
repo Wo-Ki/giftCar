@@ -21,9 +21,12 @@ wheelRCount = 0
 
 wheelRADir = True
 
-encoder_r = 35
+encoder_r = 22
 direction_r = 18
 velocity_r = 0
+
+GPIO.setup(encoder_r, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(direction_r, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 lock = threading.Lock()
 
@@ -55,7 +58,7 @@ def read_encoder_r(channel):
 
 
 GPIO.add_event_detect(encoder_r, GPIO.BOTH, callback=read_encoder_r)
-GPIO.add_event_detect(wheelRBPin, GPIO.RISING, callback=countFunc)  # 在引脚上添加上升临界值检测再回调
+# GPIO.add_event_detect(wheelRBPin, GPIO.RISING, callback=countFunc)  # 在引脚上添加上升临界值检测再回调
 # GPIO.add_event_detect(wheelRAPin, GPIO.BOTH, callback=countFunc)
 print("****test begin****")
 
@@ -83,7 +86,7 @@ def control():
     timer = threading.Timer(0.5, control)
     timer.start()
 
-timer = threading.Timer(0.5, speed)
+timer = threading.Timer(0.5, control)
 timer.start()
 
 lastTime = 0.0
