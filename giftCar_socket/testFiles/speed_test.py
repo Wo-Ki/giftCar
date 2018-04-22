@@ -21,29 +21,26 @@ wheelRCount = 0
 
 wheelRADir = True
 
-encoder_r = 22
-direction_r = 18
+encoder_r = 18
+direction_r = 22
 velocity_r = 0
 
 GPIO.setup(encoder_r, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(direction_r, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-lock = threading.Lock()
+# lock = threading.Lock()
 
 
 def countFunc(channel):
     global wheelRCount
     if GPIO.event_detected(wheelRAPin) or GPIO.event_detected(wheelRBPin):
-        lock.acquire()
         wheelRCount += 1
         # print "count:", wheelRCount
-        lock.release()
 
 
 def read_encoder_r(channel):
     global velocity_r
     if GPIO.event_detected(encoder_r):
-        lock.acquire()
         if GPIO.input(encoder_r) == GPIO.LOW:
             if GPIO.input(direction_r) == GPIO.LOW:
                 velocity_r += 1
@@ -54,7 +51,6 @@ def read_encoder_r(channel):
                 velocity_r -= 1
             else:
                 velocity_r += 1
-        lock.release()
 
 
 GPIO.add_event_detect(encoder_r, GPIO.BOTH, callback=read_encoder_r)
@@ -70,19 +66,15 @@ def speed():
         radiusSpeed = -1 * radiusSpeed
     print("speed radius A: %.2f rad/s" % radiusSpeed)
     print("speed A: %.2f m/s" % (radiusSpeed * 0.03))
-    lock.acquire()
     wheelRCount = 0
-    lock.release()
     timer = threading.Timer(0.5, speed)
     timer.start()
 
 
 def control():
     global velocity_r
-    print "velocity_r:", velocity_r
-    lock.acquire()
+    print("velocity_r:", velocity_r)
     velocity_r = 0
-    lock.release()
     timer = threading.Timer(0.5, control)
     timer.start()
 
