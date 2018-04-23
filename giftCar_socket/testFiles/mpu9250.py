@@ -52,6 +52,11 @@ address = 0x68  # This is the address value read via the i2cdetect command
 
 # Now wake the 6050 up as it starts in sleep mode
 bus.write_byte_data(address, power_mgmt_1, 0)
+time.sleep(0.01)
+# bus.write_byte_data(address, 0x37, 0x02)
+# time.sleep(0.01)
+bus.write_byte_data(0x0C, 0x0A, 0x01)
+time.sleep(0.01)
 while True:
     # print "gyro data"
     # print "---------"
@@ -87,6 +92,15 @@ while True:
     print("---------")
     tem = read_word_2c(0X41)
     print("tem :", tem)
+
+    print("RA_MAG data")
+    print("---------")
+    mag_xout = read_word_2c(0x04)
+    mag_yout = read_word_2c(0x06)
+    mag_zout = read_word_2c(0x08)
+    print("mag_xout: ", mag_xout)
+    print("mag_yout: ", mag_yout)
+    print("mag_zout: ", mag_zout)
 
 
     time.sleep(0.5)

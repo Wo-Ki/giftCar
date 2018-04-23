@@ -31,6 +31,7 @@ void countFunc(){
 }
 
 int returnCount(){
+    printf("velocity_r%d\n",velocity_r);
     return velocity_r;
 }
 int main()

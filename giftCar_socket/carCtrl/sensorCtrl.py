@@ -83,3 +83,5 @@ class SensorCtrl(object):
             accel_yout = self.read_word_2c(0x3d)
             accel_zout = self.read_word_2c(0x3f)
             yield accel_xout, accel_yout, accel_zout
+
+    def get_
