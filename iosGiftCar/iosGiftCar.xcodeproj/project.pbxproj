@@ -17,6 +17,27 @@
 		83036A881FF8EC89007A6A9D /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 83036A861FF8EC89007A6A9D /* GCDAsyncSocket.m */; };
 		83036A8B1FF8F925007A6A9D /* MarkSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83036A8A1FF8F925007A6A9D /* MarkSlider.swift */; };
 		83036A8D1FF8FC78007A6A9D /* socketCrtl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83036A8C1FF8FC78007A6A9D /* socketCrtl.swift */; };
+		83B75A0820862E9000B28AAB /* CarInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B75A0720862E9000B28AAB /* CarInformationView.swift */; };
+		83B75A1120862F0700B28AAB /* RightOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 83B75A0920862F0600B28AAB /* RightOn.png */; };
+		83B75A1220862F0700B28AAB /* ledOn.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 83B75A0A20862F0600B28AAB /* ledOn.jpeg */; };
+		83B75A1320862F0700B28AAB /* RightOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 83B75A0B20862F0600B28AAB /* RightOff.png */; };
+		83B75A1420862F0700B28AAB /* BackOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 83B75A0C20862F0600B28AAB /* BackOff.png */; };
+		83B75A1520862F0700B28AAB /* BackOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 83B75A0D20862F0600B28AAB /* BackOn.png */; };
+		83B75A1620862F0700B28AAB /* LeftOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 83B75A0E20862F0600B28AAB /* LeftOn.png */; };
+		83B75A1720862F0700B28AAB /* ledOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 83B75A0F20862F0600B28AAB /* ledOff.png */; };
+		83B75A1820862F0700B28AAB /* LeftOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 83B75A1020862F0600B28AAB /* LeftOff.png */; };
+		83B75A1A20862FF600B28AAB /* CGContextObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B75A1920862FF500B28AAB /* CGContextObject.swift */; };
+		83B75A1C20862FFF00B28AAB /* RedGradientColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B75A1B20862FFF00B28AAB /* RedGradientColor.swift */; };
+		83B75A1E2086300500B28AAB /* GradientColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B75A1D2086300400B28AAB /* GradientColor.swift */; };
+		83B75A202086300A00B28AAB /* RGBColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B75A1F2086300900B28AAB /* RGBColor.swift */; };
+		83B989C0208630CF002F708F /* yuan2_zj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B989BC208630CF002F708F /* yuan2_zj.swift */; };
+		83B989C1208630CF002F708F /* led_jishu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B989BD208630CF002F708F /* led_jishu.swift */; };
+		83B989C2208630CF002F708F /* wendu_yuan2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B989BE208630CF002F708F /* wendu_yuan2.swift */; };
+		83B989C3208630CF002F708F /* yuan2_sc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B989BF208630CF002F708F /* yuan2_sc.swift */; };
+		83B989C6208634FC002F708F /* CarCalss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B989C5208634FC002F708F /* CarCalss.swift */; };
+		83B989C920863748002F708F /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B989C820863748002F708F /* SwiftyJSON.swift */; };
+		83C90CDF208A2EA00022A8C2 /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C90CDE208A2EA00022A8C2 /* SceneKit.framework */; };
+		83C90CE2208A2EFD0022A8C2 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 83C90CE1208A2EFD0022A8C2 /* art.scnassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +80,27 @@
 		83036A861FF8EC89007A6A9D /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		83036A8A1FF8F925007A6A9D /* MarkSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkSlider.swift; sourceTree = "<group>"; };
 		83036A8C1FF8FC78007A6A9D /* socketCrtl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = socketCrtl.swift; sourceTree = "<group>"; };
+		83B75A0720862E9000B28AAB /* CarInformationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarInformationView.swift; sourceTree = "<group>"; };
+		83B75A0920862F0600B28AAB /* RightOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RightOn.png; sourceTree = "<group>"; };
+		83B75A0A20862F0600B28AAB /* ledOn.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ledOn.jpeg; sourceTree = "<group>"; };
+		83B75A0B20862F0600B28AAB /* RightOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RightOff.png; sourceTree = "<group>"; };
+		83B75A0C20862F0600B28AAB /* BackOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackOff.png; sourceTree = "<group>"; };
+		83B75A0D20862F0600B28AAB /* BackOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackOn.png; sourceTree = "<group>"; };
+		83B75A0E20862F0600B28AAB /* LeftOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LeftOn.png; sourceTree = "<group>"; };
+		83B75A0F20862F0600B28AAB /* ledOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ledOff.png; sourceTree = "<group>"; };
+		83B75A1020862F0600B28AAB /* LeftOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LeftOff.png; sourceTree = "<group>"; };
+		83B75A1920862FF500B28AAB /* CGContextObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGContextObject.swift; sourceTree = "<group>"; };
+		83B75A1B20862FFF00B28AAB /* RedGradientColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedGradientColor.swift; sourceTree = "<group>"; };
+		83B75A1D2086300400B28AAB /* GradientColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientColor.swift; sourceTree = "<group>"; };
+		83B75A1F2086300900B28AAB /* RGBColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGBColor.swift; sourceTree = "<group>"; };
+		83B989BC208630CF002F708F /* yuan2_zj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = yuan2_zj.swift; sourceTree = "<group>"; };
+		83B989BD208630CF002F708F /* led_jishu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = led_jishu.swift; sourceTree = "<group>"; };
+		83B989BE208630CF002F708F /* wendu_yuan2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = wendu_yuan2.swift; sourceTree = "<group>"; };
+		83B989BF208630CF002F708F /* yuan2_sc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = yuan2_sc.swift; sourceTree = "<group>"; };
+		83B989C5208634FC002F708F /* CarCalss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarCalss.swift; sourceTree = "<group>"; };
+		83B989C820863748002F708F /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		83C90CDE208A2EA00022A8C2 /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
+		83C90CE1208A2EFD0022A8C2 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83C90CDF208A2EA00022A8C2 /* SceneKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,6 +136,7 @@
 				83036A5F1FF8E041007A6A9D /* iosGiftCarTests */,
 				83036A6A1FF8E041007A6A9D /* iosGiftCarUITests */,
 				83036A491FF8E041007A6A9D /* Products */,
+				83C90CDD208A2EA00022A8C2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -109,7 +153,8 @@
 		83036A4A1FF8E041007A6A9D /* iosGiftCar */ = {
 			isa = PBXGroup;
 			children = (
-				83036A8A1FF8F925007A6A9D /* MarkSlider.swift */,
+				83C90CE1208A2EFD0022A8C2 /* art.scnassets */,
+				83B75A0620862E6100B28AAB /* lib */,
 				83036A891FF8ECC6007A6A9D /* socketFile */,
 				83036A7A1FF8E697007A6A9D /* images */,
 				83036A4B1FF8E041007A6A9D /* AppDelegate.swift */,
@@ -145,6 +190,14 @@
 		83036A7A1FF8E697007A6A9D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				83B75A0C20862F0600B28AAB /* BackOff.png */,
+				83B75A0D20862F0600B28AAB /* BackOn.png */,
+				83B75A0F20862F0600B28AAB /* ledOff.png */,
+				83B75A0A20862F0600B28AAB /* ledOn.jpeg */,
+				83B75A1020862F0600B28AAB /* LeftOff.png */,
+				83B75A0E20862F0600B28AAB /* LeftOn.png */,
+				83B75A0B20862F0600B28AAB /* RightOff.png */,
+				83B75A0920862F0600B28AAB /* RightOn.png */,
 				83036A7C1FF8E94F007A6A9D /* upDown.png */,
 				83036A7B1FF8E940007A6A9D /* leftRight.png */,
 			);
@@ -160,6 +213,41 @@
 				83036A851FF8EC89007A6A9D /* GCDAsyncSocket.h */,
 			);
 			path = socketFile;
+			sourceTree = "<group>";
+		};
+		83B75A0620862E6100B28AAB /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				83B989C5208634FC002F708F /* CarCalss.swift */,
+				83B989C820863748002F708F /* SwiftyJSON.swift */,
+				83B75A1D2086300400B28AAB /* GradientColor.swift */,
+				83B75A1920862FF500B28AAB /* CGContextObject.swift */,
+				83B75A0720862E9000B28AAB /* CarInformationView.swift */,
+				83B75A1B20862FFF00B28AAB /* RedGradientColor.swift */,
+				83B75A1F2086300900B28AAB /* RGBColor.swift */,
+				83036A8A1FF8F925007A6A9D /* MarkSlider.swift */,
+				83B989C4208634B4002F708F /* yuan */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		83B989C4208634B4002F708F /* yuan */ = {
+			isa = PBXGroup;
+			children = (
+				83B989BD208630CF002F708F /* led_jishu.swift */,
+				83B989BE208630CF002F708F /* wendu_yuan2.swift */,
+				83B989BF208630CF002F708F /* yuan2_sc.swift */,
+				83B989BC208630CF002F708F /* yuan2_zj.swift */,
+			);
+			path = yuan;
+			sourceTree = "<group>";
+		};
+		83C90CDD208A2EA00022A8C2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				83C90CDE208A2EA00022A8C2 /* SceneKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,7 +358,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83B75A1720862F0700B28AAB /* ledOff.png in Resources */,
+				83C90CE2208A2EFD0022A8C2 /* art.scnassets in Resources */,
+				83B75A1220862F0700B28AAB /* ledOn.jpeg in Resources */,
+				83B75A1120862F0700B28AAB /* RightOn.png in Resources */,
 				83036A531FF8E041007A6A9D /* Assets.xcassets in Resources */,
+				83B75A1320862F0700B28AAB /* RightOff.png in Resources */,
+				83B75A1420862F0700B28AAB /* BackOff.png in Resources */,
+				83B75A1820862F0700B28AAB /* LeftOff.png in Resources */,
+				83B75A1620862F0700B28AAB /* LeftOn.png in Resources */,
+				83B75A1520862F0700B28AAB /* BackOn.png in Resources */,
 				83036A511FF8E041007A6A9D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -296,12 +393,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83B75A1C20862FFF00B28AAB /* RedGradientColor.swift in Sources */,
 				83036A8B1FF8F925007A6A9D /* MarkSlider.swift in Sources */,
 				83036A8D1FF8FC78007A6A9D /* socketCrtl.swift in Sources */,
 				83036A881FF8EC89007A6A9D /* GCDAsyncSocket.m in Sources */,
 				83036A4E1FF8E041007A6A9D /* ViewController.swift in Sources */,
+				83B989C6208634FC002F708F /* CarCalss.swift in Sources */,
+				83B75A0820862E9000B28AAB /* CarInformationView.swift in Sources */,
 				83036A871FF8EC89007A6A9D /* GCDAsyncUdpSocket.m in Sources */,
+				83B75A202086300A00B28AAB /* RGBColor.swift in Sources */,
+				83B75A1A20862FF600B28AAB /* CGContextObject.swift in Sources */,
 				83036A4C1FF8E041007A6A9D /* AppDelegate.swift in Sources */,
+				83B75A1E2086300500B28AAB /* GradientColor.swift in Sources */,
+				83B989C1208630CF002F708F /* led_jishu.swift in Sources */,
+				83B989C3208630CF002F708F /* yuan2_sc.swift in Sources */,
+				83B989C920863748002F708F /* SwiftyJSON.swift in Sources */,
+				83B989C0208630CF002F708F /* yuan2_zj.swift in Sources */,
+				83B989C2208630CF002F708F /* wendu_yuan2.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

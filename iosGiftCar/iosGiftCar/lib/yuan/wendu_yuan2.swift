@@ -12,7 +12,9 @@ class wendu_yuan2: UIView {
     var kd:CGFloat = 0
     var z:CGFloat = 0{
         didSet{
-            self.setNeedsDisplay()
+            DispatchQueue.main.async {
+                self.setNeedsDisplay()
+            }
         }
     }
     var jishuText:String = ""

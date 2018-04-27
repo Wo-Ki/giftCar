@@ -59,7 +59,6 @@ def handle_client(client_socket, client_address):
 def send_data(key, update_ctrl):
     """ 上传数据"""
     if connected is True:
-
         if key == "dht":
             update_ctrl.updateDHT11()
             timer = threading.Timer(2, send_data, args=["dht", update_ctrl])

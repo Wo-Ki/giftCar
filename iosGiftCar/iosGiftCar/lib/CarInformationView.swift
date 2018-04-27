@@ -18,7 +18,7 @@ class CarInformationView: UIView {
     var leftImage:UIImageView! = nil
     var rightImage:UIImageView! = nil
     var backImage:UIImageView! = nil
-    var  hum:wendu_yuan2!
+    var hum:wendu_yuan2!
     var tem:wendu_yuan2!
     var gyroscopeX:CAShapeLayer! = nil
     var gyroscopeY:CAShapeLayer! = nil
@@ -123,14 +123,17 @@ class CarInformationView: UIView {
             let ti = fabs(Double(speed - speedLast))*0.01
             print(ti)
             //rotate the arrow
-            arrowSpeedLayer.transform = CATransform3DRotate(arrowSpeedLayer.transform, degreesToRadians(degress: CGFloat(angle2)), 0, 0, 1)
-            let animation = CABasicAnimation()
-            animation.keyPath = "transform.rotation.z"
-            animation.duration = ti
-            animation.fromValue = degreesToRadians(degress: CGFloat(speedLast)*1.8)
-            animation.toValue = degreesToRadians(degress: angle)
-            self.arrowSpeedLayer.add(animation, forKey: "rotateAnimation")
-            speedLabel.text = "\(String.init(format: "%.2f", (speed/100.0*8.17)))cm/s"
+            DispatchQueue.main.async {
+                self.arrowSpeedLayer.transform = CATransform3DRotate(self.arrowSpeedLayer.transform, self.degreesToRadians(degress: CGFloat(angle2)), 0, 0, 1)
+                let animation = CABasicAnimation()
+                animation.keyPath = "transform.rotation.z"
+                animation.duration = ti
+                animation.fromValue = self.degreesToRadians(degress: CGFloat(self.speedLast)*1.8)
+                animation.toValue = self.degreesToRadians(degress: angle)
+                self.arrowSpeedLayer.add(animation, forKey: "rotateAnimation")
+                self.speedLabel.text = "\(String.init(format: "%.2f", (speed/100.0*8.17)))cm/s"
+            }
+           
             speedLast = speed
         }
     }
@@ -166,6 +169,7 @@ class CarInformationView: UIView {
             rightImage.image = #imageLiteral(resourceName: "RightOff.png")
             backImage.image = #imageLiteral(resourceName: "BackOff.png")
         }
+        
     }
     func drawGradienter(){
         let context = CGContextObject(context: UIGraphicsGetCurrentContext()!)
@@ -191,16 +195,19 @@ class CarInformationView: UIView {
         self.addSubview(levelCircle)
     }
     
-    func updateLevelCircle(mpudata:[String:Int]){
-        let x = CGFloat(mpudata["AX"]!) + 900
-        let y = CGFloat(mpudata["AY"]!) + 100
-        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: { 
-            self.levelCircle.center = CGPoint(x: x, y: y)
-        }, completion: nil)
+    func updateLevelCircle(xValue:Float, yValue:Float){
+        DispatchQueue.main.async {
+            let x = CGFloat(xValue)*50 + 900
+            let y = CGFloat(yValue)*50 + 100
+            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
+                self.levelCircle.center = CGPoint(x: x, y: y)
+            }, completion: nil)
+        }
+        
     }
     
     func drawHum(){
-         hum = wendu_yuan2(frame: CGRect(x: 150, y: 200, width: 100, height: 100))
+        hum = wendu_yuan2(frame: CGRect(x: 150, y: 200, width: 100, height: 100))
         hum.kd = 10
         hum.backgroundColor = UIColor.clear
         hum.jishuText = "%"
@@ -211,7 +218,7 @@ class CarInformationView: UIView {
         context.drawString(string: "Hum", point: CGPoint.init(x: 190, y: 290), attribute: [:])
     }
     func drawTem(){
-         tem = wendu_yuan2(frame: CGRect(x: 30, y: 200, width: 100, height: 100))
+        tem = wendu_yuan2(frame: CGRect(x: 30, y: 200, width: 100, height: 100))
         tem.kd = 10
         tem.jishuText =  "℃"
         tem.backgroundColor = UIColor.clear
@@ -280,56 +287,78 @@ class CarInformationView: UIView {
         gyr.lineCap = kCALineJoinRound
         self.layer.addSublayer(gyr)
     }
-    func updateGyroscope(data:[String:Int]){
-        updateGyroscopeX(x: CGFloat(data["GX"]!))
-        updateGyroscopeY(y: CGFloat(data["GY"]!))
-        updateGyroscopeZ(z: CGFloat(data["GZ"]!))
+    func updateGyroscope(x:Float, y:Float, z:Float){
+
+            self.updateGyroscopeX(x: CGFloat(x))
+            self.updateGyroscopeY(y: CGFloat(y))
+            self.updateGyroscopeZ(z: CGFloat(z))
+        
+        
     }
     var lastX:CGFloat = 0
     func updateGyroscopeX(x:CGFloat){
         if x != lastX{
-            let angle = CGFloat(x)*CGFloat(1.8)
-            let angle2 = CGFloat(x - lastX)*CGFloat(1.8)
+//            let angle = CGFloat(x)*CGFloat(1.8)
+            let angle2 = CGFloat(x - lastX)
             let ti = fabs(Double(x - lastX))*0.01
-            gyroscopeX.transform = CATransform3DRotate(gyroscopeX.transform, degreesToRadians(degress: CGFloat(angle2)), 0, 0, 1)
-            let animation = CABasicAnimation()
-            animation.keyPath = "transform.rotation.z"
-            animation.duration = ti
-            animation.fromValue = degreesToRadians(degress: CGFloat(lastX)*1.8)
-            animation.toValue = degreesToRadians(degress: angle)
-            self.gyroscopeX.add(animation, forKey: "rotateAnimation")
-            lastX = x
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: ti, animations: {
+                    self.gyroscopeX.transform = CATransform3DRotate(self.gyroscopeX.transform, self.degreesToRadians(degress: CGFloat(angle2)), 0, 0, 1)
+                })
+                
+//                let animation = CABasicAnimation()
+//                animation.keyPath = "transform.rotation.z"
+//                animation.duration = ti
+//                animation.fromValue = self.degreesToRadians(degress: CGFloat(self.lastX)*1.8)
+//                animation.toValue = self.degreesToRadians(degress: angle)
+//                self.gyroscopeX.add(animation, forKey: "rotateAnimation")
+                self.lastX = x
+            }
+            
         }
     }
     var lastY:CGFloat = 0
     func updateGyroscopeY(y:CGFloat){
         if y != lastY{
-            let angle = CGFloat(y)*CGFloat(1.8)
-            let angle2 = CGFloat(y - lastY)*CGFloat(1.8)
+//            let angle = CGFloat(y)*CGFloat(1.8)
+            let angle2 = CGFloat(y - lastY)
             let ti = fabs(Double(y - lastY))*0.01
-            gyroscopeY.transform = CATransform3DRotate(gyroscopeY.transform, degreesToRadians(degress: CGFloat(angle2)), 0, 0, 1)
-            let animation = CABasicAnimation()
-            animation.keyPath = "transform.rotation.z"
-            animation.duration = ti
-            animation.fromValue = degreesToRadians(degress: CGFloat(lastY)*1.8)
-            animation.toValue = degreesToRadians(degress: angle)
-            self.gyroscopeY.add(animation, forKey: "rotateAnimation")
-            lastY = y
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: ti, animations: {
+                    self.gyroscopeY.transform = CATransform3DRotate(self.gyroscopeY.transform, self.degreesToRadians(degress: CGFloat(angle2)), 0, 0, 1)
+                })
+                
+//                let animation = CABasicAnimation()
+//                animation.keyPath = "transform.rotation.z"
+//                animation.duration = ti
+//                animation.fromValue = self.degreesToRadians(degress: CGFloat(self.lastY)*1.8)
+//                animation.toValue = self.degreesToRadians(degress: angle)
+//                self.gyroscopeY.add(animation, forKey: "rotateAnimation")
+                self.lastY = y
+            }
+            
         }
     }
     var lastZ:CGFloat = 0
     func updateGyroscopeZ(z:CGFloat){
         if z != lastZ{
-            let angle = CGFloat(z)*CGFloat(1.8)
-            let angle2 = CGFloat(z - lastZ)*CGFloat(1.8)
+//            let angle = CGFloat(z)*CGFloat(1.8)
+            let angle2 = CGFloat(z - lastZ)
             let ti = fabs(Double(z - lastZ))*0.01
-            gyroscopeZ.transform = CATransform3DRotate(gyroscopeZ.transform, degreesToRadians(degress: CGFloat(angle2)), 0, 0, 1)
-            let animation = CABasicAnimation()
-            animation.keyPath = "transform.rotation.z"
-            animation.duration = ti
-            animation.fromValue = degreesToRadians(degress: CGFloat(lastZ)*1.8)
-            animation.toValue = degreesToRadians(degress: angle)
-            self.gyroscopeZ.add(animation, forKey: "rotateAnimation")
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: ti, animations: {
+                    self.gyroscopeZ.transform = CATransform3DRotate(self.gyroscopeZ.transform, self.degreesToRadians(degress: CGFloat(angle2)), 0, 0, 1)
+
+                })
+                
+//                let animation = CABasicAnimation()
+//                animation.keyPath = "transform.rotation.z"
+//                animation.duration = ti
+//                animation.fromValue = self.degreesToRadians(degress: CGFloat(self.lastZ)*1.8)
+//                animation.toValue = self.degreesToRadians(degress: angle)
+//                self.gyroscopeZ.add(animation, forKey: "rotateAnimation")
+            }
+            
             lastZ = z
         }
     }

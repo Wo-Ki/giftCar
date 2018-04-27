@@ -83,7 +83,7 @@ class yuan2_zj: UIView {
         }
         shapelayer.lineWidth = zj_kd
         apath = UIBezierPath()
-        apath.addArc(withCenter: point, radius: bj-2, startAngle: CGFloat(M_PI)/2, endAngle: CGFloat.pi*2, clockwise: true)
+        apath.addArc(withCenter: point, radius: bj-2, startAngle: CGFloat(Double.pi)/2, endAngle: CGFloat.pi*2, clockwise: true)
         shapelayer.path = apath.cgPath
         if(z>z1){
             z1 = 0.001+z/90>0.999 ? 1 : 0.001+z/90

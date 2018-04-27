@@ -14,19 +14,19 @@ power_mgmt_1 = 0x6b
 power_mgmt_2 = 0x6c
 
 
-def read_byte(adr):
-    return bus.read_byte_data(address, adr)
+def read_byte(device_address, adr):
+    return bus.read_byte_data(device_address, adr)
 
 
-def read_word(adr):
-    high = bus.read_byte_data(address, adr)
-    low = bus.read_byte_data(address, adr + 1)
+def read_word(device_address, adr):
+    high = bus.read_byte_data(device_address, adr)
+    low = bus.read_byte_data(device_address, adr + 1)
     val = (high << 8) + low
     return val
 
 
-def read_word_2c(adr):
-    val = read_word(adr)
+def read_word_2c(device_address, adr):
+    val = read_word(device_address, adr)
     if val >= 0x8000:
         return -((65535 - val) + 1)
     else:
@@ -49,14 +49,14 @@ def get_x_rotation(x, y, z):
 
 bus = smbus.SMBus(1)  # or bus = smbus.SMBus(1) for Revision 2 boards
 address = 0x68  # This is the address value read via the i2cdetect command
-
+address2 = 0x0C
 # Now wake the 6050 up as it starts in sleep mode
-bus.write_byte_data(address, power_mgmt_1, 0)
+bus.write_byte_data(address, power_mgmt_1, 1)
 time.sleep(0.01)
 # bus.write_byte_data(address, 0x37, 0x02)
 # time.sleep(0.01)
-bus.write_byte_data(0x0C, 0x0A, 0x01)
-time.sleep(0.01)
+# bus.write_byte_data(0x0C, 0x0A, 0x01)
+# time.sleep(0.01)
 while True:
     # print "gyro data"
     # print "---------"
@@ -90,18 +90,22 @@ while True:
 
     print("tem data")
     print("---------")
-    tem = read_word_2c(0X41)
+    tem = read_word_2c(address, 0X41)
     print("tem :", tem)
 
     print("RA_MAG data")
     print("---------")
-    mag_xout = read_word_2c(0x04)
-    mag_yout = read_word_2c(0x06)
-    mag_zout = read_word_2c(0x08)
+    bus.write_byte_data(address, 0x37, 0x02)
+    time.sleep(0.02)
+    bus.write_byte_data(0x0C, 0x0A, 0x01)
+    time.sleep(0.02)
+
+    mag_xout = read_word_2c(address2, 0x04)
+    mag_yout = read_word_2c(address2, 0x06)
+    mag_zout = read_word_2c(address2, 0x08)
     print("mag_xout: ", mag_xout)
     print("mag_yout: ", mag_yout)
     print("mag_zout: ", mag_zout)
-
 
     time.sleep(0.5)
 

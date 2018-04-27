@@ -8,7 +8,7 @@ void countFunc();
 int count=0;
 
 int encoder_r = 5;
-int direction_r = 4;
+int direction_r = 6;
 long velocity_r = 0;
 
 //void countFunc(){
