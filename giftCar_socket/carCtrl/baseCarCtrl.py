@@ -51,11 +51,15 @@ class BaseCarCtrl(object):
         """左轮的pwm控制"""
         # 后退
         if value > 0:
+            if value > 100:
+                value = 100
             self.in1_hz.ChangeDutyCycle(100 - value)
             self.in2_hz.ChangeDutyCycle(100)
 
         # 前进
         elif value < 0:
+            if value < -100:
+                value = -100
             self.in1_hz.ChangeDutyCycle(-value)
             self.in2_hz.ChangeDutyCycle(0)
         # 停止
@@ -69,11 +73,14 @@ class BaseCarCtrl(object):
         """右轮的pwm控制"""
         # 后退
         if value > 0:
+            if value > 100:
+                value = 100
             self.in3_hz.ChangeDutyCycle(100 - value)
             self.in4_hz.ChangeDutyCycle(100)
         # 前进
         elif value < 0:
-
+            if value < -100:
+                value = -100
             self.in3_hz.ChangeDutyCycle(-value)
             self.in4_hz.ChangeDutyCycle(0)
             # 停止
@@ -104,12 +111,6 @@ class BaseCarCtrl(object):
     def stop(self):
         self.pca_pwm.set_pwm(self.dir_pin, 0, self.servo_center)
         time.sleep(self.servo_angle - self.servo_Dvalue)
-        self.pca_pwm.set_pwm(self.dir_pin, 0, 0)
-        self.in3_hz.ChangeDutyCycle(100)
-        self.in4_hz.ChangeDutyCycle(100)
-        self.in1_hz.ChangeDutyCycle(100)
-        self.in2_hz.ChangeDutyCycle(100)
-        time.sleep(1)
         self.in3_hz.ChangeDutyCycle(0)
         self.in4_hz.ChangeDutyCycle(0)
         self.in1_hz.ChangeDutyCycle(0)

@@ -30,14 +30,16 @@ def handle_client(client_socket, client_address):
         try:
             request_data = client_socket.recv(1024)
             if request_data:
-                print("request_data:", request_data)
                 try:
-                    json_datas = request_data.split(",")
+                    print("request_data:", request_data)
+                    json_datas = request_data.split("*")
+                    print("json_ datas:", json_datas)
                     for json_data in json_datas:
-                        json_data = json.loads(json_data)
-                        jsonCtrl.analysis(json_data)
+                        if json_data != '':
+                            json_data_now = json.loads(json_data)
+                            jsonCtrl.analysis(json_data_now)
                 except:
-                    pass
+                    print("json error")
             else:
                 print("[%s, %s] : disconnect" % client_address)
                 connected = False
@@ -84,7 +86,7 @@ if __name__ == "__main__":
     server_socket.bind((host, port))
     server_socket.listen(3)
 
-    carCtrl = carCtrl.CarCtrl(13, 12, 15, 16, 0, 7, 32, 35, 18)
+    carCtrl = carCtrl.CarCtrl(13, 12, 15, 16, 0, 7, 32)
     servoCtrl = servoCtrl.ServoCtrl(1, 2)
     robotArmCtrl = robotArmCtrl.RobotArmCtrl(3, 4, 5, 6)
     jsonCtrl = jsonAnalysis.JsonAnalysis(servoCtrl, carCtrl, robotArmCtrl)

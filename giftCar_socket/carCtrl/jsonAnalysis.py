@@ -38,9 +38,9 @@ class JsonAnalysis(object):
         if json_data.get("M") is not None:
             if json_data["M"] == 'stop':
                 self.carCtrl.stop()
-            if json_data["M"] == 'avoid':
+            elif json_data["M"] == 'avoid':
                 if json_data["V"] == 'on':
-                    self.carCtrl.avoid_mode = True
+                    self.carCtrl.set_avoid_mode(True)
                 elif json_data["V"] == 'off':
-                    self.carCtrl.avoid_mode = False
+                    self.carCtrl.set_avoid_mode(False)
 

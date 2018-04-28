@@ -35,4 +35,3 @@ def go():
 
 # scp -r ../giftCar_socket pi@192.168.100.2:/home/pi/RaspbianPython/giftCarProject
 
-# gcc speed.c -shared -lwiringPi -o speed.so
