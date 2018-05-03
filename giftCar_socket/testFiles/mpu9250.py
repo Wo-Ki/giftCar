@@ -69,24 +69,24 @@ while True:
     # print "gyro_yout: ", gyro_yout, " scaled: ", (gyro_yout / 131)
     # print "gyro_zout: ", gyro_zout, " scaled: ", (gyro_zout / 131)
     #
-    # print
-    # print "accelerometer data"
-    # print "------------------"
-    #
-    # accel_xout = read_word_2c(0x3b)
-    # accel_yout = read_word_2c(0x3d)
-    # accel_zout = read_word_2c(0x3f)
-    #
-    # accel_xout_scaled = accel_xout / 16384.0
-    # accel_yout_scaled = accel_yout / 16384.0
-    # accel_zout_scaled = accel_zout / 16384.0
-    #
-    # print "accel_xout: ", accel_xout, " scaled: ", accel_xout_scaled
-    # print "accel_yout: ", accel_yout, " scaled: ", accel_yout_scaled
-    # print "accel_zout: ", accel_zout, " scaled: ", accel_zout_scaled
-    #
-    # print "x rotation: ", get_x_rotation(accel_xout_scaled, accel_yout_scaled, accel_zout_scaled)
-    # print "y rotation: ", get_y_rotation(accel_xout_scaled, accel_yout_scaled, accel_zout_scaled)
+    print
+    print "accelerometer data"
+    print "------------------"
+
+    accel_xout = read_word_2c(address, 0x3b)
+    accel_yout = read_word_2c(address, 0x3d)
+    accel_zout = read_word_2c(address, 0x3f)
+
+    accel_xout_scaled = accel_xout / 16384.0
+    accel_yout_scaled = accel_yout / 16384.0
+    accel_zout_scaled = accel_zout / 16384.0
+
+    print "accel_xout: ", accel_xout, " scaled: ", accel_xout_scaled
+    print "accel_yout: ", accel_yout, " scaled: ", accel_yout_scaled
+    print "accel_zout: ", accel_zout, " scaled: ", accel_zout_scaled
+
+    print "x rotation: ", get_x_rotation(accel_xout_scaled, accel_yout_scaled, accel_zout_scaled)
+    print "y rotation: ", get_y_rotation(accel_xout_scaled, accel_yout_scaled, accel_zout_scaled)
 
     print("tem data")
     print("---------")

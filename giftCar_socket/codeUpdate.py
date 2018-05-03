@@ -35,3 +35,5 @@ def go():
 
 # scp -r ../giftCar_socket pi@192.168.100.2:/home/pi/RaspbianPython/giftCarProject
 
+# scp -r ../* pi@192.168.100.5:/home/pi/RaspbianPython/giftCarProject
+

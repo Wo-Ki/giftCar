@@ -32,6 +32,7 @@ class UpdateCtrl(SensorCtrl):
     def updateMpu9250(self):
         gyro_xout, gyro_yout, gyro_zout = self.get_gyro_data_generator.next()
         accel_xout, accel_yout, accel_zout = self.get_accelerometer_data_generator.next()
+
         s = {"M": "update", "K": "mpu9250",
              "V": {"gx": gyro_xout, 'gy': gyro_yout, "gz": gyro_zout, "ax": accel_xout, 'ay': accel_yout,
                    "az": accel_zout}}

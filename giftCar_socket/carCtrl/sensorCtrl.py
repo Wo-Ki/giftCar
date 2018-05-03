@@ -57,15 +57,14 @@ class SensorCtrl(object):
     def dist(self, a, b):
         return math.sqrt((a * a) + (b * b))
 
-    def get_y_rotation(self):
-        x, y, z = self.get_accelerometer_data()
-        radians = math.atan2(x, self.dist(y, z))
-        return -math.degrees(radians)
-
-    def get_x_rotation(self):
-        x, y, z = self.get_accelerometer_data()
-        radians = math.atan2(y, self.dist(x, z))
-        return math.degrees(radians)
+    def get_rotation(self):
+        x, y, z = self.get_accelerometer_data().next()
+        x /= 16384.0
+        y /= 16384.0
+        z /= 16384.0
+        x_radians = math.atan2(y, self.dist(x, z))
+        y_radians = math.atan2(x, self.dist(y, z))
+        return -math.degrees(x_radians), -math.degrees(y_radians)
 
     def get_gyro_data(self):
         while 1:
