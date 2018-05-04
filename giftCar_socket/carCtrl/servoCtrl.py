@@ -6,6 +6,7 @@
 
 from . import *
 
+
 class ServoCtrl(object):
     """舵机控制类"""
     # 设置舵机活动范围

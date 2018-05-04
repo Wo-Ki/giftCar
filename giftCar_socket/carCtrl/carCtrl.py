@@ -5,12 +5,12 @@
 # creation time = 2018/4/5 09:59
 
 from . import *
-import threading
 from .baseCarCtrl import BaseCarCtrl
+from .radarCtrl import RadarCtrl
 from ctypes import *
 
 
-class CarCtrl(BaseCarCtrl):
+class CarCtrl(BaseCarCtrl, RadarCtrl):
     speed_r_last_count = 0
     speed_r_pre = 0.0  # 原始条边沿数表示的速度,负数向前
     speed_r_real = 0.0  # 线速度 m/s
@@ -21,16 +21,21 @@ class CarCtrl(BaseCarCtrl):
     avoid_down_left = False
     avoid_down_right = False
 
-    avoid_mode = True
+    avoid_mode = True  # 避障模式默认开启
 
     client_socket = None
 
     def __init__(self, IN1, IN2, IN3, IN4, dir_pin, avoid_up_left_pin, avoid_up_right_pin):
+        # super(CarCtrl, self).__init__(IN1, IN2, IN3, IN4, dir_pin)
         super(CarCtrl, self).__init__(IN1, IN2, IN3, IN4, dir_pin)
+        super(BaseCarCtrl, self).__init__(7, 33, 35)
         self.avoid_up_left_pin = avoid_up_left_pin
         self.avoid_up_right_pin = avoid_up_right_pin
         gpio.setup(avoid_up_left_pin, gpio.IN, pull_up_down=gpio.PUD_UP)
         gpio.setup(avoid_up_right_pin, gpio.IN, pull_up_down=gpio.PUD_UP)
+        self.avoid_up_left = gpio.input(self.avoid_up_left_pin)
+        self.avoid_up_right = gpio.input(self.avoid_up_right_pin)
+
         gpio.add_event_detect(avoid_up_left_pin, gpio.BOTH, callback=self.avoid_up_left_changed)
         gpio.add_event_detect(avoid_up_right_pin, gpio.BOTH, callback=self.avoid_up_right_changed)
 
@@ -38,6 +43,9 @@ class CarCtrl(BaseCarCtrl):
         self.lib.main()
         right_speed_timer = threading.Timer(0.2, self.speed_right_func)  # 从C文件0.2s读取速度
         right_speed_timer.start()
+
+        timer_sr04 = threading.Timer(0.02, self.send_sr04)
+        timer_sr04.start()
 
     @staticmethod
     def set_client_socket(client_socket):
@@ -157,6 +165,17 @@ class CarCtrl(BaseCarCtrl):
             s = {"M": "update", "K": "speed", "V": self.speed_r_real}
             self.client_socket.send(json.dumps(s).encode("utf-8"))
             time.sleep(0.02)
+
+    def send_sr04(self):
+        """发送sr04的数据，距离和角度"""
+        self.get_servo_and_distance()
+        if self.client_socket:
+            s = {"M": "update", "K": "sr04", "V": [self.current_sr04_angle, self.current_sr04_distance]}
+            self.client_socket.send(json.dumps(s).encode("utf-8"))
+            time.sleep(0.02)
+        print("angle and distance:", self.current_sr04_angle, self.current_sr04_distance)
+        timer_sr04 = threading.Timer(0.05, self.send_sr04)
+        timer_sr04.start()
 
 
 if __name__ == "__main__":
