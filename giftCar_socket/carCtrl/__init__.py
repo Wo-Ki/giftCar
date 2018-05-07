@@ -12,3 +12,5 @@ import math
 import threading
 import json
 import threading
+
+gpio.setwarnings(False)

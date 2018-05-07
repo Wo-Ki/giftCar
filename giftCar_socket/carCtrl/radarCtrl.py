@@ -52,13 +52,14 @@ class RadarCtrl(object):
         time.sleep(self.servo_angle - self.servo_Dvalue)
         self.current_sr04_distance = self.get_distance()
         if self.servo_dir is True:
-            self.current_sr04_angle += 2
+            self.current_sr04_angle += 4
         else:
-            self.current_sr04_angle -= 2
+            self.current_sr04_angle -= 4
         if self.current_sr04_angle > self.servo_max:
             self.servo_dir = False
         elif self.current_sr04_angle < self.servo_min:
             self.servo_dir = True
+        return self.current_sr04_angle, self.current_sr04_distance
 
     def clear_servo(self):
         self.pwm.set_pwm(self.servo_pin, 0, 0)
@@ -77,7 +78,7 @@ class RadarCtrl(object):
         t1 = time.time()
         while gpio.input(self.echo_pin):
             if time.time() - t1 >= 0.0588235:  # 超过10米终止,来回共20米的时间
-                return  -1
+                return -1
         # 高电平结束停止计时
         t2 = time.time()
         # 返回距离，单位为米

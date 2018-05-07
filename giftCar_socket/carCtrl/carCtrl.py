@@ -10,7 +10,7 @@ from .radarCtrl import RadarCtrl
 from ctypes import *
 
 
-class CarCtrl(BaseCarCtrl, RadarCtrl):
+class CarCtrl(BaseCarCtrl):
     speed_r_last_count = 0
     speed_r_pre = 0.0  # 原始条边沿数表示的速度,负数向前
     speed_r_real = 0.0  # 线速度 m/s
@@ -28,7 +28,8 @@ class CarCtrl(BaseCarCtrl, RadarCtrl):
     def __init__(self, IN1, IN2, IN3, IN4, dir_pin, avoid_up_left_pin, avoid_up_right_pin):
         # super(CarCtrl, self).__init__(IN1, IN2, IN3, IN4, dir_pin)
         super(CarCtrl, self).__init__(IN1, IN2, IN3, IN4, dir_pin)
-        super(BaseCarCtrl, self).__init__(7, 33, 35)
+        # super(BaseCarCtrl, self).__init__(7, 33, 35)
+        self.radarCtrl = RadarCtrl(7, 33, 35)
         self.avoid_up_left_pin = avoid_up_left_pin
         self.avoid_up_right_pin = avoid_up_right_pin
         gpio.setup(avoid_up_left_pin, gpio.IN, pull_up_down=gpio.PUD_UP)
@@ -168,13 +169,14 @@ class CarCtrl(BaseCarCtrl, RadarCtrl):
 
     def send_sr04(self):
         """发送sr04的数据，距离和角度"""
-        self.get_servo_and_distance()
+        # angle, distance = self.radarCtrl.get_servo_and_distance()
+        angle, distance = 1, 1
         if self.client_socket:
-            s = {"M": "update", "K": "sr04", "V": [self.current_sr04_angle, self.current_sr04_distance]}
+            s = {"M": "update", "K": "sr04", "V": [angle, distance]}
             self.client_socket.send(json.dumps(s).encode("utf-8"))
             time.sleep(0.02)
-        print("angle and distance:", self.current_sr04_angle, self.current_sr04_distance)
-        timer_sr04 = threading.Timer(0.05, self.send_sr04)
+        print("angle and distance:", angle, distance)
+        timer_sr04 = threading.Timer(0.1, self.send_sr04)
         timer_sr04.start()
 
 
