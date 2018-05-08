@@ -25,10 +25,11 @@ class CarCtrl(BaseCarCtrl):
 
     client_socket = None
 
-    def __init__(self, IN1, IN2, IN3, IN4, dir_pin, avoid_up_left_pin, avoid_up_right_pin):
+    def __init__(self,lock, IN1, IN2, IN3, IN4, dir_pin, avoid_up_left_pin, avoid_up_right_pin):
         # super(CarCtrl, self).__init__(IN1, IN2, IN3, IN4, dir_pin)
         super(CarCtrl, self).__init__(IN1, IN2, IN3, IN4, dir_pin)
         # super(BaseCarCtrl, self).__init__(7, 33, 35)
+        self.lock = lock
         self.radarCtrl = RadarCtrl(7, 33, 35)
         self.avoid_up_left_pin = avoid_up_left_pin
         self.avoid_up_right_pin = avoid_up_right_pin
@@ -169,13 +170,12 @@ class CarCtrl(BaseCarCtrl):
 
     def send_sr04(self):
         """发送sr04的数据，距离和角度"""
-        # angle, distance = self.radarCtrl.get_servo_and_distance()
-        angle, distance = 1, 1
+        angle, distance = self.radarCtrl.get_servo_and_distance()
         if self.client_socket:
             s = {"M": "update", "K": "sr04", "V": [angle, distance]}
             self.client_socket.send(json.dumps(s).encode("utf-8"))
             time.sleep(0.02)
-        print("angle and distance:", angle, distance)
+        # print("angle and distance:", angle, distance)
         timer_sr04 = threading.Timer(0.1, self.send_sr04)
         timer_sr04.start()
 

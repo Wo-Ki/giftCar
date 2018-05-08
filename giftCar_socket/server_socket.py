@@ -86,7 +86,9 @@ if __name__ == "__main__":
     server_socket.bind((host, port))
     server_socket.listen(3)
 
-    carCtrl = carCtrl.CarCtrl(13, 12, 15, 16, 0, 7, 32)
+    lock = threading.Lock()
+
+    carCtrl = carCtrl.CarCtrl(lock,13, 12, 15, 16, 0, 7, 32)
     servoCtrl = servoCtrl.ServoCtrl(1, 2)
     robotArmCtrl = robotArmCtrl.RobotArmCtrl(3, 4, 5, 6)
     jsonCtrl = jsonAnalysis.JsonAnalysis(servoCtrl, carCtrl, robotArmCtrl)
