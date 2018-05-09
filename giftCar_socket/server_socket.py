@@ -16,14 +16,14 @@ port = 8989
 connected = False
 
 
-def handle_client(client_socket, client_address):
+def handle_client(client_socket, client_address, lock):
     """处理客户端"""
     global connected
     connected = True
     client_socket.send("OK\r\n".encode("utf-8"))
     client_socket.settimeout(8)
     carCtrl.set_client_socket(client_socket)  # 当连接上客户端，设置socket，以便速度和避障上传
-    update_ctrl = updateCtrl.UpdateCtrl(client_socket, dht11_pin)
+    update_ctrl = updateCtrl.UpdateCtrl(lock, client_socket, dht11_pin)
     timer = threading.Timer(0.2, send_data, args=["all", update_ctrl])
     timer.start()
     while True:
@@ -67,14 +67,14 @@ def send_data(key, update_ctrl):
             timer.start()
         elif key == "mpu":
             update_ctrl.updateMpu9250()
-            timer = threading.Timer(0.1, send_data, args=["mpu", update_ctrl])
+            timer = threading.Timer(0.01, send_data, args=["mpu", update_ctrl])
             timer.start()
         elif key == "all":
             update_ctrl.updateDHT11()
             timer = threading.Timer(2, send_data, args=["dht", update_ctrl])
             timer.start()
             update_ctrl.updateMpu9250()
-            timer = threading.Timer(0.1, send_data, args=["mpu", update_ctrl])
+            timer = threading.Timer(0.01, send_data, args=["mpu", update_ctrl])
             timer.start()
     else:
         return
@@ -100,7 +100,7 @@ if __name__ == "__main__":
             client_socket, client_address = server_socket.accept()
             print("*" * 30)
             print("[%s, %s] : connected" % client_address)
-            handle_client(client_socket, client_address)
+            handle_client(client_socket, client_address, lock)
 
     except KeyboardInterrupt:
         print("******Server Offline*****")

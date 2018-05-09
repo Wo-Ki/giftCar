@@ -25,7 +25,7 @@ class CarCtrl(BaseCarCtrl):
 
     client_socket = None
 
-    def __init__(self,lock, IN1, IN2, IN3, IN4, dir_pin, avoid_up_left_pin, avoid_up_right_pin):
+    def __init__(self, lock, IN1, IN2, IN3, IN4, dir_pin, avoid_up_left_pin, avoid_up_right_pin):
         # super(CarCtrl, self).__init__(IN1, IN2, IN3, IN4, dir_pin)
         super(CarCtrl, self).__init__(IN1, IN2, IN3, IN4, dir_pin)
         # super(BaseCarCtrl, self).__init__(7, 33, 35)
@@ -35,9 +35,10 @@ class CarCtrl(BaseCarCtrl):
         self.avoid_up_right_pin = avoid_up_right_pin
         gpio.setup(avoid_up_left_pin, gpio.IN, pull_up_down=gpio.PUD_UP)
         gpio.setup(avoid_up_right_pin, gpio.IN, pull_up_down=gpio.PUD_UP)
-        self.avoid_up_left = gpio.input(self.avoid_up_left_pin)
-        self.avoid_up_right = gpio.input(self.avoid_up_right_pin)
-
+        self.avoid_up_left = not gpio.input(self.avoid_up_left_pin)
+        self.avoid_up_right = not gpio.input(self.avoid_up_right_pin)
+        print("up left:", self.avoid_up_left)
+        print("up right:", self.avoid_up_right)
         gpio.add_event_detect(avoid_up_left_pin, gpio.BOTH, callback=self.avoid_up_left_changed)
         gpio.add_event_detect(avoid_up_right_pin, gpio.BOTH, callback=self.avoid_up_right_changed)
 
@@ -125,8 +126,11 @@ class CarCtrl(BaseCarCtrl):
         """向云端发送障碍物状态"""
         if self.client_socket:
             s = {"M": "update", "K": "avoid", "V": {"W": which, "V": value}}
-            self.client_socket.send(json.dumps(s).encode("utf-8"))
-            time.sleep(0.05)
+            if self.lock.acquire():
+                self.client_socket.send(json.dumps(s).encode("utf-8"))
+                time.sleep(0.01)
+                self.lock.release()
+                # time.sleep(0.05)
 
     def break_now(self):
         """制动"""
@@ -165,18 +169,23 @@ class CarCtrl(BaseCarCtrl):
         self.speed_r_real = (self.speed_r_pre / 260.0 * (2 * math.pi)) * 5 * 0.03  # 线速度
         if self.client_socket:
             s = {"M": "update", "K": "speed", "V": self.speed_r_real}
-            self.client_socket.send(json.dumps(s).encode("utf-8"))
-            time.sleep(0.02)
+            while self.lock.acquire():
+                self.client_socket.send(json.dumps(s).encode("utf-8"))
+                time.sleep(0.01)
+                self.lock.release()
 
     def send_sr04(self):
         """发送sr04的数据，距离和角度"""
         angle, distance = self.radarCtrl.get_servo_and_distance()
         if self.client_socket:
             s = {"M": "update", "K": "sr04", "V": [angle, distance]}
-            self.client_socket.send(json.dumps(s).encode("utf-8"))
-            time.sleep(0.02)
+            if self.lock.acquire():
+                self.client_socket.send(json.dumps(s).encode("utf-8"))
+                time.sleep(0.01)
+                self.lock.release()
+                # time.sleep(0.02)
         # print("angle and distance:", angle, distance)
-        timer_sr04 = threading.Timer(0.1, self.send_sr04)
+        timer_sr04 = threading.Timer(0.02, self.send_sr04)
         timer_sr04.start()
 
 
