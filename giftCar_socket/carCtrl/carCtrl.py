@@ -128,8 +128,8 @@ class CarCtrl(BaseCarCtrl):
             s = {"M": "update", "K": "avoid", "V": {"W": which, "V": value}}
             if self.lock.acquire():
                 self.client_socket.send(json.dumps(s).encode("utf-8"))
-                time.sleep(0.01)
                 self.lock.release()
+                time.sleep(0.01)
                 # time.sleep(0.05)
 
     def break_now(self):
@@ -167,25 +167,22 @@ class CarCtrl(BaseCarCtrl):
         """求出真实线速度，向上位机上传真是速度"""
         # self.speed_l_real = (self.speed_l_pre / 130.0 * (2 * math.pi)) * 2 * 0.03
         self.speed_r_real = (self.speed_r_pre / 260.0 * (2 * math.pi)) * 5 * 0.03  # 线速度
-        if self.client_socket:
+        if self.client_socket and self.lock.acquire():
             s = {"M": "update", "K": "speed", "V": self.speed_r_real}
-            while self.lock.acquire():
-                self.client_socket.send(json.dumps(s).encode("utf-8"))
-                time.sleep(0.01)
-                self.lock.release()
+            self.client_socket.send(json.dumps(s).encode("utf-8"))
+            self.lock.release()
+            time.sleep(0.01)
 
     def send_sr04(self):
         """发送sr04的数据，距离和角度"""
         angle, distance = self.radarCtrl.get_servo_and_distance()
-        if self.client_socket:
+        if self.client_socket and self.lock.acquire(timeout=0.02):
             s = {"M": "update", "K": "sr04", "V": [angle, distance]}
-            if self.lock.acquire():
-                self.client_socket.send(json.dumps(s).encode("utf-8"))
-                time.sleep(0.01)
-                self.lock.release()
-                # time.sleep(0.02)
+            self.client_socket.send(json.dumps(s).encode("utf-8"))
+            self.lock.release()
+            time.sleep(0.01)
         # print("angle and distance:", angle, distance)
-        timer_sr04 = threading.Timer(0.02, self.send_sr04)
+        timer_sr04 = threading.Timer(0.04, self.send_sr04)
         timer_sr04.start()
 
 

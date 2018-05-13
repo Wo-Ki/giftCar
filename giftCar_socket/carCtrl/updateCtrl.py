@@ -23,24 +23,24 @@ class UpdateCtrl(SensorCtrl):
 
     def updateDHT11(self):
         time1 = time.time()
-        hum, tem = self.get_dht11_data_generator.next()
+        hum, tem = self.get_dht11_data_generator.__next__()
         print("hum:", hum, "tem:", tem)
         s = {"M": "update", "K": "dht11", "V": {"hum": hum, 'tem': tem}}
         print("dht11 time:", time.time() - time1)
-        if self.lock.acquire():
+        if self.lock.acquire(timeout=0.02):
             self.client_socket.send(json.dumps(s).encode("utf-8"))
-            time.sleep(0.01)
             self.lock.release()
+            time.sleep(0.02)
         # time.sleep(0.1)
 
     def updateMpu9250(self):
-        gyro_xout, gyro_yout, gyro_zout = self.get_gyro_data_generator.next()
-        accel_xout, accel_yout, accel_zout = self.get_accelerometer_data_generator.next()
+        gyro_xout, gyro_yout, gyro_zout = self.get_gyro_data_generator.__next__()
+        accel_xout, accel_yout, accel_zout = self.get_accelerometer_data_generator.__next__()
         s = {"M": "update", "K": "mpu9250",
              "V": {"gx": gyro_xout, 'gy': gyro_yout, "gz": gyro_zout, "ax": accel_xout, 'ay': accel_yout,
                    "az": accel_zout}}
-        if self.lock.acquire():
+        if self.lock.acquire(timeout=0.02):
             self.client_socket.send(json.dumps(s).encode("utf-8"))
-            time.sleep(0.01)
             self.lock.release()
+            time.sleep(0.01)
         # time.sleep(0.05)

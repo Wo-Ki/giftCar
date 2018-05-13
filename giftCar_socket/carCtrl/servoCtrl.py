@@ -18,11 +18,11 @@ class ServoCtrl(object):
 
     def __init__(self, yh_pin, yv_pin):
         self.pwm = Adafruit_PCA9685.PCA9685()
-        self.pwm.set_pwm_freq(60)
+        self.pwm.set_pwm_freq(55)
         self.yh_pin = yh_pin
         self.yv_pin = yv_pin
 
-    def yh_ctrl(self, value, lock=False):
+    def yh_ctrl(self, value, lock=True):
         """云台水平方向控制"""
         yh_center = 375
         yh_max = 600
@@ -50,7 +50,7 @@ class ServoCtrl(object):
             if lock is False:
                 self.pwm.set_pwm(self.yh_pin, 0, 0)
 
-    def yv_ctrl(self, value, lock=False):
+    def yv_ctrl(self, value, lock=True):
         """云台垂直方向控制"""
         yv_center = 375
         yv_max = 600

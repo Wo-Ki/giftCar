@@ -95,18 +95,18 @@ class BaseCarCtrl(object):
             pwm_value = self.servo_center - ((-value) / 100.0) * (self.servo_center - self.servo_min)
             self.pca_pwm.set_pwm(self.dir_pin, 0, int(pwm_value))
             time.sleep(self.servo_angle - self.servo_Dvalue)
-            self.pca_pwm.set_pwm(self.dir_pin, 0, 0)
+            # self.pca_pwm.set_pwm(self.dir_pin, 0, 0)
         # 右转
         elif value > 0:
             pwm_value = (value / 100.0) * (self.servo_max - self.servo_center) + self.servo_center
             self.pca_pwm.set_pwm(self.dir_pin, 0, int(pwm_value))
             time.sleep(self.servo_angle - self.servo_Dvalue)
-            self.pca_pwm.set_pwm(self.dir_pin, 0, 0)
+            # self.pca_pwm.set_pwm(self.dir_pin, 0, 0)
         # 归位
         else:
             self.pca_pwm.set_pwm(self.dir_pin, 0, self.servo_center)
             time.sleep(self.servo_angle - self.servo_Dvalue)
-            self.pca_pwm.set_pwm(self.dir_pin, 0, 0)
+            # self.pca_pwm.set_pwm(self.dir_pin, 0, 0)
 
     def stop(self):
         self.pca_pwm.set_pwm(self.dir_pin, 0, self.servo_center)

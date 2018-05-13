@@ -8,7 +8,7 @@ import json
 import socket
 import select
 import threading
-from carCtrl import robotArmCtrl, jsonAnalysis, carCtrl, servoCtrl, updateCtrl
+from carCtrl import robotArmCtrl, jsonAnalysis, carCtrl, servoCtrl, updateCtrl, displayCtrl
 
 host = "0.0.0.0"
 port = 8989
@@ -28,12 +28,11 @@ def handle_client(client_socket, client_address, lock):
     timer.start()
     while True:
         try:
-            request_data = client_socket.recv(1024)
+            request_data = client_socket.recv(1024).decode("utf-8")
             if request_data:
                 try:
                     print("request_data:", request_data)
                     json_datas = request_data.split("*")
-                    print("json_ datas:", json_datas)
                     for json_data in json_datas:
                         if json_data != '':
                             json_data_now = json.loads(json_data)
@@ -87,12 +86,14 @@ if __name__ == "__main__":
     server_socket.listen(3)
 
     lock = threading.Lock()
-
-    carCtrl = carCtrl.CarCtrl(lock,13, 12, 15, 16, 0, 7, 32)
+    # displayCtrl = displayCtrl.DisplayCtrl()
+    carCtrl = carCtrl.CarCtrl(lock, 13, 12, 15, 16, 0, 7, 32)
     servoCtrl = servoCtrl.ServoCtrl(1, 2)
     robotArmCtrl = robotArmCtrl.RobotArmCtrl(3, 4, 5, 6)
     jsonCtrl = jsonAnalysis.JsonAnalysis(servoCtrl, carCtrl, robotArmCtrl)
+
     dht11_pin = 20  # 20为BCM, Physical:38
+    # displayCtrl.hello()
     print("******Server Online*****")
     print("***", host, port, "***")
     try:
