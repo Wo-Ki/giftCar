@@ -179,8 +179,9 @@ class CarCtrl(BaseCarCtrl):
         if self.client_socket and self.lock.acquire(timeout=0.02):
             s = {"M": "update", "K": "sr04", "V": [angle, distance]}
             self.client_socket.send(json.dumps(s).encode("utf-8"))
-            self.lock.release()
             time.sleep(0.01)
+            self.lock.release()
+
         # print("angle and distance:", angle, distance)
         timer_sr04 = threading.Timer(0.04, self.send_sr04)
         timer_sr04.start()

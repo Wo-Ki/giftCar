@@ -16,7 +16,7 @@ class UpdateCtrl(SensorCtrl):
         super(UpdateCtrl, self).__init__(dth11_pin)
         self.lock = lock
         self.client_socket = client_socket
-        # 生成器对象
+        # 生成器
         self.get_dht11_data_generator = self.get_dht11_data()
         self.get_gyro_data_generator = self.get_gyro_data()
         self.get_accelerometer_data_generator = self.get_accelerometer_data()
