@@ -4,10 +4,12 @@
 # creator = wangkai
 # creation time = 2018/4/7 08:34
 
-# !/usr/bin/python
+
+from __future__ import division
 import smbus
 import math
 import time
+import  math
 
 # Power management registers
 power_mgmt_1 = 0x6b
@@ -31,6 +33,7 @@ def read_word_2c(device_address, adr):
         return -((65535 - val) + 1)
     else:
         return val
+    # return val
 
 
 def dist(a, b):
@@ -106,6 +109,8 @@ while True:
     print("mag_xout: ", mag_xout)
     print("mag_yout: ", mag_yout)
     print("mag_zout: ", mag_zout)
+    angle = math.atan2(mag_yout, mag_xout)
+    print("angle: ", angle)
 
     time.sleep(0.5)
 

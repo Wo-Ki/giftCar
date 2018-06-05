@@ -16,14 +16,16 @@ port = 8989
 connected = False
 
 
-def handle_client(client_socket, client_address, lock):
+def handle_client(client_socket, client_address,update_ctrl):
     """处理客户端"""
     global connected
     connected = True
     client_socket.send("OK\r\n".encode("utf-8"))
     client_socket.settimeout(8)
     carCtrl.set_client_socket(client_socket)  # 当连接上客户端，设置socket，以便速度和避障上传
-    update_ctrl = updateCtrl.UpdateCtrl(lock, client_socket, dht11_pin)
+    update_ctrl.set_client_socket(client_socket)
+    # update_ctrl = updateCtrl.UpdateCtrl(lock, client_socket, dht11_pin)
+
     timer = threading.Timer(0.2, send_data, args=["all", update_ctrl])
     timer.start()
     while True:
@@ -43,6 +45,7 @@ def handle_client(client_socket, client_address, lock):
                 print("[%s, %s] : disconnect" % client_address)
                 connected = False
                 carCtrl.set_client_socket(None)
+                update_ctrl.set_client_socket(None)
                 client_socket.close()
                 carCtrl.stop()
                 return
@@ -51,6 +54,7 @@ def handle_client(client_socket, client_address, lock):
             print(e)
             print("[%s, %s] : disconnect" % client_address)
             carCtrl.set_client_socket(None)
+            update_ctrl.set_client_socket(None)
             connected = False
             carCtrl.stop()
             client_socket.close()
@@ -85,14 +89,15 @@ if __name__ == "__main__":
     server_socket.bind((host, port))
     server_socket.listen(3)
 
+    dht11_pin = 20  # 20为BCM, Physical:38
     lock = threading.Lock()
     # displayCtrl = displayCtrl.DisplayCtrl()
     carCtrl = carCtrl.CarCtrl(lock, 13, 12, 15, 16, 0, 7, 32)
     servoCtrl = servoCtrl.ServoCtrl(1, 2)
     robotArmCtrl = robotArmCtrl.RobotArmCtrl(3, 4, 5, 6)
-    jsonCtrl = jsonAnalysis.JsonAnalysis(servoCtrl, carCtrl, robotArmCtrl)
+    update_ctrl = updateCtrl.UpdateCtrl(lock, dht11_pin)
+    jsonCtrl = jsonAnalysis.JsonAnalysis(servoCtrl, carCtrl, robotArmCtrl, update_ctrl)
 
-    dht11_pin = 20  # 20为BCM, Physical:38
     # displayCtrl.hello()
     print("******Server Online*****")
     print("***", host, port, "***")
@@ -101,7 +106,7 @@ if __name__ == "__main__":
             client_socket, client_address = server_socket.accept()
             print("*" * 30)
             print("[%s, %s] : connected" % client_address)
-            handle_client(client_socket, client_address, lock)
+            handle_client(client_socket, client_address, update_ctrl)
 
     except KeyboardInterrupt:
         print("******Server Offline*****")
